@@ -7,7 +7,7 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bin)
 
-set(GLIMAC
+set(GLIMAC_FILES
         glimac/include/glimac/BBox.hpp
         glimac/include/glimac/common.hpp
         glimac/include/glimac/Cone.hpp
@@ -34,7 +34,7 @@ set(GLIMAC
         glimac/src/tiny_obj_loader.h
         glimac/src/TrackballCamera.cpp
         )
-set(THIRD_PARTY
+set(THIRD_PARTY_FILES
         third-party/include/glm/detail/_features.hpp
         third-party/include/glm/detail/_fixes.hpp
         third-party/include/glm/detail/_literals.hpp
@@ -184,9 +184,15 @@ set(THIRD_PARTY
         third-party/include/glm/vector_relational.hpp
         )
 
-include_directories(glimac/include third-party/include)
+SET(ENGINE_FILES
+        engine/src/renderable.cpp engine/include/renderable.hpp
+)
 
-add_library(glimac ${GLIMAC})
-add_library(third-party ${THIRD_PARTY})
+
+include_directories(glimac/include third-party/include engine/include)
+
+add_library(glimac ${GLIMAC_FILES})
+add_library(third-party ${THIRD_PARTY_FILES})
+add_library(engine ${ENGINE_FILES})
 
 add_executable(projet main.cpp glimac third-party)
