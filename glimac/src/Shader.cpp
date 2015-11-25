@@ -1,4 +1,4 @@
-#include "glimac/Shader.hpp"
+#include "Shader.hpp"
 
 #include <fstream>
 #include <stdexcept>

@@ -1,4 +1,4 @@
-#include "glimac/TrackballCamera.hpp"
+#include "TrackballCamera.hpp"
 
 namespace glimac{
 

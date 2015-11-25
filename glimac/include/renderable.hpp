@@ -1,6 +1,6 @@
 #pragma once
 
-#include <glimac/common.hpp>
+#include <common.hpp>
 
 using namespace glimac;
 
