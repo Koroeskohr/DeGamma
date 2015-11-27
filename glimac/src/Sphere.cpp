@@ -1,8 +1,8 @@
 #include <cmath>
 #include <vector>
 #include <iostream>
-#include "common.hpp"
-#include "Sphere.hpp"
+#include <common.hpp>
+#include <Sphere.hpp>
 
 namespace glimac {
 

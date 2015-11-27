@@ -1,16 +1,21 @@
 cmake_minimum_required(VERSION 2.8)
 project(DeGamma)
 
+set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/CMake)
+
+find_package(SDL REQUIRED)
+find_package(GLEW REQUIRED)
+find_package(OpenGL REQUIRED)
+
+set(OPENGL_LIBRARIES /usr/lib/x86_64-linux-gnu/libGL.so.1)
+
+MESSAGE(STATUS "${CMAKE_MODULE_PATH}")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/lib)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/lib)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bin)
+include_directories(${SDL_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR} ${GLEW_INCLUDE_DIR} glimac/include third-party)
 
+set(ALL_LIBRARIES glimac ${SDL_LIBRARY} ${OPENGL_LIBRARIES} ${GLEW_LIBRARY})
 add_subdirectory(glimac)
 
-
-add_library(glimac ${GLIMAC_FILES})
-add_library(third-party ${THIRD_PARTY_FILES})
-
-add_executable(projet main.cpp glimac third-party)
+add_executable(projet main.cpp)
+target_link_libraries(projet ${ALL_LIBRARIES})
