@@ -3,7 +3,12 @@ project(DeGamma)
 
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/CMake)
 
-find_package(SDL REQUIRED)
+IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    find_package(SDL2 REQUIRED)
+ELSE()
+    find_package(SDL REQUIRED)
+ENDIF()
+
 find_package(GLEW REQUIRED)
 find_package(OpenGL REQUIRED)
 
