@@ -24,7 +24,11 @@ public:
 
     bool pollEvent(SDL_Event& e);
 
+#ifdef __APPLE__
+    bool isKeyPressed(SDL_Keycode key) const;
+#else
     bool isKeyPressed(SDLKey key) const;
+#endif
 
     // button can SDL_BUTTON_LEFT, SDL_BUTTON_RIGHT and SDL_BUTTON_MIDDLE
     bool isMouseButtonPressed(uint32_t button) const;

@@ -49,15 +49,18 @@ bool SDLWindowManager::pollEvent(SDL_Event& e) {
     SDL_DestroyWindow(m_pWindow);
 #endif
     return SDL_PollEvent(&e);
-}
-
-bool SDLWindowManager::isKeyPressed(SDLKey key) const {
-#ifdef __APPLE__
-    return SDL_GetKeyboardState(nullptr)[SDL_GetScancodeFromKey(key)];
-#else
-    return SDL_GetKeyState(nullptr)[key];
 #endif
 }
+
+#ifdef __APPLE__
+bool SDLWindowManager::isKeyPressed(SDL_Keycode key) const {
+    return SDL_GetKeyboardState(nullptr)[SDL_GetScancodeFromKey(key)];
+}
+#else
+bool SDLWindowManager::isKeyPressed(SDLKey key) const {
+    return SDL_GetKeyState(nullptr)[key];
+}
+#endif
 
 // button can SDL_BUTTON_LEFT, SDL_BUTTON_RIGHT and SDL_BUTTON_MIDDLE
 bool SDLWindowManager::isMouseButtonPressed(uint32_t button) const {
