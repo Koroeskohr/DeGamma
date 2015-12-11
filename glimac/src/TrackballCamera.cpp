@@ -2,7 +2,7 @@
 
 namespace glimac{
 
-    TrackballCamera::TrackballCamera(float fDistance = 5, float fAngleX = 0, float fAngleY = 0):
+    TrackballCamera::TrackballCamera(float fDistance, float fAngleX, float fAngleY):
             m_fDistance(fDistance), m_fAngleX(fAngleX), m_fAngleY(fAngleY)
     {
     }
