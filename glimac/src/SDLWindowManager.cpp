@@ -47,7 +47,8 @@ SDLWindowManager::~SDLWindowManager() {
 bool SDLWindowManager::pollEvent(SDL_Event& e) {
 #ifdef __APPLE__
     SDL_DestroyWindow(m_pWindow);
-#endif
+    return true;
+#else
     return SDL_PollEvent(&e);
 #endif
 }
@@ -73,12 +74,12 @@ glm::ivec2 SDLWindowManager::getMousePosition() const {
     return mousePos;
 }
 
-void SDLWindowManager::swapBuffers() {
+void SDLWindowManager::swapBuffers(){
 #ifdef __APPLE__
     SDL_GL_SwapWindow(m_pWindow);
 #else
     SDL_GL_SwapBuffers();
-#end
+#endif
 }
 
 float SDLWindowManager::getTime() const {
