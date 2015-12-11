@@ -12,7 +12,10 @@ ENDIF()
 find_package(GLEW REQUIRED)
 find_package(OpenGL REQUIRED)
 
-set(OPENGL_LIBRARIES /usr/lib/x86_64-linux-gnu/libGL.so.1)
+#set(OPENGL_LIBRARIES /usr/lib/x86_64-linux-gnu/libGL.so.1)
+IF(NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    set(OPENGL_LIBRARIES /usr/lib/x86_64-linux-gnu/libGL.so.1)
+ENDIF()
 
 MESSAGE(STATUS "${CMAKE_MODULE_PATH}")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
