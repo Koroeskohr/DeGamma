@@ -13,6 +13,10 @@
 namespace glimac {
 
 class SDLWindowManager {
+#ifdef __APPLE__
+    SDL_Window* m_pWindow;
+	SDL_GLContext m_Context;
+#endif
 public:
     SDLWindowManager(uint32_t width, uint32_t height, const char* title);
 
