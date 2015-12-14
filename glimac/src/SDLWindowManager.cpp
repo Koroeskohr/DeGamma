@@ -1,4 +1,6 @@
 #include "SDLWindowManager.hpp"
+
+
 #include <iostream>
 
 namespace glimac {
@@ -20,6 +22,7 @@ SDLWindowManager::SDLWindowManager(uint32_t width, uint32_t height, const char* 
             std::cout << "anti aliasing démarré" << std::endl;
     }
 
+    std::cout << "window created" << std::endl;
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
@@ -31,6 +34,7 @@ SDLWindowManager::SDLWindowManager(uint32_t width, uint32_t height, const char* 
     }
     m_Context = SDL_GL_CreateContext(m_pWindow);
     std::cerr << SDL_GetError() << std::endl;
+    std::cout << "window created2" << std::endl;
 #else
     if(!SDL_SetVideoMode(width, height, 32, SDL_OPENGL)) {
         std::cerr << SDL_GetError() << std::endl;
@@ -45,12 +49,7 @@ SDLWindowManager::~SDLWindowManager() {
 }
 
 bool SDLWindowManager::pollEvent(SDL_Event& e) {
-#ifdef __APPLE__
-    SDL_DestroyWindow(m_pWindow);
-    return true;
-#else
     return SDL_PollEvent(&e);
-#endif
 }
 
 #ifdef __APPLE__
