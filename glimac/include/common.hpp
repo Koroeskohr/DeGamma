@@ -2,6 +2,7 @@
 
 #include <GL/glew.h>
 #include "glm.hpp"
+#include "FileLogger.hpp"
 
 namespace glimac {
 

@@ -14,7 +14,14 @@
 using namespace glimac;
 
 int main(){
-    std::cout << "hello" << std::endl;
+
+    FileLogger debug ("0.0.1", "log.txt");
+
+    // Writing warnings or errors to file is very easy and C++ style
+    debug << FileLogger::e_logType::LOG_WARNING << "Hey! ... This is a warning message!";
+    debug << FileLogger::e_logType::LOG_ERROR << "WOW! Something really wrong is happening here!";
+    debug << "This is just a simple text";
+
     Assimp::Importer importer;
     std::string file = "airboat.obj";
     const aiScene *scene = importer.ReadFile(file, aiProcessPreset_TargetRealtime_Fast);//aiProcessPreset_TargetRealtime_Fast has the configs you'll need
@@ -38,6 +45,8 @@ int main(){
         std::cerr << glewGetErrorString(glewInitError) << std::endl;
         return EXIT_FAILURE;
     }
+
+
 
 
     bool done = false;
