@@ -5,19 +5,18 @@
 #include "TimeManager.hpp"
 
 namespace glimac {
+
+    TimeManager& TimeManager::getInstance()
+    {
+        static TimeManager instance;
+        return instance;
+    }
+
     TimeManager::TimeManager()
         : mProgramStart(Clock::now()),
           mTimers(),
           mCountdowns()
-    {
-
-    }
-
-    void TimeManager::updateTimers() {
-        for(Timer& timer : mTimers) {
-            timer.updateTime();
-        }
-    }
+    { }
 
     bool TimeManager::checkCountdowns () {
         bool didAThing = false;
@@ -30,4 +29,12 @@ namespace glimac {
 
         return didAThing;
     }
+
+    std::shared_ptr<Timer> TimeManager::registerTimer(){
+        std::shared_ptr<Timer> timer;
+        mTimers.push_back(timer);
+
+        return timer;
+    }
+
 }

@@ -6,22 +6,30 @@
 #define DEGAMMA_TIMEMANAGER_HPP
 
 #include <vector>
+#include <memory>
+
 #include "TimeDefinitions.hpp"
 #include "Timer.hpp"
 #include "Countdown.hpp"
 
+using std::chrono::time_point;
 
 namespace glimac {
 class TimeManager {
-    using std::chrono::time_point;
 public:
-    TimeManager();
+    static TimeManager& getInstance();
 
-    void updateTimers();
+    TimeManager(TimeManager const&) = delete;
+    void operator=(TimeManager const&) = delete;
+
     bool checkCountdowns();
+
+    std::shared_ptr<Timer> registerTimer();
+
 private:
+    TimeManager();
     const time_point<Clock> mProgramStart;
-    std::vector<Timer> mTimers;
+    std::vector<std::shared_ptr<Timer>> mTimers;
     std::vector<Countdown> mCountdowns;
 };
 }
