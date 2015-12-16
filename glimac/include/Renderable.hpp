@@ -5,18 +5,19 @@
 #include "Transform.hpp"
 #include "Mesh.hpp"
 #include "Model.hpp"
-//TODO : #include "Texture.hpp"
+#include "Texture.hpp"
 
 
 namespace glimac {
 
 class Renderable {
-
+public:
+    virtual ~Renderable () = 0;
 
 private:
     Transform mTransform;
     Model* mModel; //DESIGN PATTERN POIDS MOUCHE
-
+    GLint vaoId;
 };
 
 
