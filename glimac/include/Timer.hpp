@@ -7,23 +7,24 @@
 
 #include "TimeDefinitions.hpp"
 
+using std::chrono::time_point;
+using std::chrono::milliseconds;
+
 namespace glimac {
+
 class Timer {
     friend class TimeManager;
-    using std::chrono::time_point;
-    using std::chrono::milliseconds;
 
 public:
-    long elapsed() const;
+    long elapsedTime() const;
 
 protected:
-    void updateTime();
     Timer();
 
 private:
     const time_point<Clock> mStartTime;
-    milliseconds mElapsedTime;
 };
+    
 }
 
 
