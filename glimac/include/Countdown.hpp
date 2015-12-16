@@ -8,21 +8,21 @@
 #include "TimeDefinitions.hpp"
 #include <functional>
 
+using std::chrono::time_point;
+using std::chrono::milliseconds;
+
 namespace glimac{
-class Countdown {
+    class Countdown {
     friend class TimeManager;
-    using std::chrono::time_point;
-    using std::chrono::milliseconds;
 
 protected:
-    Countdown(milliseconds duration, std::function callback);
-
-    template <typename T>
-    std::function<T> mCallback;
+    Countdown(milliseconds duration, std::function<void()> callback);
 
     bool isFinished() const;
+    void sendCallback();
 
 private:
+    std::function<void()> mCallback;
     const milliseconds mDuration;
     const time_point<Clock> mStartTime;
 
