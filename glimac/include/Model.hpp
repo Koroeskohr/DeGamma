@@ -1,16 +1,25 @@
 #include "common.hpp"
+#include <iostream>
 #include "Shader.hpp"
 #include "Mesh.hpp"
 #include <vector>
 #include <string>
 
+#include "Image.hpp"
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
+
+
 namespace glimac {
+
+GLint TextureFromFile(const char* path, string directory);
 
 class Model {
 
 	public: 
-		Model(GLchar* path);
-		void Draw(Shader shader);
+		Model(string path);
+		void Draw(Program & program);
 
 	private:
 		vector<Mesh> meshes;
@@ -22,5 +31,7 @@ class Model {
 		vector<Texture> loadMaterialTextures(aiMaterial* mat, aiTextureType type, string typeName);
 
 };
+
+
 
 }

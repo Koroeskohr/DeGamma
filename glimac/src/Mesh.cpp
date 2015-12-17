@@ -3,11 +3,11 @@
 namespace glimac {
 Mesh::Mesh(vector<Vertex> vertices, vector<GLuint> indices, vector<Texture> textures)
 {
-    this->vertices = vertices;
-    this->indices = indices;
-    this->textures = textures;
+    vertices = vertices;
+    indices = indices;
+    textures = textures;
 
-    this->setupMesh();
+    setupMesh();
 }
 
 void Mesh::setupMesh()
@@ -45,7 +45,7 @@ void Mesh::setupMesh()
 
 }
 
-void Mesh::Draw(Shader shader) 
+void Mesh::Draw(Program & program) 
 {
     GLuint diffuseNr = 1;
     GLuint specularNr = 1;
@@ -55,15 +55,15 @@ void Mesh::Draw(Shader shader)
         // Retrieve texture number (the N in diffuse_textureN)
         stringstream ss;
         string number;
-        string name = this->textures[i].type;
+        string name = textures[i].type;
         if(name == "texture_diffuse")
             ss << diffuseNr++; // Transfer GLuint to stream
         else if(name == "texture_specular")
             ss << specularNr++; // Transfer GLuint to stream
         number = ss.str(); 
 
-        glUniform1f(glGetUniformLocation(shader.getGLId(), ("material." + name + number).c_str()), i);
-        glBindTexture(GL_TEXTURE_2D, this->textures[i].id);
+        glUniform1f(glGetUniformLocation(program.getGLId(), ("material." + name + number).c_str()), i);
+        glBindTexture(GL_TEXTURE_2D, textures[i].id);
     }
     glActiveTexture(GL_TEXTURE0);
 
@@ -71,5 +71,7 @@ void Mesh::Draw(Shader shader)
     glBindVertexArray(this->VAO);
     glDrawElements(GL_TRIANGLES, this->indices.size(), GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
+
+
 } 
 } 

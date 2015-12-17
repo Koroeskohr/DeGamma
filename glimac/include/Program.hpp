@@ -41,8 +41,10 @@ public:
 		glUseProgram(m_nGLId);
 	}
 
-private:
 	Program(const Program&);
+
+private:
+	
 	Program& operator =(const Program&);
 
 	GLuint m_nGLId;

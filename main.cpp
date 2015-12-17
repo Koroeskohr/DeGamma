@@ -10,24 +10,33 @@
 #include <assimp/postprocess.h>
 #include <assimp/scene.h>
 #include <assimp/DefaultLogger.hpp>
-#include <Mesh.hpp>
+#include "Program.hpp"
+#include "Model.hpp"
+#include "FilePath.hpp"
 
 using namespace glimac;
 
-int main(){
-    std::cout << "hello" << std::endl;
-    Assimp::Importer importer;
-    std::string file = "airboat.obj";
-    const aiScene *scene = importer.ReadFile(file, aiProcessPreset_TargetRealtime_Fast);//aiProcessPreset_TargetRealtime_Fast has the configs you'll need
+struct ModelProgram {
 
-    if (!scene)
-    {
-        std::cout << "Error loading file: (assimp:) " << importer.GetErrorString();
-        return false;
+    Program mProgram;
+    GLint uProjection;
+    GLint uView;
+    GLint uModel;
+
+    ModelProgram(const FilePath& applicationPath):
+    mProgram(loadProgram(applicationPath.dirPath() + "shaders/modelLoading.vs.glsl", 
+                         applicationPath.dirPath() + "shaders/modelLoading.fs.glsl")) {
+
+        uProjection = glGetUniformLocation(mProgram.getGLId(), "projection");
+        uView = glGetUniformLocation(mProgram.getGLId(), "view");
+        uModel = glGetUniformLocation(mProgram.getGLId(), "model");
     }
-    aiMesh *mesh = scene->mMeshes[0]; //assuming you only want the first mesh
 
-    std::cout << scene->mNumMeshes << std::endl;
+};
+
+int main(){
+    
+
 
     SDLWindowManager windowManager(800, 600, "GLImac");
 
@@ -41,6 +50,29 @@ int main(){
     }
 
 
+    //initialisation 
+    string modelPath = "/Users/burckelmegane/Desktop/test/degamma/models/airboat.obj";
+    Model myModel(modelPath);
+
+    FilePath myFilePath;
+
+    ModelProgram myProgram(myFilePath);
+
+    myProgram.mProgram.use();
+
+    glm::mat4 projection = glm::perspective(glm::radians(70.f), 800.f/600.f, 0.1f, 100.0f);
+    glm::mat4 MVMatrix = glm::translate(glm::mat4(1), glm::vec3(0,0,-5));
+    glm::mat4 NormalMatrix = glm::transpose(glm::inverse(MVMatrix));
+
+
+        // Draw the loaded model
+        glm::mat4 model;
+        model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f)); // Translate it down a bit so it's at the center of the scene
+        model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f)); // It's a bit too big for our scene, so scale it down
+        glUniformMatrix4fv(glGetUniformLocation(myProgram.mProgram.getGLId(), "model"), 1, GL_FALSE, glm::value_ptr(model));
+        
+
+
     /* START LOOP */
     bool done = false;
     while(!done) {
@@ -51,6 +83,13 @@ int main(){
                 done = true; // Leave the loop after this iteration
             }
         }
+        
+        glUniformMatrix4fv(uMVPMatrix, 1, GL_FALSE, glm::value_ptr(ProjMatrix*MVMatrix));
+        glUniformMatrix4fv(uMVMatrix, 1, GL_FALSE, glm::value_ptr(MVMatrix));
+        glUniformMatrix4fv(uNormalMatrix, 1, GL_FALSE, glm::value_ptr(NormalMatrix));
+
+        myModel.Draw(myProgram.mProgram);
+
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         windowManager.swapBuffers();
     }

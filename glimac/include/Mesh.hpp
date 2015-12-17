@@ -1,8 +1,10 @@
 #include "common.hpp"
-#include "Shader.hpp"
+#include "Program.hpp"
 #include <vector>
 #include <string>
 #include <sstream>
+#include "assimp/scene.h"
+
 using namespace std;
 namespace glimac {
 struct Vertex {
@@ -14,6 +16,7 @@ struct Vertex {
 struct Texture {
     GLuint id;
     string type;
+    aiString path;
 };
 
 
@@ -25,7 +28,7 @@ class Mesh {
         vector<Texture> textures;
         /*  Functions  */
         Mesh(vector<Vertex> vertices, vector<GLuint> indices, vector<Texture> textures);
-        void Draw(Shader shader);
+        void Draw(Program & program);
     private:
         /*  Render data  */
         GLuint VAO, VBO, EBO;

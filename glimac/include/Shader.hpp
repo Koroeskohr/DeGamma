@@ -39,8 +39,10 @@ public:
 
 	const std::string getInfoLog() const;
 
-private:
 	Shader(const Shader&);
+
+private:
+	
 	Shader& operator =(const Shader&);
 
 	GLuint m_nGLId;

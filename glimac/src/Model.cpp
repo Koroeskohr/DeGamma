@@ -2,41 +2,41 @@
 
 namespace glimac {
 
-class Model {
 
-	public: 
-		Model::Model(GLchar* path){
+		Model::Model(string path){
 
 			loadModel(path);
 		}
-		void Draw(Shader shader){
+		void Model::Draw(Program& program){
 
-			for(GLuint i=0, i< meshes.size();i++) 
-				meshes[i].Draw(shader);
+			for(GLuint i=0; i<meshes.size();i++) 
+				meshes[i].Draw(program);
+
 		}
 
-	private:
-		vector<Mesh> meshes;
-		string directory;
+		/*vector<Mesh> meshes;
+		string directory;*/
 
-		void loadModel(string path){
+		void Model::loadModel(string path){
+
 
 			Assimp::Importer import;
-    		const aiScene* scene = import.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs);	
+    		const aiScene* scene = import.ReadFile(path, aiProcessPreset_TargetRealtime_Fast);	
 	
     		if(!scene || scene->mFlags == AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) 
     		{
-       			 cout << "ERROR::ASSIMP::" << import.GetErrorString() << endl;
+       			 std::cout << "ERROR::ASSIMP::" << import.GetErrorString() << std::endl;
         		return;
     		}
     		directory = path.substr(0, path.find_last_of('/'));
 
    			processNode(scene->mRootNode, scene);
 
+
 		}
 
 
-		void processNode(aiNode* node, const aiScene* scene) {
+		void Model::processNode(aiNode* node, const aiScene* scene) {
 
 			 // Process all the node's meshes (if any)
     		for(GLuint i = 0; i < node->mNumMeshes; i++)
@@ -49,9 +49,11 @@ class Model {
     		{
         		processNode(node->mChildren[i], scene);
     		}
+
+
 		}
 		
-		Mesh processMesh(aiMesh* mesh, const aiScene* scene)
+		Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene)
     	{
         // Data to fill
         vector<Vertex> vertices;
@@ -59,8 +61,8 @@ class Model {
         vector<Texture> textures;
 
         // Walk through each of the mesh's vertices
-        for(GLuint i = 0; i < mesh->mNumVertices; i++)
-        {
+        for(GLuint i = 0; i < mesh->mNumVertices; i++){
+
             Vertex vertex;
             glm::vec3 vector; // We declare a placeholder vector since assimp uses its own vector class that doesn't directly convert to glm's vec3 class so we transfer the data to this placeholder glm::vec3 first.
             // Positions
@@ -69,10 +71,13 @@ class Model {
             vector.z = mesh->mVertices[i].z;
             vertex.Position = vector;
             // Normals
+
             vector.x = mesh->mNormals[i].x;
             vector.y = mesh->mNormals[i].y;
             vector.z = mesh->mNormals[i].z;
             vertex.Normal = vector;
+            
+
             // Texture Coordinates
             if(mesh->mTextureCoords[0]) // Does the mesh contain texture coordinates?
             {
@@ -114,11 +119,11 @@ class Model {
             textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
         }
         
-        // Return a mesh object created from the extracted mesh data
-        return Mesh(vertices, indices, textures);
+        	// Return a mesh object created from the extracted mesh data
+        	return Mesh(vertices, indices, textures);
     	}
 
-		vector<Texture> loadMaterialTextures(aiMaterial* mat, aiTextureType type, string typeName);
+		vector<Texture> Model::loadMaterialTextures(aiMaterial* mat, aiTextureType type, string typeName)
 		{
         	vector<Texture> textures;
         for(GLuint i = 0; i < mat->GetTextureCount(type); i++)
@@ -135,6 +140,28 @@ class Model {
         return textures;
     }
 
-};
+GLint TextureFromFile(const char* path, string directory){
+	 //Generate texture ID and load texture data 
+    string filename = string(path);
+    filename = directory + '/' + filename;
+    GLuint textureID;
+    glGenTextures(1, &textureID);
+    int width,height;
+    //unsigned char* image = SOIL_load_image(filename.c_str(), &width, &height, 0, SOIL_LOAD_RGB);
+    unique_ptr<glimac::Image> image = glimac::loadImage(filename.c_str());
+    // Assign texture to ID
+    glBindTexture(GL_TEXTURE_2D, textureID);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image->getWidth(), image->getHeight(), 0, GL_RGBA, GL_FLOAT, image->getPixels());
+    glGenerateMipmap(GL_TEXTURE_2D);	
+
+    // Parameters
+    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
+    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
+    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR );
+    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glBindTexture(GL_TEXTURE_2D, 0);
+    
+    return textureID;	
+}
 
 }
