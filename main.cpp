@@ -40,6 +40,7 @@ int main(){
     }
 
 
+    /* START LOOP */
     bool done = false;
     while(!done) {
         // Event loop:
