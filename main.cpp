@@ -10,6 +10,7 @@
 #include <assimp/postprocess.h>
 #include <assimp/scene.h>
 #include <assimp/DefaultLogger.hpp>
+#include <Mesh.hpp>
 
 using namespace glimac;
 
