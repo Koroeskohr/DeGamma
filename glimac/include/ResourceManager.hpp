@@ -5,9 +5,10 @@
 #ifndef DEGAMMA_RESOURCEMANAGER_HPP
 #define DEGAMMA_RESOURCEMANAGER_HPP
 
-#include "Model.hpp"
 #include <map>
+#include <sstream>
 
+#include "Model.hpp"
 #include "models/models.hpp"
 
 namespace glimac {
@@ -27,7 +28,7 @@ public:
     /*
      * Model factory
      */
-    static Model* makeModel(const int modelId);
+    Model* getModel(const int modelId); //see ResourceManager::EModels enum
 
     /*
      * No default copy constructor since it's a singleton
@@ -38,13 +39,14 @@ public:
 
 private:
     ResourceManager();
-    static Assimp::Importer mImporter;
-    std::map<int, Model*> mModelsMap;
-    Models EModels;
-
     static ResourceManager* mInstance;
 
+    static Assimp::Importer mImporter;
 
+    Model* makeModel(const int modelId);
+    std::map<int, Model*> mModelsMap;
+
+    Models EModels;
 
 };
 

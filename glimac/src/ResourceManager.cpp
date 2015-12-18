@@ -32,4 +32,23 @@ namespace glimac {
         return mImporter.ReadFile(str, aiProcessPreset_TargetRealtime_Fast);
     }
 
+    Model *ResourceManager::getModel (const int modelId) {
+        long modelCount = mModelsMap.count(modelId);
+        Model * model;
+
+        if(modelCount > 1){
+            std::ostringstream errorMessage;
+            errorMessage << "There is more than one model : " << modelId;
+            throw std::runtime_error(errorMessage.str());
+        }
+        else if(modelCount == 0){
+            model = makeModel(modelId);
+            mModelsMap.insert(std::make_pair(modelId, model));
+        }
+        else {
+            model = mModelsMap.at(modelId);
+        }
+
+        return model;
+    }
 }
