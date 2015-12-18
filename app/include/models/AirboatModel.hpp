@@ -15,7 +15,8 @@ using namespace glimac;
 class AirboatModel: public Model {
 
 public:
-    AirboatModel("airboat.obj") //FIXME
+    AirboatModel()
+        : Model("airboat.obj")
     {
 
 
