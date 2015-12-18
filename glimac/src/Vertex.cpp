@@ -5,21 +5,15 @@
 #include "Vertex.hpp"
 
 namespace glimac {
-    Vertex::Vertex(vec3 pos, vec3 color, vec3 normal, vec3 ambiant, vec3 specular, vec3 emissive)
+    Vertex::Vertex(vec3 pos, vec3 normal, vec2 texCoords)
             : position(pos),
-              color(color),
               normal(normal),
-              ambientColor(ambiant),
-              specularColor(specular),
-              emissiveColor(emissive)
+              texCoords(texCoords)
     {}
 
     Vertex::Vertex(const Vertex &p)
             : position(p.position),
-              color(p.color),
               normal(p.normal),
-              ambientColor(p.ambientColor),
-              specularColor(p.specularColor),
-              emissiveColor(p.emissiveColor)
+              texCoords(p.texCoords)
     {}
 }
