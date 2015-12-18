@@ -23,6 +23,8 @@ public:
 private:
     void init();
 
+    //init in Mesh::init
+    unsigned long mVerticesAmount;
     std::vector<Vertex> mVertices;
     std::vector<unsigned> mIndices;
 
