@@ -5,9 +5,13 @@
 #include "Mesh.hpp"
 
 namespace glimac {
-    Mesh::Mesh (const aiMesh *mesh, const std::string& materialName)
-        : mMaterialName(materialName)
+    Mesh::Mesh (std::vector<Vertex>& vertices, std::vector<unsigned>& indices, const std::string& materialName)
+        : mVertices(vertices),
+          mIndices(indices),
+          mMaterialName(materialName)
     {
+    }
+
         /*
          * TODO : get aiMesh from scene in Model class
          * /
