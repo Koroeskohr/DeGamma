@@ -12,12 +12,13 @@ namespace glimac {
 
 class Renderable {
 public:
-    virtual ~Renderable () = 0;
+    Renderable(const int modelId, const glm::vec3& position = glm::vec3(0));
+
+    virtual ~Renderable() = 0;
 
 private:
     Transform mTransform;
     Model* mModel; //DESIGN PATTERN POIDS MOUCHE
-    GLint vaoId;
 };
 
 
