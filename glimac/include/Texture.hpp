@@ -5,10 +5,46 @@
 #ifndef DEGAMMA_TEXTURE_HPP
 #define DEGAMMA_TEXTURE_HPP
 
+#include <assimp/material.h>
+#include "common.hpp"
+
+namespace glimac {
 
 class Texture {
+public:
+    Texture (const std::string &name, glm::vec3 diffuse, glm::vec3 ambient, glm::vec3 specular,
+                 GLfloat shininess);
+
+    ~Texture();
+
     //TODO
+    void init();
+
+    std::string getName() const;
+    GLuint getGlTexture() const;
+    glm::vec4 getSpecularColor() const;
+    glm::vec4 getAmbientColor() const;
+    glm::vec4 getDiffuseColor() const;
+    GLfloat getShininess() const;
+
+    void setSpecularColor(glm::vec4 specular);
+    void setAmbientColor(glm::vec4 ambient);
+    void setDiffuseColor(glm::vec4 diffuse);
+    void setShininess(GLfloat shininess);
+
+private:
+    std::string mMaterialName;
+    GLuint mGlTexture;
+
+    glm::vec4 mDiffuseColor;
+    glm::vec4 mAmbientColor;
+    glm::vec4 mSpecularColor;
+    GLfloat mShininess;
 };
+
+}
+
+
 
 
 #endif //DEGAMMA_TEXTURE_HPP
