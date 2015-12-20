@@ -16,7 +16,7 @@ namespace glimac {
         vec3 normal;
         vec2 texCoords;
 
-        Vertex(vec3 pos = vec3(0), vec3 normal, vec2 texCoords);
+        Vertex(vec3 pos = vec3(0), vec3 normal = vec3(0), vec2 texCoords = vec2(0));
         Vertex(const Vertex &p);
     };
 }
