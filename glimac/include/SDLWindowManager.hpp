@@ -12,7 +12,7 @@
 
 namespace glimac {
 
-class SDLWindowManager {
+class SDLWindowManager { //TODO : make a singleton
 #ifdef __APPLE__
     SDL_Window* m_pWindow;
 	SDL_GLContext m_Context;

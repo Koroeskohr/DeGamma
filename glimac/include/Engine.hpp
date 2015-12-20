@@ -17,7 +17,7 @@
 using namespace glimac;
 class Engine {
 public:
-    static Engine* GetInstance();
+    static Engine* getInstance();
 
     ~Engine();
 

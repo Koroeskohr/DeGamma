@@ -6,7 +6,7 @@
 
 Engine * Engine::mInstance = nullptr;
 
-Engine* Engine::GetInstance() {
+Engine* Engine::getInstance() {
     if (mInstance == nullptr)
         mInstance = new Engine;
 
@@ -14,8 +14,8 @@ Engine* Engine::GetInstance() {
 }
 
 Engine::Engine()
-    : mResourceManager(),
-      mWindowManager()
+        : mWindowManager(new SDLWindowManager(640,480,"YOloGL")),
+          mResourceManager()
 {
     glewExperimental = GL_TRUE;
 
