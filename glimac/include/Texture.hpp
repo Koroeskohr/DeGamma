@@ -7,18 +7,20 @@
 
 #include <assimp/material.h>
 #include "common.hpp"
+#include "Image.hpp"
+#include <memory>
 
 namespace glimac {
 
 class Texture {
 public:
-    Texture (const std::string &name, glm::vec3 diffuse, glm::vec3 ambient, glm::vec3 specular,
+    Texture (const std::string &name, std::unique_ptr<Image> const & texImage, glm::vec3 diffuse, glm::vec3 ambient, glm::vec3 specular,
                  GLfloat shininess);
 
     ~Texture();
 
     //TODO
-    void init();
+    void init(std::unique_ptr<Image> const & texImage);
 
     std::string getName() const;
     GLuint getGlTexture() const;
@@ -35,6 +37,8 @@ public:
 private:
     std::string mMaterialName;
     GLuint mGlTexture;
+    GLfloat mTexImageWidth;
+    GLfloat mTexImageHeight;
 
     glm::vec4 mDiffuseColor;
     glm::vec4 mAmbientColor;
