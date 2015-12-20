@@ -4,6 +4,7 @@
 
 #include "ResourceManager.hpp"
 
+ResourceManager* ResourceManager::mInstance = nullptr;
 
 namespace glimac {
     ResourceManager *ResourceManager::getInstance () {

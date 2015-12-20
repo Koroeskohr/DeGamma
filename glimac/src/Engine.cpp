@@ -4,6 +4,8 @@
 
 #include "Engine.hpp"
 
+Engine * Engine::mInstance = nullptr;
+
 Engine* Engine::GetInstance() {
     if (mInstance == nullptr)
         mInstance = new Engine;
