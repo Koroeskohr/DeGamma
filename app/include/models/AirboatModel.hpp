@@ -13,6 +13,7 @@ class AirboatModel: public Model{
 
 public:
     AirboatModel();
+    ~AirboatModel ();
 
 };
 

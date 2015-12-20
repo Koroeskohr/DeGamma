@@ -7,3 +7,7 @@
 AirboatModel::AirboatModel()
         : Model("airboat.obj")
 { }
+
+AirboatModel::~AirboatModel () {
+
+}

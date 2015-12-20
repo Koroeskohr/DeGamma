@@ -23,6 +23,8 @@ namespace glimac {
         }
     }
 
+    Model::~Model() { }
+
     //TODO : refactor
     void Model::loadMaterials (const aiScene * scene) {
         aiString name;
