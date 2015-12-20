@@ -18,7 +18,7 @@ IF(NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 ENDIF()
 
 MESSAGE(STATUS "${CMAKE_MODULE_PATH}")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall")
 
 
 IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
@@ -35,7 +35,7 @@ ELSE()
     set(ALL_LIBRARIES app glimac assimp ${SDL_LIBRARY} ${OPENGL_LIBRARIES} ${GLEW_LIBRARY} ${ASSIMP_LIBRARY})
 ENDIF()
 
-
+add_subdirectory(app)
 add_subdirectory(glimac)
 add_subdirectory(third-party/assimp)
 
