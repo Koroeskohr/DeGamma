@@ -14,7 +14,7 @@
 using namespace glimac;
 
 int main(){
-
+    //TODO : remove stuff, add engine stuff
     FileLogger debug ("0.0.1", "log.txt");
 
     // Writing warnings or errors to file is very easy and C++ style
