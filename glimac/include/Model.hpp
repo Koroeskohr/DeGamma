@@ -6,10 +6,11 @@
 #define DEGAMMA_MODEL_HPP
 
 #include <map>
+#include <assimp/Importer.hpp>
 
 #include "Mesh.hpp"
 #include "Texture.hpp"
-#include "ResourceManager.hpp"
+
 
 
 namespace glimac {
@@ -21,8 +22,14 @@ public:
 
 
 private:
+    void loadMaterials(const aiScene* scene);
+    void loadMeshes(const aiScene* scene);
+
+    glm::vec3 aiToGlm(const aiColor3D& c);
     std::vector<Mesh> mMeshes;
     std::map<std::string, Texture> mTextures;
+
+    std::map<int, std::string> mTexCorrespondanceMap;
 };
 
 }

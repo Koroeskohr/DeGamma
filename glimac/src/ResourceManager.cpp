@@ -4,6 +4,7 @@
 
 #include "ResourceManager.hpp"
 
+
 namespace glimac {
     ResourceManager *ResourceManager::getInstance () {
         if (!mInstance) {
@@ -13,8 +14,7 @@ namespace glimac {
     }
 
     ResourceManager::ResourceManager ()
-        : mImporter(),
-          mModelsMap()
+        : mModelsMap()
     { }
 
     // called by Renderable childs instances
@@ -28,8 +28,9 @@ namespace glimac {
         }
     }
 
-    const aiScene* ResourceManager::import (std::string str) const {
-        return mImporter.ReadFile(str, aiProcessPreset_TargetRealtime_Fast);
+    const aiScene* ResourceManager::import (std::string str) {
+        Assimp::Importer importer;
+        return importer.ReadFile(str, aiProcessPreset_TargetRealtime_Fast);
     }
 
     Model *ResourceManager::getModel (const int modelId) {

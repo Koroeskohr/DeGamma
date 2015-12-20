@@ -6,21 +6,14 @@
 #define DEGAMMA_AIRBOATMODEL_HPP
 
 #include "Model.hpp"
-#include "Mesh.hpp"
-#include "Texture.hpp"
-#include "ResourceManager.hpp"
 
 using namespace glimac;
 
-class AirboatModel: public Model {
+class AirboatModel: public Model{
 
 public:
-    AirboatModel()
-        : Model("airboat.obj")
-    {
+    AirboatModel();
 
-
-    }
 };
 
 #endif //DEGAMMA_AIRBOATMODEL_HPP

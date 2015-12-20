@@ -8,8 +8,13 @@
 #include <map>
 #include <sstream>
 
+#include <assimp/scene.h>
+#include <assimp/Importer.hpp>
+#include <assimp/postprocess.h>
 #include "Model.hpp"
 #include "models/models.hpp"
+
+
 
 namespace glimac {
 
@@ -21,7 +26,7 @@ public:
     /*
      * Let's not have multiple importer since one is enough
      */
-    static const aiScene* import(std::string str) const;
+    static const aiScene* import(std::string str);
 
     enum Models { AIRBOAT } ;
 
@@ -40,8 +45,6 @@ public:
 private:
     ResourceManager();
     static ResourceManager* mInstance;
-
-    static Assimp::Importer mImporter;
 
     Model* makeModel(const int modelId);
     std::map<int, Model*> mModelsMap;
