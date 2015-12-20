@@ -4,8 +4,6 @@
 
 #include "Engine.hpp"
 
-
-
 Engine* Engine::GetInstance() {
     if (mInstance == nullptr)
         mInstance = new Engine;
@@ -32,9 +30,18 @@ Engine::Engine()
 
     createManagers();
 
+    //TODO : start timers
+}
+
+Engine::~Engine(){
+    //TODO
 }
 
 void Engine::createManagers () {
     mResourceManager = std::unique_ptr<ResourceManager>(ResourceManager::getInstance());
     mWindowManager = std::unique_ptr<SDLWindowManager>(new SDLWindowManager(1280,720, "DeGamma"));
+}
+
+void Engine::loop () {
+
 }

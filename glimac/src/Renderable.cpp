@@ -10,4 +10,12 @@ namespace glimac {
     }
 
 
+    void Renderable::update () {
+        //TODO
+        mTransform.position.x += 0.1;
+    }
+
+    void Renderable::render(){
+        //TODO
+    }
 }

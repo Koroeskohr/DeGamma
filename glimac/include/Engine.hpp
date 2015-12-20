@@ -14,13 +14,14 @@
 #include "SDLWindowManager.hpp"
 #include "ResourceManager.hpp"
 
-
+using namespace glimac;
 class Engine {
 public:
     static Engine* GetInstance();
 
     ~Engine();
 
+    void loop();
     /*
      * No default copy constructor since it's a singleton
      */

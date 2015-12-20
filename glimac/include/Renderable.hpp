@@ -3,16 +3,18 @@
 #include <common.hpp>
 
 #include "Transform.hpp"
-#include "Mesh.hpp"
-#include "Model.hpp"
-#include "Texture.hpp"
-
+#include "ResourceManager.hpp"
 
 namespace glimac {
+class Model;
+
 
 class Renderable {
 public:
     Renderable(const int modelId, const glm::vec3& position = glm::vec3(0));
+
+    virtual void update();
+    virtual void render();
 
     virtual ~Renderable() = 0;
 
