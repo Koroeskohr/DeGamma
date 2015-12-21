@@ -53,7 +53,7 @@ namespace glimac {
                 throw std::runtime_error("No material shininess");
 
             if(AI_SUCCESS != material->Get(AI_MATKEY_TEXTURE_DIFFUSE(0), imagePath))
-                throw std::runtime_error("No material shininess");
+                throw std::runtime_error("No texture");
 
 
             std::string imageName(imagePath.data);

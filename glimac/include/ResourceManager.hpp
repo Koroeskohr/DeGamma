@@ -11,9 +11,8 @@
 #include <assimp/scene.h>
 #include <assimp/Importer.hpp>
 #include <assimp/postprocess.h>
-#include "Model.hpp"
-#include "models/models.hpp"
 
+#include "models/models.hpp"
 
 
 namespace glimac {
