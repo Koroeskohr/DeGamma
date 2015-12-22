@@ -14,14 +14,20 @@
 #include <Mesh.hpp>
 #include <models/AirboatModel.hpp>
 #include <Renderable.hpp>
+#include "FilePath.hpp"
 
 
 
 #include "Engine.hpp"
 
+
+
 using namespace glimac;
 
-int main(){
+
+int main(int argc, char** argv){
+    
+
     Engine * engine = Engine::getInstance();
     //TODO : remove stuff, add engine stuff
     FileLogger debug ("0.0.1", "log.txt");

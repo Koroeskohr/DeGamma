@@ -10,25 +10,7 @@
 #include "FreeflyCamera.hpp"
 
 
-struct myProgram{
 
-    glimac::Program mProgram;
-
-    GLint uMVPMatrix;
-    GLint uMVMatrix;
-    GLint uNormalMatrix;
-
-
-    myProgram():
-            mProgram(glimac::loadProgram("/Users/Luhof/Documents/IMAC2/projetogl/DeGamma/shaders/3D.vs.glsl",
-                                 "/Users/Luhof/Documents/IMAC2/projetogl/DeGamma/shaders/3D.fs.glsl")){
-        uMVPMatrix = glGetUniformLocation(mProgram.getGLId(), "uMVPMatrix");
-        uMVMatrix = glGetUniformLocation(mProgram.getGLId(), "uMVMatrix");
-        uNormalMatrix = glGetUniformLocation(mProgram.getGLId(), "uNormalMatrix");
-
-    }
-
-};
 
 namespace glimac {
 
@@ -66,6 +48,7 @@ namespace glimac {
         for(int i = 1; i < scene->mNumMaterials; i++){
 
             //TODO : make this nicer by using a filepath
+
             std::string fullPath = "/Users/Luhof/Documents/IMAC2/projetogl/DeGamma/nanosuit/";
 
             const aiMaterial * material = scene->mMaterials[i];
@@ -162,30 +145,17 @@ namespace glimac {
 
     void Model::draw(){
 
-        myProgram theProgram;
 
-        theProgram.mProgram.use();
+
 
         for(int i=0; i<mMeshes.size(); i++){
 
             Mesh currMesh = mMeshes[i];
             std::string texName = mTexCorrespondanceMap[i];
             GLuint currTexId = mTextures[texName].getGlTexture();
-            std::cout << texName << std::endl;
 
 
-
-            FreeflyCamera myCamera;
-            glm::mat4 ProjMatrix = glm::perspective(glm::radians(70.f), 800.f/600.f, 0.1f, 100.f);
-            glm::mat4 globalMVMatrix = myCamera.getViewMatrix();
-            globalMVMatrix = glm::scale(globalMVMatrix, glm::vec3(0.2, 0.2, 0.2));
-            glm::mat4 normalMatrix = glm::transpose(glm::inverse(globalMVMatrix));
-            glm::mat4 MVPMatrix = ProjMatrix * globalMVMatrix;
-
-            glUniformMatrix4fv(theProgram.uMVMatrix, 1, GL_FALSE, glm::value_ptr(globalMVMatrix));
-            glUniformMatrix4fv(theProgram.uNormalMatrix, 1, GL_FALSE, glm::value_ptr(normalMatrix));
-            glUniformMatrix4fv(theProgram.uMVPMatrix, 1, GL_FALSE, glm::value_ptr(MVPMatrix));
-
+            glBindVertexArray(currMesh.mVAOid);
 
             glBindTexture(GL_TEXTURE_2D, currTexId);
             glDrawArrays(GL_TRIANGLES, 0, currMesh.mVerticesAmount);
@@ -193,8 +163,6 @@ namespace glimac {
 
             glBindVertexArray(0);
         }
-
-
 
     }
 }
