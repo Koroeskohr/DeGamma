@@ -3,6 +3,7 @@
 //
 
 #include "Mesh.hpp"
+#include <iostream>
 
 namespace glimac {
     Mesh::Mesh (std::vector<Vertex>& vertices, std::vector<unsigned>& indices, const std::string& materialName)
@@ -10,12 +11,18 @@ namespace glimac {
           mIndices(indices),
           mMaterialName(materialName)
     {
+
         init();
     }
 
     void Mesh::init(){
+        FileLogger debug ("0.0.1", "log.txt");
         mVerticesAmount = mVertices.size();
-
+        std::cout << mMaterialName << std::endl;
+        std::cout << mVertices[0].position.x << " - " << mVertices[0].position.y << " - " << mVertices[0].position.z << std::endl;
+        std::cout << mVertices[1].position.x << " - " << mVertices[1].position.y << " - " << mVertices[1].position.z << std::endl;
+        std::cout << mVertices[2].position.x << " - " << mVertices[2].position.y << " - " << mVertices[2].position.z << std::endl;
+        std::cout << "done" << std::endl;
         glGenBuffers(1, &mVBOid);
         glGenVertexArrays(1, &mVAOid);
 

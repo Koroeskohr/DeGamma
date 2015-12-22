@@ -13,6 +13,9 @@
 #include <Vertex.hpp>
 #include <Mesh.hpp>
 #include <models/AirboatModel.hpp>
+#include <Renderable.hpp>
+
+
 
 #include "Engine.hpp"
 
@@ -29,7 +32,11 @@ int main(){
     debug << "This is just a simple text";
 
 
+
+
     //TODO : render loop
+
+    engine->loop();
 
     return 0;
 

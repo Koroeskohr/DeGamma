@@ -16,7 +16,7 @@ class Texture {
 public:
     Texture (const std::string &name, std::unique_ptr<Image> const & texImage, glm::vec3 diffuse, glm::vec3 ambient, glm::vec3 specular,
                  GLfloat shininess);
-
+    Texture();
     ~Texture();
 
     //TODO

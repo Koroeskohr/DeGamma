@@ -3,6 +3,11 @@
 //
 
 #include "Engine.hpp"
+#include "Program.hpp"
+
+
+
+
 
 Engine * Engine::mInstance = nullptr;
 
@@ -30,7 +35,9 @@ Engine::Engine()
     glCullFace(GL_CULL_FACE);
     glDepthFunc(GL_LEQUAL);
 
-    createManagers();
+    //createManagers();
+
+
 
     //TODO : start timers
 }
@@ -45,5 +52,33 @@ void Engine::createManagers () {
 }
 
 void Engine::loop () {
+
+    AirboatModel myLittleAirboat;
+
+
+
+
+
+    glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
+
+
+    bool done = false;
+    while(!done) {
+        // Event loop:
+        SDL_Event e;
+        while (mWindowManager->pollEvent(e)) {
+            if (e.type == SDL_QUIT) {
+                done = true; // Leave the loop after this iteration
+            }
+        }
+
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        myLittleAirboat.draw();
+
+        mWindowManager->swapBuffers();
+
+
+    }
 
 }

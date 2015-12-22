@@ -7,6 +7,7 @@
 
 #include <map>
 #include <assimp/Importer.hpp>
+#include <GL/glew.h>
 
 #include "Mesh.hpp"
 #include "Texture.hpp"
@@ -19,6 +20,8 @@ class Model {
 public:
     Model(const std::string& fileName);
     virtual ~Model() = 0;
+
+    void draw();
 
 
 private:

@@ -20,6 +20,10 @@ namespace glimac {
         init(texImage);
     }
 
+    Texture::Texture(){
+
+    }
+
     Texture::~Texture() {
         glDeleteTextures(1, &mGlTexture);
     }
