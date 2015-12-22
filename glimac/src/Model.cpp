@@ -158,7 +158,7 @@ namespace glimac {
             glBindVertexArray(currMesh.mVAOid);
 
             glBindTexture(GL_TEXTURE_2D, currTexId);
-            glDrawArrays(GL_TRIANGLES, 0, currMesh.mVerticesAmount);
+            glDrawElements(GL_TRIANGLES, 0, currMesh.mVerticesAmount, currMesh.getIndicesArray());
             glBindTexture(GL_TEXTURE_2D, 0);
 
             glBindVertexArray(0);

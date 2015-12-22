@@ -26,6 +26,11 @@ public:
     GLuint mIBOid;
     unsigned long mVerticesAmount;
 
+    std::vector<Vertex> * getVertices() const;
+    std::vector<unsigned> * getIndices() const;
+    unsigned* getIndicesArray() const;
+
+
 private:
     void init();
 

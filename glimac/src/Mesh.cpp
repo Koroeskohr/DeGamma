@@ -70,5 +70,17 @@ namespace glimac {
         glBindVertexArray(0);
     }
 
+    std::vector<Vertex> *Mesh::getVertices () const {
+        return &mVertices;
+    }
+
+    std::vector<unsigned> *Mesh::getIndices () const {
+        return &mIndices;
+    }
+
+
+    unsigned * Mesh::getIndicesArray () const {
+        return &mIndices[0];
+    }
 }
 
