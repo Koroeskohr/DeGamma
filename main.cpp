@@ -26,7 +26,7 @@ using namespace glimac;
 
 
 int main(int argc, char** argv){
-    
+
 
     Engine * engine = Engine::getInstance();
     //TODO : remove stuff, add engine stuff

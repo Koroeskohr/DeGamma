@@ -146,22 +146,20 @@ namespace glimac {
     void Model::draw(){
 
 
-
-
         for(int i=0; i<mMeshes.size(); i++){
 
             Mesh currMesh = mMeshes[i];
             std::string texName = mTexCorrespondanceMap[i];
             GLuint currTexId = mTextures[texName].getGlTexture();
 
-
             glBindVertexArray(currMesh.mVAOid);
 
             glBindTexture(GL_TEXTURE_2D, currTexId);
-            glDrawArrays(GL_TRIANGLES, 0, currMesh.mVerticesAmount);
+            glDrawElements(GL_TRIANGLES, currMesh.mVerticesAmount, GL_UNSIGNED_INT, 0 );
             glBindTexture(GL_TEXTURE_2D, 0);
 
             glBindVertexArray(0);
+
         }
 
     }

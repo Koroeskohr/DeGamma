@@ -24,6 +24,8 @@ public:
     GLuint mVAOid;
     GLuint mVBOid;
     GLuint mIBOid;
+    std::vector<Vertex> mVertices;
+    std::vector<unsigned> mIndices;
     unsigned long mVerticesAmount;
 
 private:
@@ -31,8 +33,7 @@ private:
 
     //init in Mesh::init
 
-    std::vector<Vertex> mVertices;
-    std::vector<unsigned> mIndices;
+
 
     //init in Mesh::Mesh
     std::string mMaterialName;

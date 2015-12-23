@@ -10,17 +10,17 @@ struct myProgram{
 
     glimac::Program mProgram;
 
-    GLint uMVPMatrix;
-    GLint uMVMatrix;
-    GLint uNormalMatrix;
+    GLint model;
+    GLint view;
+    GLint projection;
 
 
     myProgram():
             mProgram(glimac::loadProgram("/Users/Luhof/Documents/IMAC2/projetogl/DeGamma/shaders/3D.vs.glsl",
                                          "/Users/Luhof/Documents/IMAC2/projetogl/DeGamma/shaders/3D.fs.glsl")){
-        uMVPMatrix = glGetUniformLocation(mProgram.getGLId(), "uMVPMatrix");
-        uMVMatrix = glGetUniformLocation(mProgram.getGLId(), "uMVMatrix");
-        uNormalMatrix = glGetUniformLocation(mProgram.getGLId(), "uNormalMatrix");
+        model = glGetUniformLocation(mProgram.getGLId(), "model");
+        view = glGetUniformLocation(mProgram.getGLId(), "view");
+        projection = glGetUniformLocation(mProgram.getGLId(), "projection");
 
     }
 
@@ -75,20 +75,66 @@ void Engine::createManagers () {
 void Engine::loop () {
 
 
-    AirboatModel myLittleAirboat;
 
 
     glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 
-    myProgram theProgram;
 
-    theProgram.mProgram.use();
+
+    myProgram program;
+    program.mProgram.use();
+
+
+    /*static const GLfloat g_vertex_buffer_data[] = {
+            -1.0f, -1.0f, 0.0f,
+            1.0f, -1.0f, 0.0f,
+            0.0f,  1.0f, 0.0f,
+    };
+
+    GLuint vertexbuffer;
+    GLuint vao;
+    // Generate 1 buffer, put the resulting identifier in vertexbuffer
+    glGenBuffers(1, &vertexbuffer);
+    // The following commands will talk about our 'vertexbuffer' buffer
+    glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+    // Give our vertices to OpenGL.
+    glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
+
+
+
+    // 1rst attribute buffer : vertices
+    glGenVertexArrays(1, &vao);
+
+    glBindVertexArray(vao);
+    glEnableVertexAttribArray(5);
+
+    glVertexAttribPointer(
+            5,                  // attribute 5. Because other ones are used lolmdr
+            3,                  // size
+            GL_FLOAT,           // type
+            GL_FALSE,           // normalized?
+            0,                  // stride
+            (void*)0            // array buffer offset
+    );
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindVertexArray(0);*/
+
+    AirboatModel myLittleAirboat;
+
     FreeflyCamera myCamera;
-    glm::mat4 ProjMatrix = glm::perspective(glm::radians(70.f), 800.f/600.f, 0.1f, 100.f);
-    glm::mat4 globalMVMatrix = myCamera.getViewMatrix();
-    globalMVMatrix = glm::scale(globalMVMatrix, glm::vec3(0.2, 0.2, 0.2));
-    glm::mat4 normalMatrix = glm::transpose(glm::inverse(globalMVMatrix));
-    glm::mat4 MVPMatrix = ProjMatrix * globalMVMatrix;
+    glm::mat4 projection = glm::perspective(glm::radians(75.0f), (float)640.0f/(float)480.0f, 0.1f, 100.0f);
+    glm::mat4 view = myCamera.getViewMatrix();
+    glUniformMatrix4fv(glGetUniformLocation(program.projection, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+    glUniformMatrix4fv(glGetUniformLocation(program.view, "view"), 1, GL_FALSE, glm::value_ptr(view));
+
+    // Draw the loaded model
+    glm::mat4 model;
+    model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f)); // Translate it down a bit so it's at the center of the scene
+    model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));	// It's a bit too big for our scene, so scale it down
+    glUniformMatrix4fv(glGetUniformLocation(program.model, "model"), 1, GL_FALSE, glm::value_ptr(model));
+
+
 
 
     bool done = false;
@@ -104,15 +150,7 @@ void Engine::loop () {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 
-        glUniformMatrix4fv(theProgram.uMVMatrix, 1, GL_FALSE, glm::value_ptr(globalMVMatrix));
-        glUniformMatrix4fv(theProgram.uNormalMatrix, 1, GL_FALSE, glm::value_ptr(normalMatrix));
-        glUniformMatrix4fv(theProgram.uMVPMatrix, 1, GL_FALSE, glm::value_ptr(MVPMatrix));
-
-
-
         myLittleAirboat.draw();
-
-        myCamera.moveFront(-0.1);
 
 
         mWindowManager->swapBuffers();

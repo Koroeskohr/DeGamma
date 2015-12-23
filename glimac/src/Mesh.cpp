@@ -18,24 +18,11 @@ namespace glimac {
     void Mesh::init(){
         FileLogger debug ("0.0.1", "log.txt");
         mVerticesAmount = mVertices.size();
-        std::cout << mMaterialName << std::endl;
-        std::cout << mVertices[0].position.x << " - " << mVertices[0].position.y << " - " << mVertices[0].position.z << std::endl;
-        std::cout << mVertices[1].position.x << " - " << mVertices[1].position.y << " - " << mVertices[1].position.z << std::endl;
-        std::cout << mVertices[2].position.x << " - " << mVertices[2].position.y << " - " << mVertices[2].position.z << std::endl;
-        std::cout << "done" << std::endl;
+
         glGenBuffers(1, &mVBOid);
         glGenVertexArrays(1, &mVAOid);
 
         glBindVertexArray(mVAOid);
-        glBindBuffer(GL_ARRAY_BUFFER, mVBOid);
-
-        glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * mVerticesAmount, &mVertices[0], GL_STATIC_DRAW);
-
-        glGenBuffers(1, &mIBOid);
-
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIBOid);
-
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * mVerticesAmount, &mIndices[0], GL_STATIC_DRAW);
 
         glEnableVertexAttribArray(VERTEX_ATTR_POSITION);
         glEnableVertexAttribArray(VERTEX_ATTR_NORMAL);
@@ -66,7 +53,21 @@ namespace glimac {
                 (const GLvoid*) (offsetof(Vertex, texCoords))                  //pointer (décalage en octets jusqu'à nos données)
         );
 
+        glBindBuffer(GL_ARRAY_BUFFER, mVBOid);
+
+        glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * mVerticesAmount, &mVertices[0], GL_STATIC_DRAW);
+
+        glGenBuffers(1, &mIBOid);
+
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIBOid);
+
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * mVerticesAmount, &mIndices[0], GL_STATIC_DRAW);
+
+
+
+
         glBindBuffer(GL_ARRAY_BUFFER, 0);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
         glBindVertexArray(0);
     }
 
