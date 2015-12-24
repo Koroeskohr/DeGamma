@@ -12,7 +12,7 @@
 #include <assimp/Importer.hpp>
 #include <assimp/postprocess.h>
 #include "Model.hpp"
-#include "models/models.hpp"
+#include "app/include/models/models.hpp"
 
 
 

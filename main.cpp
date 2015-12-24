@@ -12,7 +12,7 @@
 #include <assimp/DefaultLogger.hpp>
 #include <Vertex.hpp>
 #include <Mesh.hpp>
-#include <models/AirboatModel.hpp>
+#include <app/include/models/models.hpp>
 #include <Renderable.hpp>
 #include "FilePath.hpp"
 

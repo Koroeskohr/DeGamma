@@ -6,6 +6,7 @@
 
 AirboatModel::AirboatModel()
         : Model("/Users/Luhof/Documents/IMAC2/projetogl/DeGamma/nanosuit/nanosuit.obj")
+        //TODO : remove hardcoded reference
 { }
 
 AirboatModel::~AirboatModel () {

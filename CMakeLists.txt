@@ -26,16 +26,15 @@ IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 ELSE()
     include_directories(${SDL_INCLUDE_DIR})
 ENDIF()
-include_directories(${OPENGL_INCLUDE_DIR} ${GLEW_INCLUDE_DIR} glimac/include third-party/glm third-party/assimp/include/ app/include)
+include_directories(${OPENGL_INCLUDE_DIR} ${GLEW_INCLUDE_DIR} glimac/include third-party/glm third-party/assimp/include/ glimac/include/)
 
 
 IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    set(ALL_LIBRARIES app glimac assimp ${SDL2_LIBRARY} ${OPENGL_LIBRARIES} ${GLEW_LIBRARY} ${ASSIMP_LIBRARY})
+    set(ALL_LIBRARIES glimac assimp ${SDL2_LIBRARY} ${OPENGL_LIBRARIES} ${GLEW_LIBRARY} ${ASSIMP_LIBRARY})
 ELSE()
-    set(ALL_LIBRARIES app glimac assimp ${SDL_LIBRARY} ${OPENGL_LIBRARIES} ${GLEW_LIBRARY} ${ASSIMP_LIBRARY})
+    set(ALL_LIBRARIES glimac assimp ${SDL_LIBRARY} ${OPENGL_LIBRARIES} ${GLEW_LIBRARY} ${ASSIMP_LIBRARY})
 ENDIF()
 
-add_subdirectory(app)
 add_subdirectory(glimac)
 add_subdirectory(third-party/assimp)
 
