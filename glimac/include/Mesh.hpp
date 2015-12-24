@@ -27,6 +27,12 @@ public:
     std::vector<Vertex> mVertices;
     std::vector<unsigned> mIndices;
     unsigned long mVerticesAmount;
+    std::string mMaterialName;
+
+    /*std::vector<Vertex> * getVertices() const;
+    std::vector<unsigned> * getIndices() const;
+    unsigned* getIndicesArray() const;*/
+
 
 private:
     void init();
@@ -36,7 +42,7 @@ private:
 
 
     //init in Mesh::Mesh
-    std::string mMaterialName;
+
 
 
 

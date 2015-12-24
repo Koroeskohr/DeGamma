@@ -1,7 +1,8 @@
 #version 330 core
 
 //Attributs
-layout(location = 0) in vec3 aVertexPosition;
+layout(location = 5) in vec3 aVertexPosition;
+//its 5 because 0 is attribued to model thingie
 layout(location = 1) in vec3 aVertexNormal;
 layout(location = 2) in vec2 aVertexTexCoords;
 
@@ -18,8 +19,8 @@ uniform mat4 projection;
 void main()
 {
     //Coordonnées homogènes
-    /*vec4 vertexPosition = vec4(aVertexPosition, 1);
-    vec4 vertexNormal = vec4(aVertexNormal, 0);
+
+    /*vec4 vertexNormal = vec4(aVertexNormal, 0);
 
     //Valeurs de sortie
     vPosition_vs = vec3(uMVMatrix * vertexPosition);
@@ -27,5 +28,6 @@ void main()
     vTexCoords = aVertexTexCoords;*/
 
     //Position projetée
+    //gl_Position = projection * view * model * vec4(aVertexPosition.x, aVertexPosition.y, aVertexPosition.z, 1.0f);
     gl_Position = projection * view * model * vec4(aVertexPosition, 1.0f);
 }

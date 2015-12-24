@@ -23,6 +23,10 @@ namespace glimac {
         glGenVertexArrays(1, &mVAOid);
 
         glBindVertexArray(mVAOid);
+        glBindBuffer(GL_ARRAY_BUFFER, mVBOid);
+
+
+        glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * mVerticesAmount, &mVertices[0], GL_STATIC_DRAW);
 
         glEnableVertexAttribArray(VERTEX_ATTR_POSITION);
         glEnableVertexAttribArray(VERTEX_ATTR_NORMAL);
@@ -44,6 +48,7 @@ namespace glimac {
                 sizeof(Vertex),       //stride (écart entre deux jeux de données)
                 (const GLvoid*) (offsetof(Vertex, normal))                  //pointer (décalage en octets jusqu'à nos données)
         );
+
         glVertexAttribPointer(
                 VERTEX_ATTR_TEX_COORDS,  //index
                 2,                       //size
@@ -53,9 +58,9 @@ namespace glimac {
                 (const GLvoid*) (offsetof(Vertex, texCoords))                  //pointer (décalage en octets jusqu'à nos données)
         );
 
-        glBindBuffer(GL_ARRAY_BUFFER, mVBOid);
 
-        glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * mVerticesAmount, &mVertices[0], GL_STATIC_DRAW);
+
+
 
         glGenBuffers(1, &mIBOid);
 
@@ -64,12 +69,22 @@ namespace glimac {
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * mVerticesAmount, &mIndices[0], GL_STATIC_DRAW);
 
 
-
-
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
         glBindVertexArray(0);
     }
 
+    /*std::vector<Vertex> *Mesh::getVertices () const {
+        return &mVertices;
+    }
+
+    std::vector<unsigned> *Mesh::getIndices () const {
+        return &mIndices;
+    }
+
+
+    unsigned * Mesh::getIndicesArray () const {
+        return &mIndices[0];
+    }*/
 }
 

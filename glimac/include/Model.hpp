@@ -22,6 +22,7 @@ public:
     virtual ~Model() = 0;
 
     void draw();
+    std::vector<Mesh> mMeshes;
 
 
 private:
@@ -29,7 +30,7 @@ private:
     void loadMeshes(const aiScene* scene);
 
     glm::vec3 aiToGlm(const aiColor3D& c);
-    std::vector<Mesh> mMeshes;
+
     std::map<std::string, Texture> mTextures;
 
     std::map<int, std::string> mTexCorrespondanceMap;
