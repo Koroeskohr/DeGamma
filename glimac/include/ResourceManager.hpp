@@ -23,6 +23,8 @@ class ResourceManager {
 public:
     static ResourceManager* getInstance();
 
+    ~ResourceManager ();
+
     /*
      * Let's not have multiple importer since one is enough
      */

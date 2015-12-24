@@ -65,6 +65,8 @@ Engine::Engine()
 
 Engine::~Engine(){
     //TODO
+
+    std::cout << "Engine deleted" << std::endl;
 }
 
 void Engine::createManagers () {

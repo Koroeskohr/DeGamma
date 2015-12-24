@@ -19,6 +19,7 @@ namespace glimac {
 class Mesh {
 public:
     Mesh(std::vector<Vertex>& vertices, std::vector<unsigned>& indices, const std::string& materialName);
+    ~Mesh();
     //TODO : put this in private
     // init in Mesh::init
     GLuint mVAOid;

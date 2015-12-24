@@ -11,8 +11,11 @@ namespace glimac {
           mIndices(indices),
           mMaterialName(materialName)
     {
-
         init();
+    }
+
+    Mesh::~Mesh () {
+        std::cout << "Mesh deleted, it used material " << mMaterialName << std::endl << "VAO id : " << mVAOid << std::endl;
     }
 
     void Mesh::init(){
@@ -86,5 +89,6 @@ namespace glimac {
     unsigned * Mesh::getIndicesArray () const {
         return &mIndices[0];
     }*/
+
 }
 

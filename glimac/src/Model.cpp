@@ -39,7 +39,9 @@ namespace glimac {
 
     }
 
-    Model::~Model() { }
+    Model::~Model() {
+        std::cout << "Model deleted" << std::endl;
+    }
 
     //TODO : refactor
     void Model::loadMaterials(const aiScene *scene) {

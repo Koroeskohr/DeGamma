@@ -25,6 +25,7 @@ namespace glimac {
     }
 
     Texture::~Texture() {
+        std::cout << "Texture removed : " << mGlTexture << std::endl;
         glDeleteTextures(1, &mGlTexture);
     }
 

@@ -9,6 +9,9 @@ namespace glimac {
 
     }
 
+    Renderable::~Renderable () {
+        std::cout << "Renderable deleted" << std::endl;
+    }
 
     void Renderable::update () {
         //TODO
