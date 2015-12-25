@@ -17,15 +17,14 @@ namespace glimac {
           mTexImageWidth(texImage->getWidth()),
           mTexImageHeight(texImage->getHeight())
     {
+        std::cout << "Creating texture with name " << name << std::endl;
         init(texImage);
     }
 
-    Texture::Texture(){
 
-    }
 
     Texture::~Texture() {
-        std::cout << "Texture removed : " << mGlTexture << std::endl;
+        std::cout << "Texture removed : " << mMaterialName << " at id " << mGlTexture << std::endl;
         glDeleteTextures(1, &mGlTexture);
     }
 
