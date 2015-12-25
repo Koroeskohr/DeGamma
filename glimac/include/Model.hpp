@@ -11,6 +11,7 @@
 
 #include "Mesh.hpp"
 #include "Texture.hpp"
+#include "Program.hpp"
 
 
 
@@ -21,13 +22,15 @@ public:
     Model(const std::string& fileName);
     virtual ~Model() = 0;
 
-    void draw();
+    void draw(GLuint program);
     std::vector<Mesh*> mMeshes;
+
 
 
 private:
     void loadMaterials(const aiScene* scene);
     void loadMeshes(const aiScene* scene);
+    void processNode(aiNode* node, const aiScene* scene);
 
     glm::vec3 aiToGlm(const aiColor3D& c);
 

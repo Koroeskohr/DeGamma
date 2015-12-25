@@ -12,9 +12,9 @@ uniform mat4 view;
 uniform mat4 projection;
 
 //Sorties du shader
-out vec3 vPosition_vs; //position du sommet transformée dans le view space
+//out vec3 vPosition_vs; //position du sommet transformée dans le view space
 //out vec3 vNormal_vs; //normale du sommet transformée dans le view space
-//out vec2 vTexCoords;
+out vec2 vTexCoords;
 
 void main()
 {
@@ -24,12 +24,13 @@ void main()
 
     //Valeurs de sortie
     //vPosition_vs = vec3(uMVMatrix * vertexPosition);
-        vPosition_vs =  vec3(0,0,1);
+    //vPosition_vs =  vec3(0,0,1);
 
     /*vNormal_vs = vec3(uNormalMatrix * vertexNormal);
     vTexCoords = aVertexTexCoords;*/
 
     //Position projetée
     //gl_Position = projection * view * model * vec4(aVertexPosition.x, aVertexPosition.y, aVertexPosition.z, 1.0f);
+    vTexCoords = aVertexTexCoords;
     gl_Position = projection * view * model * vec4(aVertexPosition, 1.0f);
 }

@@ -40,10 +40,11 @@ public:
 	void use() const {
 		glUseProgram(m_nGLId);
 	}
-
-private:
 	Program(const Program&);
 	Program& operator =(const Program&);
+
+private:
+
 
 	GLuint m_nGLId;
 };

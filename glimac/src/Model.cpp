@@ -159,25 +159,36 @@ namespace glimac {
         }
     }
 
+   
+
+
     glm::vec3 Model::aiToGlm(const aiColor3D &c) {
         return glm::vec3(c.r, c.g, c.b);
     }
 
-    void Model::draw() {
+    void Model::draw(GLuint program) {
         for (int i = 0; i < mMeshes.size(); i++) {
             Mesh *currMesh = mMeshes[i];
 
+            //TODO : a better way than this one to deal with things with no textures
+            if(currMesh->mMaterialName!="DefaultMaterial"){
+                GLuint currTexId =  mTextures.at(currMesh->mMaterialName)->getGlTexture();
 
-            //GLuint currTexId =  mTextures.at(currMesh->mMaterialName);
+                glUniform1f(glGetUniformLocation(program, "texture_diffuse1"), currTexId);
+                glBindTexture(GL_TEXTURE_2D, currTexId);
+            }
+
 
             glBindVertexArray(currMesh->mVAOid);
 
-            // glBindTexture(GL_TEXTURE_2D, currTexId);
 
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, currMesh->mIBOid);
+
             glDrawElements(GL_TRIANGLES, currMesh->mVerticesAmount, GL_UNSIGNED_INT, (void*)0);
 
-            //glBindTexture(GL_TEXTURE_2D, 0);
+            glBindTexture(GL_TEXTURE_2D, 0);
+
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
             glBindVertexArray(0);
 
