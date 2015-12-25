@@ -174,7 +174,7 @@ namespace glimac {
 
             // glBindTexture(GL_TEXTURE_2D, currTexId);
 
-            glDrawElements(GL_TRIANGLES, currMesh->mVerticesAmount, GL_FLOAT, 0);
+            glDrawElements(GL_TRIANGLES, currMesh->mVerticesAmount, GL_UNSIGNED_INT, 0);
 
             //glBindTexture(GL_TEXTURE_2D, 0);
 
