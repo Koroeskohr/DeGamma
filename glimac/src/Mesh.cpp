@@ -11,6 +11,7 @@ namespace glimac {
           mIndices(indices),
           mMaterialName(materialName)
     {
+        std::cout << "creating mesh using material name " << materialName << std::endl;
         init();
     }
 

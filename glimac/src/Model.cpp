@@ -92,7 +92,7 @@ namespace glimac {
                     throw std::runtime_error("Texture already added");
 
                 mTextures.insert(std::make_pair(name.data,
-                                                Texture(name.data,
+                                                new Texture(name.data,
                                                         texImage,
                                                         aiToGlm(diffuse),
                                                         aiToGlm(ambient),
@@ -152,7 +152,7 @@ namespace glimac {
             else
                 materialName = "default";
 
-            mMeshes.push_back(Mesh(vertices, indices, materialName));
+            mMeshes.push_back(new Mesh(vertices, indices, materialName));
 
             vertices.clear();
             indices.clear();
@@ -164,18 +164,13 @@ namespace glimac {
     }
 
     void Model::draw() {
-
-
-
-
         for (int i = 0; i < mMeshes.size(); i++) {
-            Mesh *currMesh = &mMeshes[i];
+            Mesh *currMesh = mMeshes[i];
 
 
             //GLuint currTexId =  mTextures.at(currMesh->mMaterialName);
 
             glBindVertexArray(currMesh->mVAOid);
-
 
             // glBindTexture(GL_TEXTURE_2D, currTexId);
 

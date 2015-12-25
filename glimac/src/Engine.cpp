@@ -55,6 +55,7 @@ Engine::Engine()
     glEnable(GL_CULL_FACE);
     glCullFace(GL_CULL_FACE);
     glDepthFunc(GL_LEQUAL);
+    glPolygonMode( GL_FRONT_AND_BACK, GL_LINE ); // TODO : remove, it displays meshes as wireframe
 
     //createManagers();
 
@@ -183,8 +184,11 @@ void Engine::loop () {
         //it should work with 10000 triangle HEH ???
         //NOTA BENE (à ordure) : projection matrix makes the triangle disappear ?
         glBindVertexArray(VAO);
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        //glDrawArrays(GL_TRIANGLES, 0, 3);
         glBindVertexArray(0);
+        myCamera.rotateLeft(2);
+        myCamera.moveFront(-1.0f);
+
 
          myLittleAirboat.draw();
 
