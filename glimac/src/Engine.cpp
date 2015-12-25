@@ -186,8 +186,8 @@ void Engine::loop () {
         glBindVertexArray(VAO);
         //glDrawArrays(GL_TRIANGLES, 0, 3);
         glBindVertexArray(0);
-        myCamera.rotateLeft(2);
-        myCamera.moveFront(-1.0f);
+        //myCamera.rotateLeft(0.1f);
+        myCamera.moveFront(-0.1f);
 
 
          myLittleAirboat.draw();
