@@ -15,10 +15,6 @@
 #include "Model.hpp"
 #include "app/include/models/models.hpp"
 
-
-#include "models/models.hpp"
-
-
 namespace glimac {
 
 class ResourceManager {
