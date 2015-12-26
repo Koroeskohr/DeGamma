@@ -16,7 +16,7 @@ namespace glimac {
 
     Model::Model(const std::string &fileName) {
         Assimp::Importer importer;
-        const aiScene *scene = importer.ReadFile(fileName, aiProcessPreset_TargetRealtime_Fast);
+        const aiScene *scene = importer.ReadFile(fileName, aiProcess_Triangulate | aiProcess_FlipUVs);
 
         std::cout << "starting loading materials" << std::endl;
 
@@ -63,22 +63,22 @@ namespace glimac {
 
             const aiMaterial *material = scene->mMaterials[i];
             if (AI_SUCCESS != material->Get(AI_MATKEY_NAME, name))
-                throw std::runtime_error("No material name");
+                std::cout << name.data <<"No material name" << std::endl;
 
             if (AI_SUCCESS != material->Get(AI_MATKEY_COLOR_DIFFUSE, diffuse))
-                throw std::runtime_error("No material diffuse color");
+                std::cout << name.data << "No material diffuse color" << std::endl;
 
             if (AI_SUCCESS != material->Get(AI_MATKEY_COLOR_AMBIENT, ambient))
-                throw std::runtime_error("No material ambient color");
+                std::cout << name.data << "No material ambient color" << std::endl;
 
             if (AI_SUCCESS != material->Get(AI_MATKEY_COLOR_SPECULAR, specular))
-                throw std::runtime_error("No material specular color");
+                std::cout << name.data << "No material specular color" << std::endl;
 
             if (AI_SUCCESS != material->Get(AI_MATKEY_SHININESS, shininess))
-                throw std::runtime_error("No material shininess");
+                std::cout << name.data <<"No material shininess" << std::endl;
 
             if (AI_SUCCESS != material->Get(AI_MATKEY_TEXTURE_DIFFUSE(0), imagePath)) {
-                std::cout << "No material imagepath" << std::endl;
+                std::cout << name.data << " No material imagepath" << std::endl;
             }
             else {
 
