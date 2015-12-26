@@ -9,6 +9,7 @@
 #include "common.hpp"
 #include "Image.hpp"
 #include <memory>
+#include <iostream>
 
 namespace glimac {
 
@@ -16,10 +17,9 @@ class Texture {
 public:
     Texture (const std::string &name, std::unique_ptr<Image> const & texImage, glm::vec3 diffuse, glm::vec3 ambient, glm::vec3 specular,
                  GLfloat shininess);
-
+    Texture();
     ~Texture();
 
-    //TODO
     void init(std::unique_ptr<Image> const & texImage);
 
     std::string getName() const;

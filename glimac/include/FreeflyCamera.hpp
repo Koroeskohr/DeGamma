@@ -1,4 +1,5 @@
 #include "common.hpp"
+#include <iostream>
 
 namespace glimac{
 
@@ -14,6 +15,7 @@ private:
 
 public:
     FreeflyCamera();
+    ~FreeflyCamera ();
     void moveLeft(float t);
     void moveFront(float t);
     void rotateLeft(float degrees);

@@ -12,6 +12,10 @@
 #include <assimp/Importer.hpp>
 #include <assimp/postprocess.h>
 
+#include "Model.hpp"
+#include "app/include/models/models.hpp"
+
+
 #include "models/models.hpp"
 
 
@@ -21,6 +25,8 @@ class ResourceManager {
 
 public:
     static ResourceManager* getInstance();
+
+    ~ResourceManager ();
 
     /*
      * Let's not have multiple importer since one is enough

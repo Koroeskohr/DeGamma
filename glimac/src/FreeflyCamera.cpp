@@ -1,5 +1,6 @@
 #include <FreeflyCamera.hpp>
 
+
 namespace glimac{
     FreeflyCamera::FreeflyCamera() :
         m_fPhi(glm::pi<float>()),
@@ -46,5 +47,9 @@ namespace glimac{
     glm::mat4 FreeflyCamera::getViewMatrix() const {
         return glm::lookAt(m_Position, m_Position + m_FrontVector, m_UpVector);
 
+    }
+
+    FreeflyCamera::~FreeflyCamera () {
+        std::cout << "Free fly camera deleted" << std::endl;
     }
 }

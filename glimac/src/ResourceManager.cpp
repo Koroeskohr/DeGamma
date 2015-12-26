@@ -53,4 +53,8 @@ namespace glimac {
 
         return model;
     }
+
+    ResourceManager::~ResourceManager () {
+        std::cout << "Resource manager deleted";
+    }
 }

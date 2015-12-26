@@ -12,13 +12,22 @@
 #include <assimp/DefaultLogger.hpp>
 #include <Vertex.hpp>
 #include <Mesh.hpp>
-#include <models/AirboatModel.hpp>
+#include <app/include/models/models.hpp>
+#include <Renderable.hpp>
+#include "FilePath.hpp"
+
+
 
 #include "Engine.hpp"
 
+
+
 using namespace glimac;
 
-int main(){
+
+int main(int argc, char** argv){
+
+
     Engine * engine = Engine::getInstance();
     //TODO : remove stuff, add engine stuff
     FileLogger debug ("0.0.1", "log.txt");
@@ -29,7 +38,11 @@ int main(){
     debug << "This is just a simple text";
 
 
+
+
     //TODO : render loop
+
+    engine->loop();
 
     return 0;
 

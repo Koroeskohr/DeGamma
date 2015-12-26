@@ -3,6 +3,7 @@
 //
 
 #include "Mesh.hpp"
+#include <iostream>
 
 namespace glimac {
     Mesh::Mesh (std::vector<Vertex>& vertices, std::vector<unsigned>& indices, const std::string& materialName)
@@ -10,10 +11,16 @@ namespace glimac {
           mIndices(indices),
           mMaterialName(materialName)
     {
+        std::cout << "creating mesh using material name " << materialName << std::endl;
         init();
     }
 
+    Mesh::~Mesh () {
+        std::cout << "Mesh deleted, it used material " << mMaterialName << std::endl << "VAO id : " << mVAOid << std::endl;
+    }
+
     void Mesh::init(){
+        FileLogger debug ("0.0.1", "log.txt");
         mVerticesAmount = mVertices.size();
 
         glGenBuffers(1, &mVBOid);
@@ -22,13 +29,8 @@ namespace glimac {
         glBindVertexArray(mVAOid);
         glBindBuffer(GL_ARRAY_BUFFER, mVBOid);
 
+
         glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * mVerticesAmount, &mVertices[0], GL_STATIC_DRAW);
-
-        glGenBuffers(1, &mIBOid);
-
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIBOid);
-
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * mVerticesAmount, &mIndices[0], GL_STATIC_DRAW);
 
         glEnableVertexAttribArray(VERTEX_ATTR_POSITION);
         glEnableVertexAttribArray(VERTEX_ATTR_NORMAL);
@@ -50,6 +52,7 @@ namespace glimac {
                 sizeof(Vertex),       //stride (écart entre deux jeux de données)
                 (const GLvoid*) (offsetof(Vertex, normal))                  //pointer (décalage en octets jusqu'à nos données)
         );
+
         glVertexAttribPointer(
                 VERTEX_ATTR_TEX_COORDS,  //index
                 2,                       //size
@@ -59,9 +62,34 @@ namespace glimac {
                 (const GLvoid*) (offsetof(Vertex, texCoords))                  //pointer (décalage en octets jusqu'à nos données)
         );
 
+
+
+
+
+        glGenBuffers(1, &mIBOid);
+
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIBOid);
+
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * mVerticesAmount, &mIndices[0], GL_STATIC_DRAW);
+
+
         glBindBuffer(GL_ARRAY_BUFFER, 0);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
         glBindVertexArray(0);
     }
+
+    /*std::vector<Vertex> *Mesh::getVertices () const {
+        return &mVertices;
+    }
+
+    std::vector<unsigned> *Mesh::getIndices () const {
+        return &mIndices;
+    }
+
+
+    unsigned * Mesh::getIndicesArray () const {
+        return &mIndices[0];
+    }*/
 
 }
 
