@@ -18,7 +18,7 @@ namespace glimac {
         mTransform.position.x += 0.1;
     }
 
-    void Renderable::render(){
+    void Renderable::render(Program * program){
         //TODO
     }
 }

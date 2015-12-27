@@ -14,7 +14,7 @@ public:
     Renderable(const int modelId, const glm::vec3& position = glm::vec3(0));
 
     virtual void update();
-    virtual void render();
+    virtual void render(Program * program);
 
     virtual ~Renderable() = 0;
 
