@@ -8,6 +8,7 @@ namespace glimac{
 
     Scene::Scene () {
         loadPrograms();
+        setProgram(mPrograms.at(0));
     }
 
     Scene::~Scene () {
@@ -27,7 +28,7 @@ namespace glimac{
 
     void Scene::render () {
         for(auto renderable: mRenderables){
-            renderable->render();
+            renderable->render(mCurrentProgram);
         }
     }
 
@@ -39,7 +40,7 @@ namespace glimac{
         //TODO : more shaders ?
         Program * p  = glimac::loadProgram("shaders/3D.vs.glsl", "shaders/3D.fs.glsl");
         addProgram(p);
-        setProgram(p);
+
     }
 
     void Scene::addProgram (Program * program) {
