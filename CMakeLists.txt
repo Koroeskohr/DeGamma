@@ -40,3 +40,6 @@ add_subdirectory(third-party/assimp)
 
 add_executable(projet main.cpp)
 target_link_libraries(projet ${ALL_LIBRARIES})
+
+file(COPY shaders DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+file(COPY assets DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
