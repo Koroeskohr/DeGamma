@@ -5,7 +5,7 @@
 #include "AirboatModel.hpp"
 
 AirboatModel::AirboatModel()
-        : Model("/Users/Luhof/Documents/IMAC2/projetogl/DeGamma/nanosuit/nanosuit.obj")
+        : Model("assets/nanosuit/nanosuit.obj")
         //TODO : remove hardcoded reference
 { }
 

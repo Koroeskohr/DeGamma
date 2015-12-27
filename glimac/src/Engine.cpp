@@ -3,8 +3,7 @@
 //
 
 #include "Engine.hpp"
-#include "Program.hpp"
-#include "FreeflyCamera.hpp"
+
 
 struct myProgram{
 
@@ -16,8 +15,8 @@ struct myProgram{
 
 
     myProgram():
-            mProgram(glimac::loadProgram("/Users/Luhof/Documents/IMAC2/projetogl/DeGamma/shaders/3D.vs.glsl",
-                                         "/Users/Luhof/Documents/IMAC2/projetogl/DeGamma/shaders/3D.fs.glsl")){
+            mProgram(glimac::loadProgram("shaders/3D.vs.glsl",
+                                         "shaders/3D.fs.glsl")){
         model = glGetUniformLocation(mProgram.getGLId(), "model");
         view = glGetUniformLocation(mProgram.getGLId(), "view");
         projection = glGetUniformLocation(mProgram.getGLId(), "projection");
@@ -25,10 +24,6 @@ struct myProgram{
     }
 
 };
-
-
-
-
 
 Engine * Engine::mInstance = nullptr;
 
@@ -40,9 +35,10 @@ Engine* Engine::getInstance() {
 }
 
 Engine::Engine()
-        : mWindowManager(new SDLWindowManager(640,480,"YOloGL")),
+        : mWindowManager(),
           mResourceManager()
 {
+    createManagers();
     glewExperimental = GL_TRUE;
 
     // Initialize glew for OpenGL3+ support
@@ -57,7 +53,7 @@ Engine::Engine()
     glDepthFunc(GL_LEQUAL);
     //glPolygonMode( GL_FRONT_AND_BACK, GL_LINE ); // TODO : remove, it displays meshes as wireframe
 
-    //createManagers();
+
 
 
 
@@ -72,29 +68,20 @@ Engine::~Engine(){
 
 void Engine::createManagers () {
     mResourceManager = std::unique_ptr<ResourceManager>(ResourceManager::getInstance());
-    mWindowManager = std::unique_ptr<SDLWindowManager>(new SDLWindowManager(1280,720, "DeGamma"));
+    mWindowManager = std::unique_ptr<SDLWindowManager>(
+                         new SDLWindowManager(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME));
 }
 
 void Engine::loop () {
 
-
-
-
     glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
-
-
 
     myProgram program;
     program.mProgram.use();
 
-
-
     AirboatModel myLittleAirboat;
 
     FreeflyCamera myCamera;
-
-
-
 
 
     glm::mat4 projection = glm::perspective(glm::radians(40.0f), (float)640.0f/(float)480.0f, 0.1f, 100.0f);
@@ -105,9 +92,6 @@ void Engine::loop () {
     model = glm::translate(model, glm::vec3(0.0f, -1.75f, -5.0f)); // Translate it down a bit so it's at the center of the scene
     model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));	// It's a bit too big for our scene, so scale it down
     glUniformMatrix4fv(program.model, 1, GL_FALSE, glm::value_ptr(model));
-
-
-
 
     bool done = false;
     while(!done) {
@@ -124,12 +108,7 @@ void Engine::loop () {
         model = glm::rotate(model, 0.01f, glm::vec3(0, 1, 0));
         glUniformMatrix4fv(program.model, 1, GL_FALSE, glm::value_ptr(model));
 
-
-
-         myLittleAirboat.draw(program.mProgram.getGLId());
-
-
-
+        myLittleAirboat.draw(program.mProgram.getGLId());
 
         mWindowManager->swapBuffers();
 

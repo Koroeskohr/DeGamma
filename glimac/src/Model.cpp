@@ -59,7 +59,7 @@ namespace glimac {
 
             //TODO : make this nicer by using a filepath
 
-            std::string fullPath = "/Users/Luhof/Documents/IMAC2/projetogl/DeGamma/nanosuit/";
+            std::string fullPath = "assets/nanosuit/";
 
             const aiMaterial *material = scene->mMaterials[i];
             if (AI_SUCCESS != material->Get(AI_MATKEY_NAME, name))
