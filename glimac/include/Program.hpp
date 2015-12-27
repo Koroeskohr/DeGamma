@@ -9,8 +9,6 @@
 
 namespace glimac {
 
-//TODO : isUsed function
-
 class Program {
 public:
 	Program(): m_nGLId(glCreateProgram()) {
@@ -45,6 +43,8 @@ public:
 	void use() const {
 		glUseProgram(m_nGLId);
 	}
+
+	bool isCurrent();
 
 	GLint uniform(const GLchar * name) const;
 
