@@ -46,8 +46,12 @@ namespace glimac{
 
     glm::mat4 FreeflyCamera::getViewMatrix() const {
         return glm::lookAt(m_Position, m_Position + m_FrontVector, m_UpVector);
-
     }
+
+    glm::mat4 FreeflyCamera::getProjectionMatrix() const{
+        return mProjection;
+    }
+
 
     FreeflyCamera::~FreeflyCamera () {
         std::cout << "Free fly camera deleted" << std::endl;

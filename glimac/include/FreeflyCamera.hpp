@@ -10,6 +10,7 @@ private:
     glm::vec3 m_FrontVector;
     glm::vec3 m_LeftVector;
     glm::vec3 m_UpVector;
+    glm::mat4 mProjection;
 
     void computeDirectionVectors();
 
@@ -21,6 +22,7 @@ public:
     void rotateLeft(float degrees);
     void rotateUp(float degrees);
     glm::mat4 getViewMatrix() const;
+    glm::mat4 getProjectionMatrix const;
 
 
 };
