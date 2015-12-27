@@ -20,11 +20,12 @@ namespace glimac {
         void update();
         void render();
 
-        void addRenderable(const Renderable& renderable);
+        void addRenderable(Renderable * renderable);
         //TODO : void addLight(const Light& light);
         //TODO : void setCamera(const Camera& camera);
 
-        void addProgram(const Program& program);
+        void addProgram(Program * program);
+        void setProgram(Program * program);
 
 
     private:
@@ -32,7 +33,7 @@ namespace glimac {
         //TODO : std::vector<Light*> mLights;
         //TODO : Camera* camera;
 
-        Program* currentProgram;
+        Program* mCurrentProgram;
         std::vector<Program*> mPrograms;
         void loadPrograms();
     };

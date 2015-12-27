@@ -10,7 +10,7 @@ const char * WINDOW_NAME = "DeGamma";
 
 struct myProgram{
 
-    glimac::Program mProgram;
+    glimac::Program * mProgram;
 
     GLint model;
     GLint view;
@@ -18,11 +18,11 @@ struct myProgram{
 
 
     myProgram():
-            mProgram(glimac::loadProgram("shaders/3D.vs.glsl",
-                                         "shaders/3D.fs.glsl")){
-        model = glGetUniformLocation(mProgram.getGLId(), "model");
-        view = glGetUniformLocation(mProgram.getGLId(), "view");
-        projection = glGetUniformLocation(mProgram.getGLId(), "projection");
+        mProgram(glimac::loadProgram("shaders/3D.vs.glsl", "shaders/3D.fs.glsl"))
+    {
+        model = glGetUniformLocation(mProgram->getGLId(), "model");
+        view = glGetUniformLocation(mProgram->getGLId(), "view");
+        projection = glGetUniformLocation(mProgram->getGLId(), "projection");
 
     }
 
@@ -37,6 +37,7 @@ Engine* Engine::getInstance() {
     return mInstance;
 }
 
+//TODO : add timemanager
 Engine::Engine()
         : mWindowManager(),
           mResourceManager()
@@ -80,14 +81,14 @@ void Engine::loop () {
     glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 
     myProgram program;
-    program.mProgram.use();
+    program.mProgram->use();
 
     AirboatModel myLittleAirboat;
 
     FreeflyCamera myCamera;
 
 
-    glm::mat4 projection = glm::perspective(glm::radians(40.0f), (float)640.0f/(float)480.0f, 0.1f, 100.0f);
+    glm::mat4 projection = glm::perspective(glm::radians(40.0f), (float)WINDOW_WIDTH/(float)WINDOW_HEIGHT, 0.1f, 100.0f);
     glm::mat4 view = myCamera.getViewMatrix();
     glUniformMatrix4fv(program.projection, 1, GL_FALSE, glm::value_ptr(projection));
     glUniformMatrix4fv(program.view, 1, GL_FALSE, glm::value_ptr(view));
@@ -111,7 +112,7 @@ void Engine::loop () {
         model = glm::rotate(model, 0.01f, glm::vec3(0, 1, 0));
         glUniformMatrix4fv(program.model, 1, GL_FALSE, glm::value_ptr(model));
 
-        myLittleAirboat.draw(program.mProgram.getGLId());
+        myLittleAirboat.draw(program.mProgram->getGLId());
 
         mWindowManager->swapBuffers();
 
