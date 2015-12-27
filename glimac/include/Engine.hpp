@@ -11,7 +11,6 @@
 #include "glm.hpp"
 #include <GL/glew.h>
 
-#include "app/include/parameters.hpp"
 #include "SDLWindowManager.hpp"
 #include "ResourceManager.hpp"
 #include "Program.hpp"
