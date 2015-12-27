@@ -3,3 +3,14 @@
 //
 
 #include "Scene.hpp"
+
+namespace glimac{
+
+    Scene::Scene () {
+        loadPrograms();
+    }
+
+    void Scene::loadPrograms () {
+
+    }
+}

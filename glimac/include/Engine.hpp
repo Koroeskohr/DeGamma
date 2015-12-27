@@ -11,8 +11,13 @@
 #include "glm.hpp"
 #include <GL/glew.h>
 
+#include "app/include/parameters.hpp"
 #include "SDLWindowManager.hpp"
 #include "ResourceManager.hpp"
+#include "Program.hpp"
+#include "FreeflyCamera.hpp"
+#include "Scene.hpp"
+
 
 using namespace glimac;
 class Engine {
@@ -32,6 +37,8 @@ private:
     static Engine* mInstance;
     Engine();
     void createManagers();
+
+    Scene* currentScene;
 
     std::unique_ptr<ResourceManager> mResourceManager;
     std::unique_ptr<SDLWindowManager> mWindowManager;
