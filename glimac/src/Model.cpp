@@ -62,25 +62,29 @@ namespace glimac {
             aiMesh * currMesh = scene->mMeshes[i];
             const aiMaterial *material = scene->mMaterials[currMesh->mMaterialIndex];
 
+
             if (AI_SUCCESS != material->Get(AI_MATKEY_NAME, name)){
                 throw std::runtime_error("No material name");
             }
 
+
             if (AI_SUCCESS != material->Get(AI_MATKEY_COLOR_DIFFUSE, diffuse))
-                throw std::runtime_error("No material diffuse color");
+                std::cout << name.data << "No material diffuse color" << std::endl;
 
             if (AI_SUCCESS != material->Get(AI_MATKEY_COLOR_AMBIENT, ambient))
-                throw std::runtime_error("No material ambient color");
+                std::cout << name.data << "No material ambient color" << std::endl;
 
             if (AI_SUCCESS != material->Get(AI_MATKEY_COLOR_SPECULAR, specular))
-                throw std::runtime_error("No material specular color");
+                std::cout << name.data << "No material specular color" << std::endl;
 
-            if (AI_SUCCESS != material->Get(AI_MATKEY_SHININESS, shininess)){
+            if (AI_SUCCESS != material->Get(AI_MATKEY_SHININESS, shininess))
+                throw std::runtime_error("No material shininess");
 
-               // throw std::runtime_error("No material shininess");
-            }
+            if (AI_SUCCESS != material->Get(AI_MATKEY_TEXTURE_DIFFUSE(0), imagePath))
+                std::cout << name.data << " No material imagepath" << std::endl;
 
-            //everything is in a if statement because some meshes can have no texture
+
+            //We do not call the same Texture constructor if there is an actual texture to the material.
 
             if (AI_SUCCESS == material->GetTexture(aiTextureType_DIFFUSE, 0, &imagePath)) {
                 fullPath.append(imagePath.C_Str());
@@ -101,9 +105,6 @@ namespace glimac {
                 }
 
 
-
-
-
             }
             else if (mTextures.count(name.data) == 0){
                 mTextures.insert(std::make_pair(name.data,
@@ -116,12 +117,6 @@ namespace glimac {
 
             std::string materialName(name.data);
             mTexCorrespondanceMap.insert(std::make_pair(i, materialName));
-
-
-
-
-
-
 
         }
 
