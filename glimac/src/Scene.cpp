@@ -6,7 +6,9 @@
 
 namespace glimac{
 
-    Scene::Scene () {
+    Scene::Scene ()
+        : mCamera(new FreeflyCamera)
+    {
         loadPrograms();
         setProgram(mPrograms.at(0));
     }

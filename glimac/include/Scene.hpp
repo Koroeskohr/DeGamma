@@ -7,6 +7,7 @@
 
 #include "Program.hpp"
 #include "Renderable.hpp"
+#include "FreeflyCamera.hpp"
 
 #include <vector>
 
@@ -22,7 +23,7 @@ namespace glimac {
 
         void addRenderable(Renderable * renderable);
         //TODO : void addLight(const Light& light);
-        //TODO : void setCamera(const Camera& camera);
+        void setCamera(const FreeflyCamera& camera);
 
         void addProgram(Program * program);
         void setProgram(Program * program);
@@ -31,7 +32,7 @@ namespace glimac {
     private:
         std::vector<Renderable*> mRenderables;
         //TODO : std::vector<Light*> mLights;
-        //TODO : Camera* camera;
+        FreeflyCamera * mCamera;
 
         Program* mCurrentProgram;
         std::vector<Program*> mPrograms;
