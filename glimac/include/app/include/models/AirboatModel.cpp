@@ -6,7 +6,6 @@
 
 AirboatModel::AirboatModel()
         : Model("assets/nanosuit/nanosuit.obj")
-        //TODO : remove hardcoded reference
 { }
 
 AirboatModel::~AirboatModel () {
