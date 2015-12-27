@@ -16,7 +16,8 @@
 #include "Program.hpp"
 #include "FreeflyCamera.hpp"
 #include "Scene.hpp"
-
+#include "Renderable.hpp"
+#include "app/include/renderables/renderables.hpp"
 
 using namespace glimac;
 class Engine {
@@ -37,7 +38,7 @@ private:
     Engine();
     void createManagers();
 
-    Scene* currentScene;
+    Scene* mCurrentScene;
 
     std::unique_ptr<ResourceManager> mResourceManager;
     std::unique_ptr<SDLWindowManager> mWindowManager;

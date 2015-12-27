@@ -55,9 +55,14 @@ Engine::Engine()
     glEnable(GL_CULL_FACE);
     glCullFace(GL_CULL_FACE);
     glDepthFunc(GL_LEQUAL);
+    glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
+
     //glPolygonMode( GL_FRONT_AND_BACK, GL_LINE ); // TODO : remove, it displays meshes as wireframe
 
-
+    Scene * baseScene = new Scene;
+    mCurrentScene = baseScene;
+    baseScene->addRenderable(new Airboat);
+    baseScene->addRenderable(new Airboat(glm::vec3(0.5,0,0)));
 
 
 
@@ -78,24 +83,17 @@ void Engine::createManagers () {
 
 void Engine::loop () {
 
-    glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
-
-    myProgram program;
-    program.mProgram->use();
-
-    AirboatModel myLittleAirboat;
 
     FreeflyCamera myCamera;
 
 
-    glm::mat4 projection = glm::perspective(glm::radians(40.0f), (float)WINDOW_WIDTH/(float)WINDOW_HEIGHT, 0.1f, 100.0f);
     glm::mat4 view = myCamera.getViewMatrix();
-    glUniformMatrix4fv(program.projection, 1, GL_FALSE, glm::value_ptr(projection));
-    glUniformMatrix4fv(program.view, 1, GL_FALSE, glm::value_ptr(view));
+    mCurrentScene->getCurrentProgram()->setUniformMatrix4("projection", projection);
+    mCurrentScene->getCurrentProgram()->setUniformMatrix4("view", view);
     glm::mat4 model(1);
     model = glm::translate(model, glm::vec3(0.0f, -1.75f, -5.0f)); // Translate it down a bit so it's at the center of the scene
     model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));	// It's a bit too big for our scene, so scale it down
-    glUniformMatrix4fv(program.model, 1, GL_FALSE, glm::value_ptr(model));
+    mCurrentScene->getCurrentProgram()->setUniformMatrix4("model", model);
 
     bool done = false;
     while(!done) {
