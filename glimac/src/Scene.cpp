@@ -53,4 +53,7 @@ namespace glimac{
         mCurrentProgram = program;
     }
 
+    Program *Scene::getCurrentProgram () {
+        return mCurrentProgram;
+    }
 }

@@ -27,6 +27,7 @@ namespace glimac {
 
         void addProgram(Program * program);
         void setProgram(Program * program);
+        Program* getCurrentProgram ();
 
 
     private:
