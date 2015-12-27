@@ -1,5 +1,5 @@
 #include "Program.hpp"
-#include <stdexcept>
+
 
 namespace glimac {
 
@@ -71,4 +71,55 @@ Program loadProgram(const FilePath& vsFile, const FilePath& fsFile) {
 	return program;
 }
 
+	GLint Program::uniform (const GLchar *name) const {
+		if (!name) {
+			throw std::runtime_error("Program::uniform : name was empty or pointer was null");
+		}
+
+		GLint uniform = glGetUniformLocation(m_nGLId, name);
+
+		if (uniform == -1) {
+			std::stringstream msg;
+			msg << "Uniform in program " << m_nGLId << " not found: " << name << std::endl;
+			throw std::runtime_error(msg.str().c_str());
+		}
+
+		return uniform;
+	}
+
+	void Program::setUniform (const GLchar *name, GLfloat v0) {
+		glUniform1f(uniform(name), v0);
+	}
+
+	void Program::setUniform (const GLchar *name, GLfloat v0, GLfloat v1) {
+		glUniform2f(uniform(name), v0, v1);
+	}
+
+	void Program::setUniform (const GLchar *name, GLfloat v0, GLfloat v1, GLfloat v2) {
+		glUniform3f(uniform(name), v0, v1, v2);
+	}
+
+	void Program::setUniform (const GLchar *name, const glm::vec3 &v) {
+		glUniform3f(uniform(name), v.x, v.y, v.z);
+	}
+
+	void Program::setUniform (const GLchar *name, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3) {
+		glUniform4f(uniform(name), v0, v1, v2, v3);
+	}
+
+	void Program::setUniform (const GLchar *name, const glm::vec4 &v) {
+		glUniform4f(uniform(name), v.x, v.y, v.z, v.w);
+	}
+
+	void Program::setUniformMatrix2 (const GLchar *name, const glm::mat2 &v) {
+		glUniformMatrix2fv(uniform(name), 1, GL_FALSE, glm::value_ptr(v));
+	}
+
+	void Program::setUniformMatrix3 (const GLchar *name, const glm::mat3 &v) {
+		glUniformMatrix3fv(uniform(name), 1, GL_FALSE, glm::value_ptr(v));
+	}
+
+	void Program::setUniformMatrix4 (const GLchar *name, const glm::mat4 &v) {
+		glUniformMatrix4fv(uniform(name), 1, GL_FALSE, glm::value_ptr(v));
+	}
 }

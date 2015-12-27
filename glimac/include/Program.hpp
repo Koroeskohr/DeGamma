@@ -1,10 +1,15 @@
 #pragma once
 
 #include <GL/glew.h>
+#include "glm.hpp"
 #include "Shader.hpp"
 #include "FilePath.hpp"
+#include <stdexcept>
+#include <sstream>
 
 namespace glimac {
+
+//TODO : isUsed function
 
 class Program {
 public:
@@ -40,6 +45,21 @@ public:
 	void use() const {
 		glUseProgram(m_nGLId);
 	}
+
+	GLint uniform(const GLchar * name) const;
+
+	void setUniform(const GLchar* name, GLfloat v0);
+	void setUniform(const GLchar* name, GLfloat v0, GLfloat v1);
+	void setUniform(const GLchar* name, GLfloat v0, GLfloat v1, GLfloat v2);
+	void setUniform(const GLchar* name, const glm::vec3& v);
+	void setUniform(const GLchar* name, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3);
+	void setUniform(const GLchar* name, const glm::vec4& v);
+	void setUniformMatrix2(const GLchar* name, const glm::mat2& v);
+	void setUniformMatrix3(const GLchar* name, const glm::mat3& v);
+	void setUniformMatrix4(const GLchar* name, const glm::mat4& v);
+
+
+
 	Program(const Program&);
 	Program& operator =(const Program&);
 
