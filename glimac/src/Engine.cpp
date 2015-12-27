@@ -102,8 +102,8 @@ void Engine::loop () {
     glUniformMatrix4fv(program.projection, 1, GL_FALSE, glm::value_ptr(projection));
     glUniformMatrix4fv(program.view, 1, GL_FALSE, glm::value_ptr(view));
     glm::mat4 model(1);
-    model = glm::translate(model, glm::vec3(0.0f, -1.75f, -5.0f)); // Translate it down a bit so it's at the center of the scene
-    model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));	// It's a bit too big for our scene, so scale it down
+    model = glm::translate(model, glm::vec3(0.0f, 0.0f, -5.0f)); // Translate it down a bit so it's at the center of the scene
+    model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.1f));	// It's a bit too big for our scene, so scale it down
     glUniformMatrix4fv(program.model, 1, GL_FALSE, glm::value_ptr(model));
 
 

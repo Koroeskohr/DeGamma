@@ -15,10 +15,25 @@ namespace glimac {
           mSpecularColor(glm::vec4(specular, 1)),
           mShininess(shininess), //Possible problem
           mTexImageWidth(texImage->getWidth()),
-          mTexImageHeight(texImage->getHeight())
+          mTexImageHeight(texImage->getHeight()),
+          hasTexture(true)
     {
         std::cout << "Creating texture with name " << name << std::endl;
         init(texImage);
+    }
+
+    Texture::Texture(const std::string& name,
+                     glm::vec3 diffuse, glm::vec3 ambient, glm::vec3 specular,
+                     GLfloat shininess)
+            : mMaterialName(name),
+              mDiffuseColor(glm::vec4(diffuse, 1)),
+              mAmbientColor(glm::vec4(ambient, 1)),
+              mSpecularColor(glm::vec4(specular, 1)),
+              mShininess(shininess),
+              hasTexture(false)
+
+    {
+        std::cout << "Creating texture (color only) with name " << name << std::endl;
     }
 
 

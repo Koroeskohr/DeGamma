@@ -29,6 +29,7 @@ public:
     std::vector<unsigned> mIndices;
     unsigned long mVerticesAmount;
     std::string mMaterialName;
+    glm::vec3 mdiffColor;
 
     /*std::vector<Vertex> * getVertices() const;
     std::vector<unsigned> * getIndices() const;
