@@ -16,6 +16,8 @@ public:
     virtual void update();
     virtual void render(Program * program);
 
+    Transform getTransform() const;
+
     virtual ~Renderable() = 0;
 
 private:
