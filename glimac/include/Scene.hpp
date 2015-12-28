@@ -23,7 +23,8 @@ namespace glimac {
 
         void addRenderable(Renderable * renderable);
         //TODO : void addLight(const Light& light);
-        void setCamera(const FreeflyCamera& camera);
+        //void setCamera(const FreeflyCamera& camera);
+        FreeflyCamera * getCamera();
 
         void addProgram(Program * program);
         void setProgram(Program * program);

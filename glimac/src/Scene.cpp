@@ -5,12 +5,15 @@
 #include "Scene.hpp"
 
 namespace glimac{
-
+    //HACK : ratio should be retrieved
     Scene::Scene ()
-        : mCamera(new FreeflyCamera)
+        : mCamera(new FreeflyCamera(glm::perspective(glm::radians(40.0f), 1280.0f/720.0f, 0.1f, 100.0f)))
     {
         loadPrograms();
+        std::cout << "Program added has ID " << mPrograms.at(0)->getGLId() << std::endl;
         setProgram(mPrograms.at(0));
+        mCurrentProgram->setUniformMatrix4("projection", mCamera->getProjectionMatrix());
+        mCamera->moveFront(-1.0f);
     }
 
     Scene::~Scene () {
@@ -29,6 +32,9 @@ namespace glimac{
     }
 
     void Scene::render () {
+        glm::mat4 view = mCamera->getViewMatrix();
+        mCurrentProgram->setUniformMatrix4("view", view);
+
         for(auto renderable: mRenderables){
             renderable->render(mCurrentProgram);
         }
@@ -42,6 +48,7 @@ namespace glimac{
         //TODO : more shaders ?
         Program * p  = glimac::loadProgram("shaders/3D.vs.glsl", "shaders/3D.fs.glsl");
         addProgram(p);
+        std::cout << "mprograms has " << mPrograms.size() << std::endl;
 
     }
 
@@ -51,9 +58,14 @@ namespace glimac{
 
     void Scene::setProgram (Program * program) {
         mCurrentProgram = program;
+        mCurrentProgram->use();
     }
 
     Program *Scene::getCurrentProgram () {
         return mCurrentProgram;
+    }
+
+    FreeflyCamera* Scene::getCamera () {
+        return mCamera;
     }
 }
