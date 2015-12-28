@@ -93,11 +93,8 @@ void Engine::loop () {
         }
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        model = glm::rotate(model, 0.01f, glm::vec3(0, 1, 0));
-        glUniformMatrix4fv(program.model, 1, GL_FALSE, glm::value_ptr(model));
-
-        myLittleAirboat.draw(program.mProgram->getGLId());
+        //mCurrentScene->update();
+        mCurrentScene->render();
 
         mWindowManager->swapBuffers();
 
