@@ -174,7 +174,7 @@ namespace glimac {
             if(currMesh->mMaterialName!="DefaultMaterial"){
                 GLuint currTexId =  mTextures.at(currMesh->mMaterialName)->getGlTexture();
 
-                glUniform1f(glGetUniformLocation(program, "texture_diffuse1"), currTexId);
+                glUniform1i(glGetUniformLocation(program, "texture_diffuse1"), currTexId);
                 glBindTexture(GL_TEXTURE_2D, currTexId);
             }
 
