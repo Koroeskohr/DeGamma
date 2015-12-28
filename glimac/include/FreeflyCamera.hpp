@@ -1,3 +1,5 @@
+#pragma once
+
 #include "common.hpp"
 #include <iostream>
 
@@ -15,14 +17,14 @@ private:
     void computeDirectionVectors();
 
 public:
-    FreeflyCamera();
+    FreeflyCamera(glm::mat4 projection);
     ~FreeflyCamera ();
     void moveLeft(float t);
     void moveFront(float t);
     void rotateLeft(float degrees);
     void rotateUp(float degrees);
     glm::mat4 getViewMatrix() const;
-    glm::mat4 getProjectionMatrix const;
+    glm::mat4 getProjectionMatrix() const;
 
 
 };

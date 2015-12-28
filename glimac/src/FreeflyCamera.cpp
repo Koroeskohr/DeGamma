@@ -2,7 +2,7 @@
 
 
 namespace glimac{
-    FreeflyCamera::FreeflyCamera() :
+    FreeflyCamera::FreeflyCamera(glm::mat4 projection) :
         m_fPhi(glm::pi<float>()),
         m_fTheta(0)
     {
@@ -48,7 +48,7 @@ namespace glimac{
         return glm::lookAt(m_Position, m_Position + m_FrontVector, m_UpVector);
     }
 
-    glm::mat4 FreeflyCamera::getProjectionMatrix() const{
+    glm::mat4 FreeflyCamera::getProjectionMatrix() const {
         return mProjection;
     }
 
