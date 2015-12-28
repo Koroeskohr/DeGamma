@@ -24,10 +24,10 @@ struct Transform {
     }
 
     Transform()
-        : rotation(0), position(0), scale(1)
+        : rotation(1), position(0), scale(1)
     { }
     Transform(glm::vec3 pos)
-        : rotation(0), position(pos), scale(1)
+        : rotation(1), position(pos), scale(1)
     { }
 };
 
