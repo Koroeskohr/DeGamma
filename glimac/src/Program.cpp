@@ -99,6 +99,7 @@ void Program::setUniform (const GLchar *name, GLfloat v0) {
 	glUniform1f(uniform(name), v0);
 }
 
+
 void Program::setUniform (const GLchar *name, GLfloat v0, GLfloat v1) {
 	if(!isCurrent())
 		throw std::runtime_error("A uniform tried to be set to a non-current program");
@@ -145,5 +146,11 @@ void Program::setUniformMatrix4 (const GLchar *name, const glm::mat4 &v) {
 	if(!isCurrent())
 		throw std::runtime_error("A uniform tried to be set to a non-current program");
 	glUniformMatrix4fv(uniform(name), 1, GL_FALSE, glm::value_ptr(v));
+}
+
+void Program::setUniformInt (const GLchar *name, int id) {
+	if(!isCurrent())
+		throw std::runtime_error("A uniform tried to be set to a non-current program");
+	glUniform1i(uniform(name), id);
 }
 }

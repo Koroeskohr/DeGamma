@@ -6,6 +6,8 @@
 #include "FilePath.hpp"
 #include <stdexcept>
 #include <sstream>
+#include <iostream>
+
 
 namespace glimac {
 
@@ -58,7 +60,7 @@ public:
 	void setUniformMatrix3(const GLchar* name, const glm::mat3& v);
 	void setUniformMatrix4(const GLchar* name, const glm::mat4& v);
 
-
+	void setUniformInt(const GLchar* name, int id);
 
 	Program(const Program&);
 	Program& operator =(const Program&);
