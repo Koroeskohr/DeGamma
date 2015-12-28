@@ -62,7 +62,7 @@ Engine::Engine()
     Scene * baseScene = new Scene;
     mCurrentScene = baseScene;
     baseScene->addRenderable(new Airboat);
-    baseScene->addRenderable(new Airboat(glm::vec3(0.5,0,0)));
+    //baseScene->addRenderable(new Airboat(glm::vec3(0.5,0,0)));
 
 
 
@@ -82,19 +82,6 @@ void Engine::createManagers () {
 }
 
 void Engine::loop () {
-
-
-    FreeflyCamera myCamera;
-
-
-    glm::mat4 view = myCamera.getViewMatrix();
-    mCurrentScene->getCurrentProgram()->setUniformMatrix4("projection", projection);
-    mCurrentScene->getCurrentProgram()->setUniformMatrix4("view", view);
-    glm::mat4 model(1);
-    model = glm::translate(model, glm::vec3(0.0f, -1.75f, -5.0f)); // Translate it down a bit so it's at the center of the scene
-    model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));	// It's a bit too big for our scene, so scale it down
-    mCurrentScene->getCurrentProgram()->setUniformMatrix4("model", model);
-
     bool done = false;
     while(!done) {
         // Event loop:
