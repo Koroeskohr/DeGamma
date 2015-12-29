@@ -5,7 +5,7 @@
 #include "AirboatModel.hpp"
 
 AirboatModel::AirboatModel()
-        : Model("assets/nanosuit/nanosuit.obj")
+    : Model("assets/nanosuit/nanosuit.obj")
 { }
 
 AirboatModel::~AirboatModel () {
