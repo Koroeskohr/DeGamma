@@ -173,8 +173,7 @@ namespace glimac {
             //TODO : a better way than this one to deal with things with no textures
             if(currMesh->mMaterialName!="DefaultMaterial"){
                 GLuint currTexId =  mTextures.at(currMesh->mMaterialName)->getGlTexture();
-
-                glUniform1i(glGetUniformLocation(program, "texture_diffuse1"), currTexId);
+                glUniform1i(glGetUniformLocation(program, "texture_diffuse1"), 0);
                 glBindTexture(GL_TEXTURE_2D, currTexId);
             }
 
