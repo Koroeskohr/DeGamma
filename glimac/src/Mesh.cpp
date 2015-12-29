@@ -20,7 +20,6 @@ namespace glimac {
     }
 
     void Mesh::init(){
-        FileLogger debug ("0.0.1", "log.txt");
         mVerticesAmount = mVertices.size();
 
         glGenBuffers(1, &mVBOid);
