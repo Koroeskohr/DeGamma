@@ -4,7 +4,8 @@
 namespace glimac{
     FreeflyCamera::FreeflyCamera(glm::mat4 projection) :
         m_fPhi(glm::pi<float>()),
-        m_fTheta(0)
+        m_fTheta(0),
+        mProjection(projection)
     {
         computeDirectionVectors();
     }
