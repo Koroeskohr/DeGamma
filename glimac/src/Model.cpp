@@ -54,14 +54,15 @@ namespace glimac {
         aiString imagePath;
 
 
-        for (int i = 0; i < scene->mNumMaterials; i++) {
+        for (int i = 0; i < scene->mNumMeshes; i++) {
+            aiMesh * currMesh = scene->mMeshes[i];
+            const aiMaterial *material = scene->mMaterials[currMesh->mMaterialIndex];
 
 
             //TODO : make this nicer by using a filepath
 
             std::string fullPath = "assets/nanosuit/";
 
-            const aiMaterial *material = scene->mMaterials[i];
             if (AI_SUCCESS != material->Get(AI_MATKEY_NAME, name))
                 std::cout << name.data <<"No material name" << std::endl;
 
@@ -77,37 +78,37 @@ namespace glimac {
             if (AI_SUCCESS != material->Get(AI_MATKEY_SHININESS, shininess))
                 std::cout << name.data <<"No material shininess" << std::endl;
 
-            if (AI_SUCCESS != material->Get(AI_MATKEY_TEXTURE_DIFFUSE(0), imagePath)) {
-                std::cout << name.data << " No material imagepath" << std::endl;
-            }
-            else {
-
+            if (AI_SUCCESS == material->GetTexture(aiTextureType_DIFFUSE, 0, &imagePath)) {
                 fullPath.append(imagePath.C_Str());
                 imagePath = fullPath;
 
                 std::string imageName(imagePath.data);
+
                 std::unique_ptr<Image> texImage = loadImage(imageName);
 
-                if (mTextures.count(name.data) != 0)
-                    throw std::runtime_error("Texture already added");
+                if (mTextures.count(name.data) == 0){
+                    mTextures.insert(std::make_pair(name.data,
+                                                    new Texture(name.data,
+                                                                texImage,
+                                                                aiToGlm(diffuse),
+                                                                aiToGlm(ambient),
+                                                                aiToGlm(specular),
+                                                                (GLfloat) shininess)));
+                }
 
+            }
+            else if (mTextures.count(name.data) == 0){
                 mTextures.insert(std::make_pair(name.data,
                                                 new Texture(name.data,
-                                                        texImage,
-                                                        aiToGlm(diffuse),
-                                                        aiToGlm(ambient),
-                                                        aiToGlm(specular),
-                                                        (GLfloat) shininess)));
-
+                                                            aiToGlm(diffuse),
+                                                            aiToGlm(ambient),
+                                                            aiToGlm(specular),
+                                                            (GLfloat) shininess)));
             }
 
             std::string materialName(name.data);
             mTexCorrespondanceMap.insert(std::make_pair(i, materialName));
-
-
         }
-
-
     }
 
     //TODO : refactor
@@ -128,9 +129,21 @@ namespace glimac {
                 //texture coords for texture at id 0
                 const aiVector3D &texCoords = mesh->mTextureCoords[0][j];
 
+                glm::vec2 currTexCoords;
+                if(mesh->HasTextureCoords(0)){
+                    currTexCoords = glm::vec2(texCoords.x, texCoords.y);
+                }
+                else currTexCoords = glm::vec2(0.0f,0.0f);
+
+                glm::vec3 currNormals;
+                if(mesh->HasNormals()){
+                    currNormals = glm::vec3(normals.x, normals.y, normals.z);
+                }
+                else currNormals = glm::vec3(0);
+
                 Vertex v(glm::vec3(position.x, position.y, position.z),
-                         glm::vec3(normals.x, normals.y, normals.z),
-                         glm::vec2(texCoords.x, texCoords.y));
+                         glm::vec3(currNormals.x, currNormals.y, currNormals.z),
+                         glm::vec2(currTexCoords.x, currTexCoords.y));
 
                 vertices.push_back(v);
             }
@@ -171,12 +184,14 @@ namespace glimac {
             Mesh *currMesh = mMeshes[i];
 
             //TODO : a better way than this one to deal with things with no textures
-            if(currMesh->mMaterialName!="DefaultMaterial"){
-                GLuint currTexId =  mTextures.at(currMesh->mMaterialName)->getGlTexture();
-                glUniform1i(glGetUniformLocation(program, "texture_diffuse1"), 0);
-                glBindTexture(GL_TEXTURE_2D, currTexId);
-            }
+            GLuint currTexId =  mTextures.at(currMesh->mMaterialName)->getGlTexture();
+            glm::vec4 dColor = mTextures.at(currMesh->mMaterialName)->getDiffuseColor();
 
+            glUniform1i(glGetUniformLocation(program, "hasTexture"), mTextures.at(currMesh->mMaterialName)->hasTexture);
+
+            glUniform1i(glGetUniformLocation(program, "texture_diffuse1"), 0);
+            glUniform3f(glGetUniformLocation(program, "color_diffuse"), dColor.r, dColor.g, dColor.b);
+            glBindTexture(GL_TEXTURE_2D, currTexId);
 
             glBindVertexArray(currMesh->mVAOid);
 

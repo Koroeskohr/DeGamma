@@ -17,7 +17,8 @@ class Texture {
 public:
     Texture (const std::string &name, std::unique_ptr<Image> const & texImage, glm::vec3 diffuse, glm::vec3 ambient, glm::vec3 specular,
                  GLfloat shininess);
-    Texture();
+    Texture (const std::string &name, glm::vec3 diffuse, glm::vec3 ambient, glm::vec3 specular,
+             GLfloat shininess);
     ~Texture();
 
     void init(std::unique_ptr<Image> const & texImage);
@@ -28,6 +29,7 @@ public:
     glm::vec4 getAmbientColor() const;
     glm::vec4 getDiffuseColor() const;
     GLfloat getShininess() const;
+    bool hasTexture = false;
 
     void setSpecularColor(glm::vec4 specular);
     void setAmbientColor(glm::vec4 ambient);
