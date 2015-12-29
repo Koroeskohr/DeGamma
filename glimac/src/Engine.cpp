@@ -23,9 +23,7 @@ struct myProgram{
         model = glGetUniformLocation(mProgram->getGLId(), "model");
         view = glGetUniformLocation(mProgram->getGLId(), "view");
         projection = glGetUniformLocation(mProgram->getGLId(), "projection");
-
     }
-
 };
 
 Engine * Engine::mInstance = nullptr;
@@ -61,8 +59,12 @@ Engine::Engine()
 
     Scene * baseScene = new Scene;
     mCurrentScene = baseScene;
-    baseScene->addRenderable(new Airboat);
-    //baseScene->addRenderable(new Airboat(glm::vec3(0.5,0,0)));
+    mCurrentScene->addRenderable(new Airboat(glm::vec3(1.0f, -1.75f, -5.0f)));
+    mCurrentScene->addRenderable(new Airboat(glm::vec3(0.0f, -1.75f, -5.0f)));
+    mCurrentScene->addRenderable(new Airboat(glm::vec3(-1.0f, -1.75f, -5.0f)));
+    mCurrentScene->getRenderables().at(0)->setScale(0.2);
+    mCurrentScene->getRenderables().at(1)->setScale(0.2);
+    mCurrentScene->getRenderables().at(2)->setScale(0.2);
 
 
 
