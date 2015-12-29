@@ -12,8 +12,10 @@ namespace glimac{
         loadPrograms();
         std::cout << "Program added has ID " << mPrograms.at(0)->getGLId() << std::endl;
         setProgram(mPrograms.at(0));
+
+
         mCurrentProgram->setUniformMatrix4("projection", mCamera->getProjectionMatrix());
-        mCamera->moveFront(-1.0f);
+        //mCamera->moveFront(-1.0f);
     }
 
     Scene::~Scene () {
@@ -67,5 +69,9 @@ namespace glimac{
 
     FreeflyCamera* Scene::getCamera () {
         return mCamera;
+    }
+
+    std::vector<Renderable *> & Scene::getRenderables () {
+        return mRenderables;
     }
 }

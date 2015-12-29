@@ -18,6 +18,11 @@ public:
 
     Transform getTransform() const;
 
+    void setPosition(glm::vec3 pos);
+    void setRotation(glm::mat4 rot);
+    void setScale(glm::vec3 scale);
+    void setScale(float ratio);
+
     virtual ~Renderable() = 0;
 
 private:

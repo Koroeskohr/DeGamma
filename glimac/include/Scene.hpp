@@ -22,6 +22,8 @@ namespace glimac {
         void render();
 
         void addRenderable(Renderable * renderable);
+        std::vector<Renderable*> & getRenderables();
+
         //TODO : void addLight(const Light& light);
         //void setCamera(const FreeflyCamera& camera);
         FreeflyCamera * getCamera();

@@ -22,6 +22,8 @@ namespace glimac {
     Model* ResourceManager::makeModel(const int modelId){
         switch(modelId){
             case ResourceManager::AIRBOAT:
+                std::cout << "------RM::makeModel, returned AIRBOAT" << std::endl;
+
                 return new AirboatModel;
 
             default:
@@ -44,10 +46,12 @@ namespace glimac {
             throw std::runtime_error(errorMessage.str());
         }
         else if(modelCount == 0){
+            std::cout << "----RM::getmodel, about to make a model" << std::endl;
             model = makeModel(modelId);
             mModelsMap.insert(std::make_pair(modelId, model));
         }
         else {
+            std::cout << "----RM::getmodel, sending back " << modelId << std::endl;
             model = mModelsMap.at(modelId);
         }
 
