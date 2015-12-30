@@ -85,6 +85,7 @@ void Engine::createManagers () {
 
 void Engine::loop () {
     bool done = false;
+    glm::ivec2 initialMousePosition(WINDOW_WIDTH/2,WINDOW_HEIGHT/2), actualMousePosition(WINDOW_WIDTH/2,WINDOW_HEIGHT/2), difference(0,0);
     while(!done) {
         // Event loop:
         SDL_Event e;
@@ -93,6 +94,25 @@ void Engine::loop () {
                 done = true; // Leave the loop after this iteration
             }
         }
+
+        actualMousePosition = getWindowManager()->getMousePosition();
+        difference = actualMousePosition - initialMousePosition;
+        initialMousePosition = actualMousePosition;
+
+        if(getWindowManager()->isMouseButtonPressed(SDL_BUTTON_RIGHT)){
+            mCurrentScene->getCamera()->rotateLeft(-difference.x/4);
+            mCurrentScene->getCamera()->rotateUp(-difference.y/4);
+        }
+
+        if(getWindowManager()->isKeyPressed(SDLK_z))
+            mCurrentScene->getCamera()->moveFront(0.01f);
+        else if (getWindowManager()->isKeyPressed(SDLK_s))
+            mCurrentScene->getCamera()->moveFront(-0.01f);
+
+        if(getWindowManager()->isKeyPressed(SDLK_q))
+            mCurrentScene->getCamera()->moveLeft(0.01f);
+        else if (getWindowManager()->isKeyPressed(SDLK_d))
+            mCurrentScene->getCamera()->moveLeft(-0.01f);
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         //mCurrentScene->update();
@@ -103,4 +123,8 @@ void Engine::loop () {
 
     }
 
+}
+
+std::unique_ptr<SDLWindowManager> const &Engine::getWindowManager () {
+    return mWindowManager;
 }
