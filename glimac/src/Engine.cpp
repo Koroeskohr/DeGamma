@@ -90,7 +90,7 @@ void Engine::loop () {
         // Event loop:
         SDL_Event e;
         while (mWindowManager->pollEvent(e)) {
-            if (e.type == SDL_QUIT) {
+            if (e.type == SDL_QUIT || e.key.keysym.sym == SDLK_ESCAPE) {
                 done = true; // Leave the loop after this iteration
             }
         }
