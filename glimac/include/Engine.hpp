@@ -27,6 +27,10 @@ public:
     ~Engine();
 
     void loop();
+
+    //TODO : remove when wmanager is singleton
+    std::unique_ptr<SDLWindowManager> const & getWindowManager();
+
     /*
      * No default copy constructor since it's a singleton
      */
