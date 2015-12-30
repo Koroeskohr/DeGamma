@@ -184,21 +184,21 @@ namespace glimac {
             Mesh *currMesh = mMeshes[i];
 
             //TODO : a better way than this one to deal with things with no textures
-            GLuint currTexId =  mTextures.at(currMesh->mMaterialName)->getGlTexture();
-            glm::vec4 dColor = mTextures.at(currMesh->mMaterialName)->getDiffuseColor();
+            GLuint currTexId =  mTextures.at(currMesh->getMaterialName())->getGlTexture();
+            glm::vec4 dColor = mTextures.at(currMesh->getMaterialName())->getDiffuseColor();
 
-            glUniform1i(glGetUniformLocation(program, "hasTexture"), mTextures.at(currMesh->mMaterialName)->hasTexture);
+            glUniform1i(glGetUniformLocation(program, "hasTexture"), mTextures.at(currMesh->getMaterialName())->hasTexture);
 
             glUniform1i(glGetUniformLocation(program, "texture_diffuse1"), 0);
             glUniform3f(glGetUniformLocation(program, "color_diffuse"), dColor.r, dColor.g, dColor.b);
             glBindTexture(GL_TEXTURE_2D, currTexId);
 
-            glBindVertexArray(currMesh->mVAOid);
+            glBindVertexArray(currMesh->getVAOid());
 
 
-            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, currMesh->mIBOid);
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, currMesh->getIBOid());
 
-            glDrawElements(GL_TRIANGLES, currMesh->mVerticesAmount, GL_UNSIGNED_INT, (void*)0);
+            glDrawElements(GL_TRIANGLES, currMesh->getVertexAmount(), GL_UNSIGNED_INT, (void*)0);
 
             glBindTexture(GL_TEXTURE_2D, 0);
 
