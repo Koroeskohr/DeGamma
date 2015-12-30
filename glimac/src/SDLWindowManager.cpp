@@ -43,6 +43,10 @@ SDLWindowManager::SDLWindowManager(uint32_t width, uint32_t height, const char* 
         return;
     }
     SDL_WM_SetCaption(title, nullptr);
+
+    //SDL_ShowCursor(SDL_DISABLE);
+    //SDL_WM_GrabInput(SDL_GRAB_ON);
+
 #endif
 }
 
