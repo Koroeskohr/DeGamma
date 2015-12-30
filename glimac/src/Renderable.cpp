@@ -17,7 +17,7 @@ namespace glimac {
     }
 
     void Renderable::render(Program * program){
-        
+
         mTransform.scale = glm::vec3(0.2);
         mTransform.updateModelMatrix();
         program->setUniformMatrix4("model", mTransform.modelMatrix);

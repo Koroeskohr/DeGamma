@@ -99,20 +99,23 @@ void Engine::loop () {
         difference = actualMousePosition - initialMousePosition;
         initialMousePosition = actualMousePosition;
 
+        //SDL_WarpMouse(WINDOW_WIDTH/2, WINDOW_HEIGHT/2);
+
+
         if(getWindowManager()->isMouseButtonPressed(SDL_BUTTON_RIGHT)){
-            mCurrentScene->getCamera()->rotateLeft(-difference.x/4);
-            mCurrentScene->getCamera()->rotateUp(-difference.y/4);
+            mCurrentScene->getCamera()->rotateLeft(-difference.x/4.0f);
+            mCurrentScene->getCamera()->rotateUp(-difference.y/4.0f);
         }
 
         if(getWindowManager()->isKeyPressed(SDLK_z))
-            mCurrentScene->getCamera()->moveFront(0.01f);
+            mCurrentScene->getCamera()->moveFront(0.06f);
         else if (getWindowManager()->isKeyPressed(SDLK_s))
-            mCurrentScene->getCamera()->moveFront(-0.01f);
+            mCurrentScene->getCamera()->moveFront(-0.06f);
 
         if(getWindowManager()->isKeyPressed(SDLK_q))
-            mCurrentScene->getCamera()->moveLeft(0.01f);
+            mCurrentScene->getCamera()->moveLeft(0.06f);
         else if (getWindowManager()->isKeyPressed(SDLK_d))
-            mCurrentScene->getCamera()->moveLeft(-0.01f);
+            mCurrentScene->getCamera()->moveLeft(-0.06f);
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         //mCurrentScene->update();
