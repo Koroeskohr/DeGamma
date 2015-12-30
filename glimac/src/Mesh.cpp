@@ -77,18 +77,32 @@ namespace glimac {
         glBindVertexArray(0);
     }
 
-    /*std::vector<Vertex> *Mesh::getVertices () const {
-        return &mVertices;
+    std::vector<Vertex> & Mesh::getVertices () {
+        return mVertices;
     }
 
-    std::vector<unsigned> *Mesh::getIndices () const {
-        return &mIndices;
+    std::vector<unsigned> & Mesh::getIndices () {
+        return mIndices;
     }
 
+    unsigned long Mesh::getVertexAmount () const {
+        return mVerticesAmount;
+    }
 
-    unsigned * Mesh::getIndicesArray () const {
-        return &mIndices[0];
-    }*/
+    const std::string &Mesh::getMaterialName () const {
+        return mMaterialName;
+    }
 
+    GLuint Mesh::getIBOid () const {
+        return mIBOid;
+    }
+
+    GLuint Mesh::getVBOid () const {
+        return mVBOid;
+    }
+
+    GLuint Mesh::getVAOid () const {
+        return mVAOid;
+    }
 }
 

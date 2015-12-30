@@ -20,7 +20,19 @@ class Mesh {
 public:
     Mesh(std::vector<Vertex>& vertices, std::vector<unsigned>& indices, const std::string& materialName);
     ~Mesh();
-    //TODO : put this in private
+
+    std::vector<Vertex> & getVertices();
+    std::vector<unsigned> & getIndices();
+
+    unsigned long getVertexAmount () const;
+    const std::string &getMaterialName () const;
+    GLuint getIBOid () const;
+    GLuint getVBOid () const;
+    GLuint getVAOid () const;
+
+private:
+    void init();
+
     // init in Mesh::init
     GLuint mVAOid;
     GLuint mVBOid;
@@ -29,22 +41,6 @@ public:
     std::vector<unsigned> mIndices;
     unsigned long mVerticesAmount;
     std::string mMaterialName;
-
-    /*std::vector<Vertex> * getVertices() const;
-    std::vector<unsigned> * getIndices() const;
-    unsigned* getIndicesArray() const;*/
-
-
-private:
-    void init();
-
-    //init in Mesh::init
-
-
-
-    //init in Mesh::Mesh
-
-
 
 
 };
