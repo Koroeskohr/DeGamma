@@ -26,8 +26,8 @@ public:
     virtual ~Renderable() = 0;
 
 private:
-    Transform mTransform;
     Model* mModel; //DESIGN PATTERN POIDS MOUCHE
+    Transform mTransform;
 };
 
 

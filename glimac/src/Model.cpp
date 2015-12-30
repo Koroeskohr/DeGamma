@@ -18,15 +18,9 @@ namespace glimac {
         Assimp::Importer importer;
         const aiScene *scene = importer.ReadFile(fileName, aiProcess_Triangulate | aiProcess_FlipUVs);
 
-        std::cout << "starting loading materials" << std::endl;
-
         if (scene->HasMaterials()) {
-
-
             loadMaterials(scene);
         }
-
-        std::cout << "loaded cube materials" << std::endl;
 
         if (!scene->HasMeshes())
             throw std::runtime_error("Scene was empty");
@@ -35,8 +29,6 @@ namespace glimac {
         }
 
         std::cout << "loaded cube meshes" << std::endl;
-
-
     }
 
     Model::~Model() {
@@ -53,8 +45,7 @@ namespace glimac {
 
         aiString imagePath;
 
-
-        for (int i = 0; i < scene->mNumMeshes; i++) {
+        for (unsigned int i = 0; i < scene->mNumMeshes; i++) {
             aiMesh * currMesh = scene->mMeshes[i];
             const aiMaterial *material = scene->mMaterials[currMesh->mMaterialIndex];
 
@@ -117,12 +108,12 @@ namespace glimac {
         std::vector<Vertex> vertices;
         std::vector<unsigned> indices;
 
-        for (int i = 0; i < scene->mNumMeshes; i++) {
+        for (unsigned int i = 0; i < scene->mNumMeshes; i++) {
 
             const aiMesh *mesh = scene->mMeshes[i];
 
             // Filling the vertices vector
-            for (int j = 0; j < mesh->mNumVertices; ++j) {
+            for (unsigned int j = 0; j < mesh->mNumVertices; ++j) {
                 // references to avoid data copy. Way too many vertices to afford copying them
                 const aiVector3D &position = mesh->mVertices[j];
                 const aiVector3D &normals = mesh->mNormals[j];
@@ -149,7 +140,7 @@ namespace glimac {
             }
 
             // Now filling the indices vector with faces
-            for (int j = 0; j < mesh->mNumFaces; ++j) {
+            for (unsigned int j = 0; j < mesh->mNumFaces; ++j) {
                 const aiFace &meshFace = mesh->mFaces[j];
                 indices.push_back(meshFace.mIndices[0]);
                 indices.push_back(meshFace.mIndices[1]);
@@ -177,7 +168,7 @@ namespace glimac {
     }
 
     void Model::draw(Program * program) {
-        for (int i = 0; i < mMeshes.size(); i++) {
+        for (unsigned int i = 0; i < mMeshes.size(); i++) {
             Mesh *currMesh = mMeshes[i];
 
             //TODO : a better way than this one to deal with things with no textures

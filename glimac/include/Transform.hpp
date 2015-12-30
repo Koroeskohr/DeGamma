@@ -12,9 +12,9 @@ using namespace glm;
 struct Transform {
     mat4 modelMatrix;
 
-    mat4 rotation = glm::mat4(0);
-    vec3 position = glm::vec3(0);
-    vec3 scale = glm::vec3(1);
+    vec3 position;
+    mat4 rotation;
+    vec3 scale;
 
     void updateModelMatrix(){
         modelMatrix = mat4(1);
