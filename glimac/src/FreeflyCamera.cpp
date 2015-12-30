@@ -42,6 +42,7 @@ namespace glimac{
 
     void FreeflyCamera::rotateUp(float degrees) {
         m_fTheta += glm::radians(degrees);
+        m_fTheta = std::max<float>(glm::radians(-90.0f), std::min<float>(m_fTheta, glm::radians(90.0f)));
         computeDirectionVectors();
     }
 
