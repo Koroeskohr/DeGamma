@@ -28,7 +28,6 @@ namespace glimac {
         glBindVertexArray(mVAOid);
         glBindBuffer(GL_ARRAY_BUFFER, mVBOid);
 
-
         glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * mVerticesAmount, &mVertices[0], GL_STATIC_DRAW);
 
         glEnableVertexAttribArray(VERTEX_ATTR_POSITION);
@@ -61,16 +60,9 @@ namespace glimac {
                 (const GLvoid*) (offsetof(Vertex, texCoords))                  //pointer (décalage en octets jusqu'à nos données)
         );
 
-
-
-
-
         glGenBuffers(1, &mIBOid);
-
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIBOid);
-
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * mVerticesAmount, &mIndices[0], GL_STATIC_DRAW);
-
 
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
