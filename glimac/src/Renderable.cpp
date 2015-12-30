@@ -17,13 +17,9 @@ namespace glimac {
     }
 
     void Renderable::render(Program * program){
-        //glm::mat4 transform(1);
-        //transform = glm::translate(transform, glm::vec3(0.0f, -1.75f, -5.0f));
-        //transform = glm::scale(transform, glm::vec3(0.2,0.2,0.2));
+        
         mTransform.scale = glm::vec3(0.2);
         mTransform.updateModelMatrix();
-
-        //transform = mTransform.modelMatrix; //FIXME
         program->setUniformMatrix4("model", mTransform.modelMatrix);
         mModel->draw(program);
     }
