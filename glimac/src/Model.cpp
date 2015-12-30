@@ -60,7 +60,7 @@ namespace glimac {
 
 
             //TODO : make this nicer by using a filepath
-
+            //TODO : only works for nanosuit though
             std::string fullPath = "assets/nanosuit/";
 
             if (AI_SUCCESS != material->Get(AI_MATKEY_NAME, name))
@@ -172,38 +172,29 @@ namespace glimac {
         }
     }
 
-   
-
-
     glm::vec3 Model::aiToGlm(const aiColor3D &c) {
         return glm::vec3(c.r, c.g, c.b);
     }
 
-    void Model::draw(GLuint program) {
+    void Model::draw(Program * program) {
         for (int i = 0; i < mMeshes.size(); i++) {
             Mesh *currMesh = mMeshes[i];
 
             //TODO : a better way than this one to deal with things with no textures
-            GLuint currTexId =  mTextures.at(currMesh->getMaterialName())->getGlTexture();
-            glm::vec4 dColor = mTextures.at(currMesh->getMaterialName())->getDiffuseColor();
+            Texture* currentTex = mTextures.at(currMesh->getMaterialName());
+            GLuint currTexId =  currentTex->getGlTexture();
+            glm::vec4 dColor = currentTex->getDiffuseColor();
 
-            glUniform1i(glGetUniformLocation(program, "hasTexture"), mTextures.at(currMesh->getMaterialName())->hasTexture);
+            program->setUniformInt("hasTexture", currentTex->hasTexture);
+            program->setUniformInt("texture_diffuse1", 0);
+            program->setUniform("color_diffuse", dColor.r, dColor.g, dColor.b);
 
-            glUniform1i(glGetUniformLocation(program, "texture_diffuse1"), 0);
-            glUniform3f(glGetUniformLocation(program, "color_diffuse"), dColor.r, dColor.g, dColor.b);
             glBindTexture(GL_TEXTURE_2D, currTexId);
-
             glBindVertexArray(currMesh->getVAOid());
-
-
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, currMesh->getIBOid());
-
             glDrawElements(GL_TRIANGLES, currMesh->getVertexAmount(), GL_UNSIGNED_INT, (void*)0);
-
             glBindTexture(GL_TEXTURE_2D, 0);
-
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
             glBindVertexArray(0);
 
         }

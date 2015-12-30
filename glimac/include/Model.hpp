@@ -22,7 +22,7 @@ public:
     Model(const std::string& fileName);
     virtual ~Model() = 0;
 
-    void draw(GLuint program);
+    void draw(Program * program);
     std::vector<Mesh*> mMeshes;
 
 

@@ -25,7 +25,7 @@ namespace glimac {
 
         //transform = mTransform.modelMatrix; //FIXME
         program->setUniformMatrix4("model", mTransform.modelMatrix);
-        mModel->draw(program->getGLId());
+        mModel->draw(program);
     }
 
     Transform Renderable::getTransform () const {
