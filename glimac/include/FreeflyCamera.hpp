@@ -19,6 +19,8 @@ private:
 public:
     FreeflyCamera(glm::mat4 projection);
     ~FreeflyCamera ();
+    void setPosition(glm::vec3 & pos);
+    void setPosition(float x, float y, float z);
     void moveLeft(float t);
     void moveFront(float t);
     void rotateLeft(float degrees);

@@ -58,4 +58,12 @@ namespace glimac{
     FreeflyCamera::~FreeflyCamera () {
         std::cout << "Free fly camera deleted" << std::endl;
     }
+
+    void FreeflyCamera::setPosition (glm::vec3 &pos) {
+        m_Position = pos;
+    }
+
+    void FreeflyCamera::setPosition (float x, float y, float z) {
+        m_Position = glm::vec3(x,y,z);
+    }
 }
