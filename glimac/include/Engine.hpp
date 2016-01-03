@@ -14,9 +14,12 @@
 #include "SDLWindowManager.hpp"
 #include "ResourceManager.hpp"
 #include "TimeManager.hpp"
+
+#include "Scene.hpp"
+
 #include "Program.hpp"
 #include "FreeflyCamera.hpp"
-#include "Scene.hpp"
+
 #include "Renderable.hpp"
 #include "app/include/renderables/renderables.hpp"
 
@@ -28,6 +31,8 @@ public:
     ~Engine();
 
     void loop();
+
+    void loadSceneFromFile(std::string & path);
 
     //TODO : remove when wmanager is singleton
     std::unique_ptr<SDLWindowManager> const & getWindowManager();

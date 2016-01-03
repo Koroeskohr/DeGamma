@@ -123,6 +123,12 @@ void Engine::loop () {
 
 }
 
+void Engine::loadSceneFromFile (std::string & path) {
+
+}
+
 std::unique_ptr<SDLWindowManager> const &Engine::getWindowManager () {
     return mWindowManager;
 }
+
+
