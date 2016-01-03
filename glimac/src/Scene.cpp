@@ -74,4 +74,43 @@ namespace glimac{
     std::vector<Renderable *> & Scene::getRenderables () {
         return mRenderables;
     }
+
+    Scene::Scene (std::string &path)
+        : Scene()
+    {
+        std::string fullPath = "assets/scenes/" + path;
+        std::ifstream ifs(fullPath);
+        if(!ifs.is_open())
+            throw std::runtime_error("couldnt load file");
+
+        std::stringstream buffer;
+        buffer << ifs.rdbuf();
+        Document document;
+        document.Parse(buffer.str().c_str());
+
+        const Value& camera = document["camera"];
+        const Value& models = document["models"];
+        //const Value& lights = document["lights"];
+        //const Value& programs = document["programs"];
+
+        // 1/4 : set Camera position
+        mCamera->setPosition(camera["position"]["x"].GetDouble(), camera["position"]["y"].GetDouble(), camera["position"]["z"].GetDouble());
+
+        // 2/4 : create renderables
+        //TODO : add renderable factory
+        for (SizeType i = 0; i != models.Size(); ++i)
+        {
+            const Value & pos = models[i]["position"];
+            const Value & scale = models[i]["scale"];
+            std::string type = models[i]["type"].GetString();
+            Renderable* r = RenderableFactory::getByName(type);
+
+            r->setPosition(glm::vec3(pos["x"].GetDouble(), pos["y"].GetDouble(), pos["z"].GetDouble()));
+            //r->setRotation();
+            r->setScale(glm::vec3(scale["x"].GetDouble(), scale["y"].GetDouble(), scale["z"].GetDouble()));
+
+            addRenderable(r);
+        }
+
+    }
 }

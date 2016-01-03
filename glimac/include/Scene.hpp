@@ -6,16 +6,24 @@
 #define DEGAMMA_SCENE_HPP
 
 #include "Program.hpp"
+#include "app/include/renderables/renderables.hpp"
 #include "Renderable.hpp"
 #include "FreeflyCamera.hpp"
+#include "RenderableFactory.hpp"
+#include "rapidjson/document.h"
 
+#include <fstream>
 #include <vector>
+
+using namespace rapidjson;
+
 
 namespace glimac {
     class Scene {
 
     public:
         Scene();
+        Scene(std::string & path);
         ~Scene();
 
         void update();
