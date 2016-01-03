@@ -90,13 +90,14 @@ namespace glimac{
 
         const Value& camera = document["camera"];
         const Value& models = document["models"];
-        //const Value& lights = document["lights"];
-        //const Value& programs = document["programs"];
+        const Value& dirLights = document["lights"]["directional"];
+        const Value& pointLights = document["lights"]["point"];
+        const Value& programs = document["programs"];
 
-        // 1/4 : set Camera position
+        // 1/5 : set Camera position
         mCamera->setPosition(camera["position"]["x"].GetDouble(), camera["position"]["y"].GetDouble(), camera["position"]["z"].GetDouble());
 
-        // 2/4 : create renderables
+        // 2/5 : create renderables
         for (SizeType i = 0; i < models.Size(); ++i)
         {
             const Value & pos = models[i]["position"];
@@ -110,6 +111,43 @@ namespace glimac{
             addRenderable(r);
         }
 
+        // 3/5 : create dir lights
+        for (SizeType i = 0; i < dirLights.Size(); ++i)
+        {
+            const Value & pos = dirLights[i]["position"];
+            const Value & rot = dirLights[i]["rotation"];
+            double intensity = dirLights[i]["intensity"].GetDouble();
+
+            glm::vec3 posVec = glm::vec3(pos["x"].GetDouble(), pos["y"].GetDouble(), pos["z"].GetDouble())
+            //Light * light = nullptr;
+
+            //light = new DirectionalLight(pos, rot, intensity);
+            //addLight(light);
+        }
+
+        // 4/5 : create points lights
+        for (SizeType i = 0; i < dirLights.Size(); ++i)
+        {
+            const Value & pos = dirLights[i]["position"];
+            double intensity = dirLights[i]["intensity"].GetDouble();
+
+            glm::vec3 posVec = glm::vec3(pos["x"].GetDouble(), pos["y"].GetDouble(), pos["z"].GetDouble())
+            //Light * light = nullptr;
+
+            //light = new PointLight(pos, intensity);
+            //addLight(light);
+        }
+
+        //5/5 : create programs
+        for (SizeType i = 0; i < programs.Size(); ++i)
+        {
+            std::string name = programs[i]["name"].GetString();
+            std::string vs_path = programs[i]["vs_path"].GetString();
+            std::string fs_path = programs[i]["fs_path"].GetString();
+
+            Program * p = loadProgram(vs_path.c_str(), fs_path.c_str());
+            addProgram(p);
+        }
 
 
     }
