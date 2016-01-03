@@ -97,8 +97,7 @@ namespace glimac{
         mCamera->setPosition(camera["position"]["x"].GetDouble(), camera["position"]["y"].GetDouble(), camera["position"]["z"].GetDouble());
 
         // 2/4 : create renderables
-        //TODO : add renderable factory
-        for (SizeType i = 0; i != models.Size(); ++i)
+        for (SizeType i = 0; i < models.Size(); ++i)
         {
             const Value & pos = models[i]["position"];
             const Value & scale = models[i]["scale"];
@@ -108,9 +107,10 @@ namespace glimac{
             r->setPosition(glm::vec3(pos["x"].GetDouble(), pos["y"].GetDouble(), pos["z"].GetDouble()));
             //r->setRotation();
             r->setScale(glm::vec3(scale["x"].GetDouble(), scale["y"].GetDouble(), scale["z"].GetDouble()));
-
             addRenderable(r);
         }
+
+
 
     }
 }
