@@ -18,7 +18,7 @@ IF(NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 ENDIF()
 
 MESSAGE(STATUS "${CMAKE_MODULE_PATH}")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -Wno-reorder")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -Wno-reorder -g")
 
 
 IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
