@@ -8,24 +8,6 @@ const int WINDOW_WIDTH = 1280;
 const int WINDOW_HEIGHT = 720;
 const char * WINDOW_NAME = "DeGamma";
 
-struct myProgram{
-
-    glimac::Program * mProgram;
-
-    GLint model;
-    GLint view;
-    GLint projection;
-
-
-    myProgram():
-        mProgram(glimac::loadProgram("shaders/3D.vs.glsl", "shaders/3D.fs.glsl"))
-    {
-        model = glGetUniformLocation(mProgram->getGLId(), "model");
-        view = glGetUniformLocation(mProgram->getGLId(), "view");
-        projection = glGetUniformLocation(mProgram->getGLId(), "projection");
-    }
-};
-
 Engine * Engine::mInstance = nullptr;
 
 Engine* Engine::getInstance() {
@@ -131,7 +113,6 @@ void Engine::loop () {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         //mCurrentScene->update();
         mCurrentScene->render();
-
         mWindowManager->swapBuffers();
 
 
