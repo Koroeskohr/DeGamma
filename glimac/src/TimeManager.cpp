@@ -4,12 +4,17 @@
 
 #include "TimeManager.hpp"
 
+
 namespace glimac {
 
-    TimeManager& TimeManager::getInstance()
+    TimeManager* TimeManager::mInstance = nullptr;
+
+    TimeManager* TimeManager::getInstance()
     {
-        static TimeManager instance;
-        return instance;
+        if (!mInstance) {
+            mInstance = new TimeManager;
+        }
+        return mInstance;
     }
 
     TimeManager::TimeManager()
@@ -31,7 +36,7 @@ namespace glimac {
     }
 
     std::shared_ptr<Timer> TimeManager::registerTimer(){
-        std::shared_ptr<Timer> timer;
+        std::shared_ptr<Timer> timer(new Timer);
         mTimers.push_back(timer);
 
         return timer;

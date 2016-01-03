@@ -38,11 +38,14 @@ Engine* Engine::getInstance() {
 //TODO : add timemanager
 Engine::Engine()
         : mWindowManager(),
-          mResourceManager()
+          mResourceManager(),
+          mTimeManager()
 {
     createManagers();
-    glewExperimental = GL_TRUE;
 
+    mProgramTimer = mTimeManager->registerTimer();
+
+    glewExperimental = GL_TRUE;
     // Initialize glew for OpenGL3+ support
     GLenum glewInitError = glewInit();
     if(GLEW_OK != glewInitError) {
@@ -69,6 +72,7 @@ Engine::Engine()
 
 
     //TODO : start timers
+
 }
 
 Engine::~Engine(){
@@ -81,12 +85,19 @@ void Engine::createManagers () {
     mResourceManager = std::unique_ptr<ResourceManager>(ResourceManager::getInstance());
     mWindowManager = std::unique_ptr<SDLWindowManager>(
                          new SDLWindowManager(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME));
+    mTimeManager = std::unique_ptr<TimeManager>(TimeManager::getInstance());
+
+
 }
 
 void Engine::loop () {
     bool done = false;
     glm::ivec2 initialMousePosition(WINDOW_WIDTH/2,WINDOW_HEIGHT/2), actualMousePosition(WINDOW_WIDTH/2,WINDOW_HEIGHT/2), difference(0,0);
+
+    std::shared_ptr<Timer> frameTimer = mTimeManager->registerTimer();
     while(!done) {
+        frameTimer->reset();
+
         // Event loop:
         SDL_Event e;
         while (mWindowManager->pollEvent(e)) {
@@ -123,6 +134,9 @@ void Engine::loop () {
 
         mWindowManager->swapBuffers();
 
+
+        int loopIterationDuration = (int)frameTimer->elapsedTime();
+        SDL_Delay(std::max<int>(0, 1000/60.0f - loopIterationDuration));
 
     }
 

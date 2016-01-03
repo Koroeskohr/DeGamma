@@ -6,6 +6,7 @@
 #define DEGAMMA_TIMER_HPP
 
 #include "TimeDefinitions.hpp"
+#include <iostream>
 
 using std::chrono::time_point;
 using std::chrono::milliseconds;
@@ -14,15 +15,17 @@ namespace glimac {
 
 class Timer {
     friend class TimeManager;
+    friend class Engine;
 
 public:
     long elapsedTime() const;
+    void reset();
 
 protected:
     Timer();
 
 private:
-    const time_point<Clock> mStartTime;
+    time_point<Clock> mStartTime;
 };
     
 }

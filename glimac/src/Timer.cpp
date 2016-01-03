@@ -11,7 +11,10 @@ namespace glimac {
     }
 
     long Timer::elapsedTime() const {
-        return std::chrono::duration_cast<milliseconds>(Clock::now() - mStartTime).count();
+        return std::chrono::duration_cast<std::chrono::milliseconds>(Clock::now() - mStartTime).count();
     }
 
+    void Timer::reset () {
+        mStartTime = Clock::now();
+    }
 }

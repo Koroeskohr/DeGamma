@@ -17,7 +17,7 @@ using std::chrono::time_point;
 namespace glimac {
 class TimeManager {
 public:
-    static TimeManager& getInstance();
+    static TimeManager* getInstance();
 
     TimeManager(TimeManager const&) = delete;
     void operator=(TimeManager const&) = delete;
@@ -28,6 +28,7 @@ public:
 
 private:
     TimeManager();
+    static TimeManager* mInstance;
     const time_point<Clock> mProgramStart;
     std::vector<std::shared_ptr<Timer>> mTimers;
     std::vector<Countdown> mCountdowns;

@@ -13,6 +13,7 @@
 
 #include "SDLWindowManager.hpp"
 #include "ResourceManager.hpp"
+#include "TimeManager.hpp"
 #include "Program.hpp"
 #include "FreeflyCamera.hpp"
 #include "Scene.hpp"
@@ -46,6 +47,9 @@ private:
 
     std::unique_ptr<ResourceManager> mResourceManager;
     std::unique_ptr<SDLWindowManager> mWindowManager;
+    std::unique_ptr<TimeManager> mTimeManager;
+
+    std::shared_ptr<Timer> mProgramTimer;
 };
 
 
