@@ -4,11 +4,6 @@
 
 #include "Model.hpp"
 
-#include <iostream>
-#include "Program.hpp"
-#include "Image.hpp"
-#include "FreeflyCamera.hpp"
-
 
 
 

@@ -12,7 +12,9 @@
 #include "Mesh.hpp"
 #include "Texture.hpp"
 #include "Program.hpp"
-
+#include <iostream>
+#include "Image.hpp"
+#include "FreeflyCamera.hpp"
 
 
 namespace glimac {
