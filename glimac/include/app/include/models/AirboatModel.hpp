@@ -12,8 +12,10 @@ using namespace glimac;
 class AirboatModel: public Model{
 
 public:
-    AirboatModel();
-    ~AirboatModel ();
+    AirboatModel()
+        : Model("assets/nanosuit/nanosuit.obj") {}
+
+    ~AirboatModel () {}
 
 };
 
