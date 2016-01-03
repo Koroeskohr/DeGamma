@@ -26,7 +26,7 @@ IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 ELSE()
     include_directories(${SDL_INCLUDE_DIR})
 ENDIF()
-include_directories(${OPENGL_INCLUDE_DIR} ${GLEW_INCLUDE_DIR} glimac/include third-party/glm third-party/assimp/include/ glimac/include/)
+include_directories(${OPENGL_INCLUDE_DIR} ${GLEW_INCLUDE_DIR} glimac/include third-party/glm third-party/assimp/include/ third-party/rapidjson glimac/include/)
 
 
 IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
