@@ -42,6 +42,10 @@ Engine::Engine()
 
     //glPolygonMode( GL_FRONT_AND_BACK, GL_LINE ); // TODO : remove, it displays meshes as wireframe
 
+    std::string baseScenePath("model.json");
+    loadSceneFromFile(baseScenePath);
+
+    /*
     Scene * baseScene = new Scene;
     mCurrentScene = baseScene;
     mCurrentScene->addRenderable(new Airboat(glm::vec3(1.0f, -1.75f, -5.0f)));
@@ -50,7 +54,7 @@ Engine::Engine()
     mCurrentScene->getRenderables().at(0)->setScale(0.2);
     mCurrentScene->getRenderables().at(1)->setScale(0.2);
     mCurrentScene->getRenderables().at(2)->setScale(0.2);
-
+    */
 
 
     //TODO : start timers
@@ -124,7 +128,9 @@ void Engine::loop () {
 }
 
 void Engine::loadSceneFromFile (std::string & path) {
+    //TODO : handle scene deletion
 
+    mCurrentScene = new Scene(path);
 }
 
 std::unique_ptr<SDLWindowManager> const &Engine::getWindowManager () {
