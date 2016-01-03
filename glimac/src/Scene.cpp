@@ -118,10 +118,12 @@ namespace glimac{
             const Value & rot = dirLights[i]["rotation"];
             double intensity = dirLights[i]["intensity"].GetDouble();
 
-            glm::vec3 posVec = glm::vec3(pos["x"].GetDouble(), pos["y"].GetDouble(), pos["z"].GetDouble())
+            glm::vec3 posVec = glm::vec3(pos["x"].GetDouble(),
+                                         pos["y"].GetDouble(),
+                                         pos["z"].GetDouble());
             //Light * light = nullptr;
 
-            //light = new DirectionalLight(pos, rot, intensity);
+            //light = new DirectionalLight(posVec, rotMat, intensity);
             //addLight(light);
         }
 
@@ -131,14 +133,17 @@ namespace glimac{
             const Value & pos = dirLights[i]["position"];
             double intensity = dirLights[i]["intensity"].GetDouble();
 
-            glm::vec3 posVec = glm::vec3(pos["x"].GetDouble(), pos["y"].GetDouble(), pos["z"].GetDouble())
+            glm::vec3 posVec = glm::vec3(pos["x"].GetDouble(),
+                                         pos["y"].GetDouble(),
+                                         pos["z"].GetDouble());
             //Light * light = nullptr;
 
-            //light = new PointLight(pos, intensity);
+            //light = new PointLight(posVec, intensity);
             //addLight(light);
         }
 
         //5/5 : create programs
+        /*
         for (SizeType i = 0; i < programs.Size(); ++i)
         {
             std::string name = programs[i]["name"].GetString();
@@ -148,6 +153,7 @@ namespace glimac{
             Program * p = loadProgram(vs_path.c_str(), fs_path.c_str());
             addProgram(p);
         }
+         */
 
 
     }
