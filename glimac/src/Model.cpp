@@ -13,8 +13,11 @@ namespace glimac {
         Assimp::Importer importer;
         const aiScene *scene = importer.ReadFile(fileName, aiProcess_Triangulate | aiProcess_FlipUVs);
 
+        std::size_t lastSlash = fileName.find_last_of("/\\");
+        std::string dir = fileName.substr(0,lastSlash+1);
+
         if (scene->HasMaterials()) {
-            loadMaterials(scene);
+            loadMaterials(scene, dir);
         }
 
         if (!scene->HasMeshes())
@@ -31,7 +34,7 @@ namespace glimac {
     }
 
     //TODO : refactor
-    void Model::loadMaterials(const aiScene *scene) {
+    void Model::loadMaterials(const aiScene *scene, const std::string & directory) {
         aiString name;
         aiColor3D diffuse;
         aiColor3D ambient;
@@ -47,7 +50,7 @@ namespace glimac {
 
             //TODO : make this nicer by using a filepath
             //TODO : only works for nanosuit though
-            std::string fullPath = "assets/nanosuit/";
+            std::string fullPath = directory;
 
             if (AI_SUCCESS != material->Get(AI_MATKEY_NAME, name))
                 std::cout << name.data <<"No material name" << std::endl;

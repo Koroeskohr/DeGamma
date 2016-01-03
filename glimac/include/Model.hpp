@@ -30,7 +30,7 @@ public:
 
 
 private:
-    void loadMaterials(const aiScene* scene);
+    void loadMaterials(const aiScene* scene, const std::string & directory);
     void loadMeshes(const aiScene* scene);
     void processNode(aiNode* node, const aiScene* scene);
 
