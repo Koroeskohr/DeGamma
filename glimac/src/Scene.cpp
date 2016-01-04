@@ -7,7 +7,7 @@
 namespace glimac{
     //HACK : ratio should be retrieved
     Scene::Scene ()
-        : mCamera(new FreeflyCamera(glm::perspective(glm::radians(40.0f), 1280.0f/720.0f, 0.1f, 100.0f)))
+        : mCamera(new FreeflyCamera(glm::perspective(glm::radians(40.0f), 1280.0f/720.0f, 0.1f, 1000.0f)))
     {
         loadPrograms();
         std::cout << "Program added has ID " << mPrograms.at(0)->getGLId() << std::endl;
