@@ -29,7 +29,7 @@ public:
      */
     static const aiScene* import(std::string str);
 
-    enum Models { AIRBOAT } ;
+    enum Models { AIRBOAT, COTTAGE } ;
 
     /*
      * Model factory

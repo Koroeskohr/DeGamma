@@ -25,6 +25,9 @@ namespace glimac {
                 std::cout << "------RM::makeModel, returned AIRBOAT" << std::endl;
 
                 return new AirboatModel;
+            case ResourceManager::COTTAGE:
+                std::cout << "------RM::makeModel, returned CHUB" << std::endl;
+                return new CottageModel;
 
             default:
                 throw std::runtime_error("Wrong model id input");

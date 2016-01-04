@@ -6,5 +6,6 @@
 #define DEGAMMA_MODELS_HPP
 
 #include "AirboatModel.hpp"
+#include "CottageModel.hpp"
 
 #endif //DEGAMMA_MODELS_HPP

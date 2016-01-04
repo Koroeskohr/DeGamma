@@ -105,14 +105,14 @@ void Engine::loop () {
         }
 
         if(getWindowManager()->isKeyPressed(SDLK_z))
-            mCurrentScene->getCamera()->moveFront(0.06f);
+            mCurrentScene->getCamera()->moveFront(0.25f);
         else if (getWindowManager()->isKeyPressed(SDLK_s))
-            mCurrentScene->getCamera()->moveFront(-0.06f);
+            mCurrentScene->getCamera()->moveFront(-0.25f);
 
         if(getWindowManager()->isKeyPressed(SDLK_q))
-            mCurrentScene->getCamera()->moveLeft(0.06f);
+            mCurrentScene->getCamera()->moveLeft(0.25f);
         else if (getWindowManager()->isKeyPressed(SDLK_d))
-            mCurrentScene->getCamera()->moveLeft(-0.06f);
+            mCurrentScene->getCamera()->moveLeft(-0.25f);
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         //mCurrentScene->update();

@@ -6,5 +6,6 @@
 #define DEGAMMA_RENDERABLES_HPP
 
 #include "Airboat.hpp"
+#include "Cottage.hpp"
 
 #endif //DEGAMMA_RENDERABLES_HPP

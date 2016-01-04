@@ -12,7 +12,9 @@ namespace glimac {
     Model::Model(const std::string &fileName) {
         Assimp::Importer importer;
         const aiScene *scene = importer.ReadFile(fileName, aiProcess_Triangulate | aiProcess_FlipUVs);
-
+        if(const char * error = importer.GetErrorString() )
+        std::cout << "%%%%%% There might be an error in parsing: " << importer.GetErrorString() << std::endl;
+        std::cout << fileName << std::endl;
         std::size_t lastSlash = fileName.find_last_of("/\\");
         std::string dir = fileName.substr(0,lastSlash+1);
 
@@ -51,6 +53,7 @@ namespace glimac {
             //TODO : make this nicer by using a filepath
             //TODO : only works for nanosuit though
             std::string fullPath = directory;
+            std::cout << fullPath << std::endl;
 
             if (AI_SUCCESS != material->Get(AI_MATKEY_NAME, name))
                 std::cout << name.data <<"No material name" << std::endl;

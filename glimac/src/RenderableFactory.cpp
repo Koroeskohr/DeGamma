@@ -10,6 +10,8 @@ namespace glimac {
         Renderable * renderable = nullptr;
         if(name == "airboat")
             renderable = (Renderable*)(new Airboat);
+        if(name == "cottage")
+            renderable = (Renderable*)(new Cottage);
 
 
 
