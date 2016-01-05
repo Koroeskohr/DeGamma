@@ -59,12 +59,16 @@ Engine::Engine()
 
     Scene * baseScene = new Scene;
     mCurrentScene = baseScene;
-    mCurrentScene->addRenderable(new Airboat(glm::vec3(1.0f, -1.75f, -5.0f)));
-    mCurrentScene->addRenderable(new Airboat(glm::vec3(0.0f, -1.75f, -5.0f)));
-    mCurrentScene->addRenderable(new Airboat(glm::vec3(-1.0f, -1.75f, -5.0f)));
+    mCurrentScene->addRenderable(new Airboat(glm::vec3(3.0f, -1.75f, -5.0f)));
+    mCurrentScene->addRenderable(new Airboat(glm::vec3(0.0f, -1.75f, -15.0f)));
+    mCurrentScene->addRenderable(new Airboat(glm::vec3(-1.0f, -1.75f, -2.0f)));
+
     mCurrentScene->getRenderables().at(0)->setScale(0.2);
     mCurrentScene->getRenderables().at(1)->setScale(0.2);
     mCurrentScene->getRenderables().at(2)->setScale(0.2);
+
+    //mCurrentScene->addLight(new Light(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f)));
+
 
 
 

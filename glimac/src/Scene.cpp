@@ -15,6 +15,10 @@ namespace glimac{
 
 
         mCurrentProgram->setUniformMatrix4("projection", mCamera->getProjectionMatrix());
+
+       // mCurrentProgram->setUniform("lightPos", mLights[0]->getLightPos());
+       // mCurrentProgram->setUniform("lightColor", mLights[0]->getLightColor());
+        //mCurrentProgram->setUniform("lightPos", glm::vec3(0.0f, -1.75f, -2.0f));
         //mCamera->moveFront(-1.0f);
     }
 
@@ -46,12 +50,15 @@ namespace glimac{
         mRenderables.push_back(renderable);
     }
 
+    void Scene::addLight(Light * light){
+        mLights.push_back(light);
+    }
+
     void Scene::loadPrograms () {
         //TODO : more shaders ?
         Program * p  = glimac::loadProgram("shaders/3D.vs.glsl", "shaders/3D.fs.glsl");
         addProgram(p);
         std::cout << "mprograms has " << mPrograms.size() << std::endl;
-
     }
 
     void Scene::addProgram (Program * program) {
@@ -73,5 +80,8 @@ namespace glimac{
 
     std::vector<Renderable *> & Scene::getRenderables () {
         return mRenderables;
+    }
+    std::vector<Light *> & Scene::getLights() {
+        return mLights;
     }
 }
