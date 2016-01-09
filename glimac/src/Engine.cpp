@@ -23,7 +23,8 @@ Engine* Engine::getInstance() {
 Engine::Engine()
         : mWindowManager(),
           mResourceManager(),
-          mTimeManager()
+          mTimeManager(),
+          mCurrentScene(nullptr)
 {
     createManagers();
 
@@ -73,6 +74,7 @@ Engine::Engine()
 
 Engine::~Engine(){
     //TODO
+    delete mCurrentScene;
 
     std::cout << "Engine deleted" << std::endl;
 }
@@ -148,6 +150,8 @@ void Engine::loop () {
 
 void Engine::loadSceneFromFile (std::string & path) {
     //TODO : handle scene deletion
+    if(mCurrentScene != nullptr)
+        delete mCurrentScene;
 
     mCurrentScene = new Scene(path);
 }
@@ -157,3 +161,6 @@ std::unique_ptr<SDLWindowManager> const &Engine::getWindowManager () {
 }
 
 
+long Engine::getGlobalTime () {
+    return mProgramTimer->elapsedTime();
+}

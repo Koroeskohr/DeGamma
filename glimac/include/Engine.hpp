@@ -27,12 +27,12 @@ using namespace glimac;
 class Engine {
 public:
     static Engine* getInstance();
-
     ~Engine();
 
     void loop();
-
     void loadSceneFromFile(std::string & path);
+    long getGlobalTime();
+
 
     //TODO : remove when wmanager is singleton
     std::unique_ptr<SDLWindowManager> const & getWindowManager();
