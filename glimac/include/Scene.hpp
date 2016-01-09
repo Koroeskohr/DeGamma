@@ -11,6 +11,7 @@
 #include "FreeflyCamera.hpp"
 #include "RenderableFactory.hpp"
 #include "rapidjson/document.h"
+#include "Light.hpp"
 
 #include <fstream>
 #include <vector>
@@ -40,6 +41,11 @@ namespace glimac {
         void setProgram(Program * program);
         Program* getCurrentProgram ();
 
+        void addPointLight(Light * light);
+        void setDirLight();
+        std::vector<Light*> & getPointLights();
+        void createLightsUniforms();
+
 
     private:
         std::vector<Renderable*> mRenderables;
@@ -48,6 +54,8 @@ namespace glimac {
 
         Program* mCurrentProgram;
         std::vector<Program*> mPrograms;
+        std::vector<Light*> mPointLights;
+        Light * mDirLight;
         void loadPrograms();
     };
 

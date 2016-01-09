@@ -43,6 +43,8 @@ namespace glimac {
         aiColor3D specular;
         float shininess;
 
+        std::cout << "yo" << std::endl;
+
         aiString imagePath;
 
         for (unsigned int i = 0; i < scene->mNumMeshes; i++) {
@@ -54,6 +56,8 @@ namespace glimac {
             //TODO : only works for nanosuit though
             std::string fullPath = directory;
             std::cout << fullPath << std::endl;
+
+
 
             if (AI_SUCCESS != material->Get(AI_MATKEY_NAME, name))
                 std::cout << name.data <<"No material name" << std::endl;
@@ -73,6 +77,7 @@ namespace glimac {
             if (AI_SUCCESS == material->GetTexture(aiTextureType_DIFFUSE, 0, &imagePath)) {
                 fullPath.append(imagePath.C_Str());
                 imagePath = fullPath;
+
 
                 std::string imageName(imagePath.data);
 
@@ -177,9 +182,25 @@ namespace glimac {
             GLuint currTexId =  currentTex->getGlTexture();
             glm::vec4 dColor = currentTex->getDiffuseColor();
 
+            GLuint currTexId =  mTextures.at(currMesh->mMaterialName)->getGlTexture();
+            glm::vec4 dColor = mTextures.at(currMesh->mMaterialName)->getDiffuseColor();
+            glm::vec4 aColor = mTextures.at(currMesh->mMaterialName)->getAmbientColor();
+            glm::vec4 sColor = mTextures.at(currMesh->mMaterialName)->getSpecularColor();
+            GLfloat shininess = mTextures.at(currMesh->mMaterialName)->getShininess();
+
+
             program->setUniformInt("hasTexture", currentTex->hasTexture);
             program->setUniformInt("texture_diffuse1", 0);
             program->setUniform("color_diffuse", dColor.r, dColor.g, dColor.b);
+
+
+            glUniform1i(glGetUniformLocation(program, "texture_diffuse1"), 0);
+
+            glUniform3f(glGetUniformLocation(program, "color_diffuse"), dColor.r, dColor.g, dColor.b);
+            glUniform3f(glGetUniformLocation(program, "color_ambiant"), aColor.r, aColor.g, aColor.b);
+            glUniform3f(glGetUniformLocation(program, "color_specular"), sColor.r, sColor.g, sColor.b);
+            glUniform1f(glGetUniformLocation(program, "shininess"), shininess);
+
 
             glBindTexture(GL_TEXTURE_2D, currTexId);
             glBindVertexArray(currMesh->getVAOid());

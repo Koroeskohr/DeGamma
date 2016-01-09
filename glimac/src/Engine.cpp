@@ -3,6 +3,8 @@
 //
 
 #include "Engine.hpp"
+#include "Light.hpp"
+
 
 const int WINDOW_WIDTH = 1280;
 const int WINDOW_HEIGHT = 720;
@@ -40,6 +42,8 @@ Engine::Engine()
     glDepthFunc(GL_LEQUAL);
     glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 
+    Light * myLight = new Light();
+
     //glPolygonMode( GL_FRONT_AND_BACK, GL_LINE ); // TODO : remove, it displays meshes as wireframe
 
     std::string baseScenePath("model.json");
@@ -48,13 +52,19 @@ Engine::Engine()
     /*
     Scene * baseScene = new Scene;
     mCurrentScene = baseScene;
-    mCurrentScene->addRenderable(new Airboat(glm::vec3(1.0f, -1.75f, -5.0f)));
-    mCurrentScene->addRenderable(new Airboat(glm::vec3(0.0f, -1.75f, -5.0f)));
-    mCurrentScene->addRenderable(new Airboat(glm::vec3(-1.0f, -1.75f, -5.0f)));
+    mCurrentScene->addRenderable(new Airboat(glm::vec3(3.0f, -1.75f, -5.0f)));
+    mCurrentScene->addRenderable(new Airboat(glm::vec3(0.0f, -1.75f, -15.0f)));
+    mCurrentScene->addRenderable(new Airboat(glm::vec3(-1.0f, -1.75f, -2.0f)));
     mCurrentScene->getRenderables().at(0)->setScale(0.2);
     mCurrentScene->getRenderables().at(1)->setScale(0.2);
     mCurrentScene->getRenderables().at(2)->setScale(0.2);
     */
+
+    mCurrentScene->addPointLight(new Light(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
+    mCurrentScene->addPointLight(new Light(glm::vec3(0.0f, 0.0f, -10.0f), glm::vec3(1.0f, 0.0f, 0.0f)));
+
+    std::cout << "creating lights uniforms" << std::endl;
+    mCurrentScene->createLightsUniforms();
 
 
     //TODO : start timers

@@ -15,22 +15,17 @@ uniform mat4 projection;
 //out vec3 vPosition_vs; //position du sommet transformée dans le view space
 //out vec3 vNormal_vs; //normale du sommet transformée dans le view space
 out vec2 vTexCoords;
+out vec3 vFragPos;
+out vec3 vNormal;
+out vec3 vView;
 
 void main()
 {
-    //Coordonnées homogènes
 
-    /*vec4 vertexNormal = vec4(aVertexNormal, 0);*/
 
-    //Valeurs de sortie
-    //vPosition_vs = vec3(uMVMatrix * vertexPosition);
-    //vPosition_vs =  vec3(0,0,1);
-
-    /*vNormal_vs = vec3(uNormalMatrix * vertexNormal);
-    vTexCoords = aVertexTexCoords;*/
-
-    //Position projetée
-    //gl_Position = projection * view * model * vec4(aVertexPosition.x, aVertexPosition.y, aVertexPosition.z, 1.0f);
     vTexCoords = aVertexTexCoords;
+    vView = vec3(view[0]);
+    vNormal = aVertexNormal;
+    vFragPos = vec3(model * vec4(aVertexPosition, 1.0f));
     gl_Position = projection * view * model * vec4(aVertexPosition, 1.0f);
 }

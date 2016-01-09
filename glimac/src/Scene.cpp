@@ -15,7 +15,8 @@ namespace glimac{
 
 
         mCurrentProgram->setUniformMatrix4("projection", mCamera->getProjectionMatrix());
-        //mCamera->moveFront(-1.0f);
+        mDirLight = new Light(glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+
     }
 
     Scene::~Scene () {
@@ -37,6 +38,7 @@ namespace glimac{
         glm::mat4 view = mCamera->getViewMatrix();
         mCurrentProgram->setUniformMatrix4("view", view);
 
+
         for(auto renderable: mRenderables){
             renderable->render(mCurrentProgram);
         }
@@ -44,6 +46,10 @@ namespace glimac{
 
     void Scene::addRenderable (Renderable *renderable) {
         mRenderables.push_back(renderable);
+    }
+
+    void Scene::addPointLight(Light * light){
+        mPointLights.push_back(light);
     }
 
     void Scene::loadPrograms () {
@@ -156,5 +162,37 @@ namespace glimac{
          */
 
 
+    std::vector<Light *> & Scene::getPointLights(){
+        return mPointLights;
+    }
+
+    void Scene::setDirLight() {
+
+    }
+
+
+
+    void Scene::createLightsUniforms() {
+
+        //DIRECTIONAL LIGHT
+        mCurrentProgram->setUniform("myDirLight.lightDir", mDirLight->getLightPos());
+        mCurrentProgram->setUniform("myDirLight.lightColor", mDirLight->getLightColor());
+
+        //POINT LIGHTS
+        mCurrentProgram->setUniformInt("nbPointLights", mPointLights.size());
+
+        for(int i = 0; i<mPointLights.size(); i++){
+
+            std::string currUniformName = "lights[";
+            currUniformName += std::to_string(i);
+
+            const char * uniformColor = (currUniformName+"].lightColor").c_str();
+            const char * uniformPos = (currUniformName+"].lightPos").c_str();
+
+            mCurrentProgram->setUniform(uniformColor, mPointLights[i]->getLightColor());
+
+            mCurrentProgram->setUniform(uniformPos, mPointLights[i]->getLightPos());
+
+        }
     }
 }
