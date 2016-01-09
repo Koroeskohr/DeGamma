@@ -20,6 +20,7 @@ namespace glimac{
     }
 
     Scene::~Scene () {
+        std::cout << "Deleting scene" << std::endl;
         for(auto renderable: mRenderables){
             delete renderable;
         }
