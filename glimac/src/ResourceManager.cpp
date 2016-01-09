@@ -30,7 +30,7 @@ namespace glimac {
                 throw std::runtime_error("Wrong model id input");
         }
     }
-    
+
 
     Model *ResourceManager::getModel (const int modelId) {
         long modelCount = mModelsMap.count(modelId);
