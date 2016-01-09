@@ -22,11 +22,8 @@ namespace glimac {
     Model* ResourceManager::makeModel(const int modelId){
         switch(modelId){
             case ResourceManager::AIRBOAT:
-                std::cout << "------RM::makeModel, returned AIRBOAT" << std::endl;
-
                 return new AirboatModel;
             case ResourceManager::COTTAGE:
-                std::cout << "------RM::makeModel, returned CHUB" << std::endl;
                 return new CottageModel;
 
             default:
