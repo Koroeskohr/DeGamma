@@ -16,10 +16,9 @@ in vec3 vNormal;
 in vec3 vView;
 out vec4 color;
 
-
 uniform sampler2D texture_diffuse1;
 uniform vec3 color_diffuse;
-uniform vec3 color_ambiant;
+//uniform vec3 color_ambiant;
 uniform vec3 color_specular;
 uniform float shininess;
 
@@ -28,6 +27,8 @@ uniform Light lights[100];
 uniform dirLight myDirLight;
 
 uniform int hasTexture;
+
+//vec3 color_ambiant;
 
 vec3 calcPointLight(Light light, vec3 normal, vec3 fragPos, vec3 viewDir){
 
@@ -56,7 +57,6 @@ vec3 calcPointLight(Light light, vec3 normal, vec3 fragPos, vec3 viewDir){
     float distance    = length(lightPos - vFragPos);
     float attenuation = 1.0f / (constant + linear * distance +
                                 quadratic * (distance * distance));
-
 
     //setting colors
 
@@ -97,20 +97,14 @@ vec3 CalcDirLight(dirLight light, vec3 normal, vec3 viewDir){
 
 void main()
 {
-
-
-
     //stuff for every light
     vec3 normal = normalize(vNormal);
     vec3 viewDir = normalize(vView - vFragPos);
 
     vec3 result = CalcDirLight(myDirLight, normal, viewDir);
 
-
     for(int i = 0; i < nbPointLights; i++)
         result += calcPointLight(lights[i], normal, vFragPos, viewDir);
-
-
 
     color = vec4(result, 1.0f);
 }

@@ -13,7 +13,7 @@ namespace glimac {
         Assimp::Importer importer;
         const aiScene *scene = importer.ReadFile(fileName, aiProcess_Triangulate | aiProcess_FlipUVs);
         if(const char * error = importer.GetErrorString() )
-        std::cout << "%%%%%% There might be an error in parsing: " << importer.GetErrorString() << std::endl;
+            std::cout << "%%%%%% There might be an error in parsing: " << importer.GetErrorString() << std::endl;
         std::cout << fileName << std::endl;
         std::size_t lastSlash = fileName.find_last_of("/\\");
         std::string dir = fileName.substr(0,lastSlash+1);
@@ -181,26 +181,18 @@ namespace glimac {
             Texture* currentTex = mTextures.at(currMesh->getMaterialName());
             GLuint currTexId =  currentTex->getGlTexture();
             glm::vec4 dColor = currentTex->getDiffuseColor();
+            glm::vec4 aColor = currentTex->getAmbientColor();
+            glm::vec4 sColor = currentTex->getSpecularColor();
+            GLfloat shininess = currentTex->getShininess();
 
-            GLuint currTexId =  mTextures.at(currMesh->mMaterialName)->getGlTexture();
-            glm::vec4 dColor = mTextures.at(currMesh->mMaterialName)->getDiffuseColor();
-            glm::vec4 aColor = mTextures.at(currMesh->mMaterialName)->getAmbientColor();
-            glm::vec4 sColor = mTextures.at(currMesh->mMaterialName)->getSpecularColor();
-            GLfloat shininess = mTextures.at(currMesh->mMaterialName)->getShininess();
-
+            aColor = glm::vec4(1,1,1,1);
 
             program->setUniformInt("hasTexture", currentTex->hasTexture);
             program->setUniformInt("texture_diffuse1", 0);
             program->setUniform("color_diffuse", dColor.r, dColor.g, dColor.b);
-
-
-            glUniform1i(glGetUniformLocation(program, "texture_diffuse1"), 0);
-
-            glUniform3f(glGetUniformLocation(program, "color_diffuse"), dColor.r, dColor.g, dColor.b);
-            glUniform3f(glGetUniformLocation(program, "color_ambiant"), aColor.r, aColor.g, aColor.b);
-            glUniform3f(glGetUniformLocation(program, "color_specular"), sColor.r, sColor.g, sColor.b);
-            glUniform1f(glGetUniformLocation(program, "shininess"), shininess);
-
+            //program->setUniform("color_ambiant", aColor.r, aColor.g, aColor.b);
+            program->setUniform("color_specular", sColor.r, sColor.g, sColor.b);
+            program->setUniform("shininess", shininess);
 
             glBindTexture(GL_TEXTURE_2D, currTexId);
             glBindVertexArray(currMesh->getVAOid());
