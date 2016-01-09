@@ -16,19 +16,11 @@ namespace glimac{
 
     public:
 
-        Light():
-                lightPos(glm::vec3(0.0f, 0.0f, 0.0f)),
-                lightColor(glm::vec3(1.0f, 1.0f, 1.0f)){}
+        Light();
+        Light(glm::vec3 pos, glm::vec3 color);
 
-        Light(glm::vec3 pos, glm::vec3 color):
-                lightPos(pos), lightColor(color){}
-
-
-        ~Light();
-
-        glm::vec3 getLightPos();
-
-        glm::vec3 getLightColor();
+        glm::vec3 getLightPos() const;
+        glm::vec3 getLightColor() const;
 
         void setLightPos(glm::vec3 pos);
         void setLightColor(glm::vec3 color);
