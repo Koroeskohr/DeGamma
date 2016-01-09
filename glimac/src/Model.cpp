@@ -12,8 +12,10 @@ namespace glimac {
     Model::Model(const std::string &fileName) {
         Assimp::Importer importer;
         const aiScene *scene = importer.ReadFile(fileName, aiProcess_Triangulate | aiProcess_FlipUVs);
-        if(const char * error = importer.GetErrorString() )
+
+        if(const char * error = importer.GetErrorString() ){
             std::cout << "%%%%%% There might be an error in parsing: " << importer.GetErrorString() << std::endl;
+        }
         std::cout << fileName << std::endl;
         std::size_t lastSlash = fileName.find_last_of("/\\");
         std::string dir = fileName.substr(0,lastSlash+1);
@@ -28,7 +30,7 @@ namespace glimac {
             loadMeshes(scene);
         }
 
-        std::cout << "loaded cube meshes" << std::endl;
+
     }
 
     Model::~Model() {
@@ -179,18 +181,18 @@ namespace glimac {
 
             //TODO : a better way than this one to deal with things with no textures
             Texture* currentTex = mTextures.at(currMesh->getMaterialName());
+
             GLuint currTexId =  currentTex->getGlTexture();
             glm::vec4 dColor = currentTex->getDiffuseColor();
             glm::vec4 aColor = currentTex->getAmbientColor();
             glm::vec4 sColor = currentTex->getSpecularColor();
             GLfloat shininess = currentTex->getShininess();
 
-            aColor = glm::vec4(1,1,1,1);
-
             program->setUniformInt("hasTexture", currentTex->hasTexture);
             program->setUniformInt("texture_diffuse1", 0);
             program->setUniform("color_diffuse", dColor.r, dColor.g, dColor.b);
-            //program->setUniform("color_ambiant", aColor.r, aColor.g, aColor.b);
+
+            program->setUniform("color_ambiant", aColor.r, aColor.g, aColor.b);
             program->setUniform("color_specular", sColor.r, sColor.g, sColor.b);
             program->setUniform("shininess", shininess);
 

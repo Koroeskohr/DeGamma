@@ -42,7 +42,7 @@ namespace glimac {
         Program* getCurrentProgram ();
 
         void addPointLight(Light * light);
-        void setDirLight();
+        void setDirLight(glm::vec3 dir, glm::vec3 color);
         std::vector<Light*> & getPointLights();
         void createLightsUniforms();
 
