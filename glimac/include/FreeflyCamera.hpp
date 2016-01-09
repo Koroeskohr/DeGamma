@@ -29,6 +29,7 @@ public:
     glm::mat4 getProjectionMatrix() const;
 
 
+    void moveUp (float t);
 };
 
 
