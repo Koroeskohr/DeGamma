@@ -6,6 +6,7 @@
 #define DEGAMMA_LIGHT_HPP
 
 #include "glm.hpp"
+#include <iostream>
 
 namespace glimac{
     class Light {
@@ -18,6 +19,8 @@ namespace glimac{
 
         Light();
         Light(glm::vec3 pos, glm::vec3 color);
+
+        ~Light();
 
         glm::vec3 getLightPos() const;
         glm::vec3 getLightColor() const;

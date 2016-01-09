@@ -15,11 +15,11 @@ namespace glimac{
               lightColor(color)
     { }
 
-    glm::vec3 Light::getLightPos() const{
+    glm::vec3 Light::getLightPos() const {
         return lightPos;
     }
 
-    glm::vec3 Light::getLightColor() const{
+    glm::vec3 Light::getLightColor() const {
         return lightColor;
     }
 
@@ -31,6 +31,9 @@ namespace glimac{
         lightColor = color;
     }
 
+    Light::~Light () {
+        std::cout << "Light deleted";
+    }
 }
 
 
