@@ -27,17 +27,13 @@ public:
     void draw(Program * program);
     std::vector<Mesh*> mMeshes;
 
-
-
 private:
     void loadMaterials(const aiScene* scene, const std::string & directory);
     void loadMeshes(const aiScene* scene);
-    void processNode(aiNode* node, const aiScene* scene);
 
     glm::vec3 aiToGlm(const aiColor3D& c);
 
     std::map<std::string, Texture*> mTextures;
-
     std::map<int, std::string> mTexCorrespondanceMap;
 };
 
