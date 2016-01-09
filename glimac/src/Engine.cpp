@@ -60,8 +60,8 @@ Engine::Engine()
     mCurrentScene->getRenderables().at(2)->setScale(0.2);
     */
 
-    mCurrentScene->addPointLight(new Light(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
-    mCurrentScene->addPointLight(new Light(glm::vec3(0.0f, 0.0f, -10.0f), glm::vec3(1.0f, 0.0f, 0.0f)));
+   /* mCurrentScene->addPointLight(new Light(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
+    mCurrentScene->addPointLight(new Light(glm::vec3(0.0f, 0.0f, -10.0f), glm::vec3(1.0f, 0.0f, 0.0f)));*/
 
     std::cout << "creating lights uniforms" << std::endl;
     mCurrentScene->createLightsUniforms();
@@ -124,14 +124,14 @@ void Engine::loop () {
         else if (getWindowManager()->isKeyPressed(SDLK_d))
             mCurrentScene->getCamera()->moveLeft(-0.25f);
 
-        if(getWindowManager()->isKeyPressed(SDLK_LSHIFT))
+        /*if(getWindowManager()->isKeyPressed(SDLK_LSHIFT))
             mCurrentScene->getCamera()->moveUp(0.25f);
 
         if(getWindowManager()->isKeyPressed(SDLK_LCTRL))
-            mCurrentScene->getCamera()->moveUp(-0.25f);
+            mCurrentScene->getCamera()->moveUp(-0.25f);*/
 
-        if(getWindowManager()->isKeyPressed(SDLK_a))
-            mCurrentScene->getCamera()->lookAt(mCurrentScene->getRenderables().at(0)->getTransform().position);
+        //if(getWindowManager()->isKeyPressed(SDLK_a))
+        //    mCurrentScene->getCamera()->lookAt(mCurrentScene->getRenderables().at(0)->getTransform().position);
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         //mCurrentScene->update();

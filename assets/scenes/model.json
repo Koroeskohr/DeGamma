@@ -65,27 +65,12 @@
         "y": 1.0,
         "z": 1.0
       }
-    },
-    {
-      "type": "cottage",
-      "position": {
-        "x": 0.0,
-        "y": 1.0,
-        "z": -5.0
-      },
-      "rotation": {
-        "x": 0.0,
-        "y": 1.0,
-        "z": 0.0
-      },
-      "scale": {
-        "x": 1.0,
-        "y": 1.0,
-        "z": 1.0
-      }
     }
+
   ],
+
   "lights": {
+
     "point": [
       {
         "position": {
@@ -93,7 +78,11 @@
           "y": 1.0,
           "z": 0.0
         },
-        "intensity": 6.0
+        "color": {
+          "r": 1.0,
+          "g": 0.0,
+          "b": 0.0
+        }
       },
       {
         "position": {
@@ -101,43 +90,34 @@
           "y": 1.0,
           "z": 0.0
         },
-        "intensity": 2.3
+        "color": {
+          "r": 1.0,
+          "g": 0.0,
+          "b": 0.0
+        }
       }
     ],
-    "directional": [
-      {
-        "position": {
-          "x": 0.0,
-          "y": 1.0,
-          "z": 0.0
-        },
-        "rotation": {
-          "x": 0.0,
-          "y": 1.0,
-          "z": 0.0
-        },
-        "intensity": 6.0
+
+    "directional":
+    {
+      "direction": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
       },
-      {
-        "position": {
-          "x": 0.0,
-          "y": 1.0,
-          "z": 0.0
-        },
-        "rotation": {
-          "x": 0.0,
-          "y": 1.0,
-          "z": 0.0
-        },
-        "intensity": 6.0
+      "color": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
       }
-    ]
+    }
+
   },
   "programs": [
     {
-      "name": "blinnphong",
-      "vs_path": "shaders/bp.vs.glsl",
-      "fs_path": "shaders/bp.fs.glsl"
+      "name": "3D",
+      "vs_path": "shaders/3D.vs.glsl",
+      "fs_path": "shaders/3D.fs.glsl"
     }
   ]
 }

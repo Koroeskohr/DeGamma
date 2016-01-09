@@ -82,11 +82,10 @@ namespace glimac{
     }
 
     Scene::Scene (std::string &path)
-        : Scene()
-    {
+        : Scene() {
         std::string fullPath = "assets/scenes/" + path;
         std::ifstream ifs(fullPath);
-        if(!ifs.is_open())
+        if (!ifs.is_open())
             throw std::runtime_error("couldnt load file");
 
         std::stringstream buffer;
@@ -94,62 +93,60 @@ namespace glimac{
         Document document;
         document.Parse(buffer.str().c_str());
 
-        const Value& camera = document["camera"];
-        const Value& models = document["models"];
-        const Value& dirLights = document["lights"]["directional"];
-        const Value& pointLights = document["lights"]["point"];
-        const Value& programs = document["programs"];
+        const Value &camera = document["camera"];
+        const Value &models = document["models"];
+        const Value &dirLights = document["lights"]["directional"];
+        const Value &pointLights = document["lights"]["point"];
+        const Value &programs = document["programs"];
 
         // 1/5 : set Camera position
-        mCamera->setPosition(camera["position"]["x"].GetDouble(), camera["position"]["y"].GetDouble(), camera["position"]["z"].GetDouble());
+        mCamera->setPosition(camera["position"]["x"].GetDouble(), camera["position"]["y"].GetDouble(),
+                             camera["position"]["z"].GetDouble());
 
         // 2/5 : create renderables
-        for (SizeType i = 0; i < models.Size(); ++i)
-        {
-            const Value & pos = models[i]["position"];
-            const Value & scale = models[i]["scale"];
+        for (SizeType i = 0; i < models.Size(); ++i) {
+            const Value &pos = models[i]["position"];
+            const Value &scale = models[i]["scale"];
             std::string type = models[i]["type"].GetString();
-            Renderable* r = RenderableFactory::getByName(type);
+            Renderable *r = RenderableFactory::getByName(type);
 
             r->setPosition(glm::vec3(pos["x"].GetDouble(), pos["y"].GetDouble(), pos["z"].GetDouble()));
             //r->setRotation();
             r->setScale(glm::vec3(scale["x"].GetDouble(), scale["y"].GetDouble(), scale["z"].GetDouble()));
             addRenderable(r);
         }
+        std::cout << "added renderables" << std::endl;
 
         // 3/5 : create dir lights
-        for (SizeType i = 0; i < dirLights.Size(); ++i)
-        {
-            const Value & pos = dirLights[i]["position"];
-            const Value & rot = dirLights[i]["rotation"];
-            double intensity = dirLights[i]["intensity"].GetDouble();
 
-            glm::vec3 posVec = glm::vec3(pos["x"].GetDouble(),
-                                         pos["y"].GetDouble(),
-                                         pos["z"].GetDouble());
-            //Light * light = nullptr;
+            setDirLight(glm::vec3(dirLights["direction"]["x"].GetDouble(),
+                                  dirLights["direction"]["y"].GetDouble(),
+                                  dirLights["direction"]["z"].GetDouble()),
+                        glm::vec3(1.0f, 1.0f, 1.0f));
 
-            //light = new DirectionalLight(posVec, rotMat, intensity);
-            //addLight(light);
-        }
+        std::cout << "added dirLight" << std::endl;
 
         // 4/5 : create points lights
-        for (SizeType i = 0; i < dirLights.Size(); ++i)
-        {
-            const Value & pos = dirLights[i]["position"];
-            double intensity = dirLights[i]["intensity"].GetDouble();
+        for (SizeType i = 0; i < pointLights.Size(); i++) {
+            const Value &pos = pointLights[i]["position"];
+            const Value &col = pointLights[i]["color"];
+            //double intensity = dirLights[i]["intensity"].GetDouble();
 
             glm::vec3 posVec = glm::vec3(pos["x"].GetDouble(),
                                          pos["y"].GetDouble(),
                                          pos["z"].GetDouble());
-            //Light * light = nullptr;
+            glm::vec3 colVec = glm::vec3(col["r"].GetDouble(),
+                                         col["g"].GetDouble(),
+                                         col["b"].GetDouble());
+            Light * light = nullptr;
 
-            //light = new PointLight(posVec, intensity);
-            //addLight(light);
+            light = new Light(posVec, colVec);
+            mPointLights.push_back(light);
         }
 
+        std::cout << "added lights from the scene" << std::endl;
         //5/5 : create programs
-        /*
+
         for (SizeType i = 0; i < programs.Size(); ++i)
         {
             std::string name = programs[i]["name"].GetString();
@@ -159,15 +156,19 @@ namespace glimac{
             Program * p = loadProgram(vs_path.c_str(), fs_path.c_str());
             addProgram(p);
         }
-         */
+
+        std::cout << "added everything from the scene" << std::endl;
+
+    }
 
 
     std::vector<Light *> & Scene::getPointLights(){
         return mPointLights;
     }
 
-    void Scene::setDirLight() {
-
+    void Scene::setDirLight(glm::vec3 dir, glm::vec3 color) {
+        mDirLight->setLightPos(dir);
+        mDirLight->setLightColor(color);
     }
 
 

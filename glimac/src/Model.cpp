@@ -12,8 +12,9 @@ namespace glimac {
     Model::Model(const std::string &fileName) {
         Assimp::Importer importer;
         const aiScene *scene = importer.ReadFile(fileName, aiProcess_Triangulate | aiProcess_FlipUVs);
-        if(const char * error = importer.GetErrorString() )
-        std::cout << "%%%%%% There might be an error in parsing: " << importer.GetErrorString() << std::endl;
+        if(const char * error = importer.GetErrorString() ){
+            std::cout << "%%%%%% There might be an error in parsing: " << importer.GetErrorString() << std::endl;
+        }
         std::cout << fileName << std::endl;
         std::size_t lastSlash = fileName.find_last_of("/\\");
         std::string dir = fileName.substr(0,lastSlash+1);
@@ -28,7 +29,7 @@ namespace glimac {
             loadMeshes(scene);
         }
 
-        std::cout << "loaded cube meshes" << std::endl;
+
     }
 
     Model::~Model() {
@@ -179,27 +180,23 @@ namespace glimac {
 
             //TODO : a better way than this one to deal with things with no textures
             Texture* currentTex = mTextures.at(currMesh->getMaterialName());
-            GLuint currTexId =  currentTex->getGlTexture();
-            glm::vec4 dColor = currentTex->getDiffuseColor();
+            //GLuint currTexId =  currentTex->getGlTexture();
+            //glm::vec4 dColor = currentTex->getDiffuseColor();
 
-            GLuint currTexId =  mTextures.at(currMesh->mMaterialName)->getGlTexture();
-            glm::vec4 dColor = mTextures.at(currMesh->mMaterialName)->getDiffuseColor();
-            glm::vec4 aColor = mTextures.at(currMesh->mMaterialName)->getAmbientColor();
-            glm::vec4 sColor = mTextures.at(currMesh->mMaterialName)->getSpecularColor();
-            GLfloat shininess = mTextures.at(currMesh->mMaterialName)->getShininess();
+            GLuint currTexId =  mTextures.at(currMesh->getMaterialName())->getGlTexture();
+            glm::vec4 dColor = mTextures.at(currMesh->getMaterialName())->getDiffuseColor();
+            glm::vec4 aColor = mTextures.at(currMesh->getMaterialName())->getAmbientColor();
+            glm::vec4 sColor = mTextures.at(currMesh->getMaterialName())->getSpecularColor();
+            GLfloat shininess = mTextures.at(currMesh->getMaterialName())->getShininess();
 
 
             program->setUniformInt("hasTexture", currentTex->hasTexture);
             program->setUniformInt("texture_diffuse1", 0);
             program->setUniform("color_diffuse", dColor.r, dColor.g, dColor.b);
+            program->setUniform("color_ambiant", aColor.r, aColor.g, aColor.b);
+            program->setUniform("color_specular", sColor.r, sColor.g, sColor.b);
 
-
-            glUniform1i(glGetUniformLocation(program, "texture_diffuse1"), 0);
-
-            glUniform3f(glGetUniformLocation(program, "color_diffuse"), dColor.r, dColor.g, dColor.b);
-            glUniform3f(glGetUniformLocation(program, "color_ambiant"), aColor.r, aColor.g, aColor.b);
-            glUniform3f(glGetUniformLocation(program, "color_specular"), sColor.r, sColor.g, sColor.b);
-            glUniform1f(glGetUniformLocation(program, "shininess"), shininess);
+            //glUniform1i(glGetUniformLocation(program, "texture_diffuse1"), 0);
 
 
             glBindTexture(GL_TEXTURE_2D, currTexId);
