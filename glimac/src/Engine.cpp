@@ -70,7 +70,7 @@ Engine::Engine()
 
 Engine::~Engine(){
     //TODO
-    delete mCurrentScene;
+    mCurrentScene.reset(nullptr);
 
     std::cout << "Engine deleted" << std::endl;
 }
@@ -145,11 +145,15 @@ void Engine::loop () {
 }
 
 void Engine::loadSceneFromFile (std::string & path) {
-    //TODO : handle scene deletion
-    if(mCurrentScene != nullptr)
-        delete mCurrentScene;
+    Scene * scene = new Scene(path);
 
-    mCurrentScene = new Scene(path);
+    if(mCurrentScene != nullptr) {
+        mCurrentScene.reset(scene);
+    } else {
+        mCurrentScene = std::unique_ptr<Scene>(scene);
+    }
+
+
 }
 
 std::unique_ptr<SDLWindowManager> const &Engine::getWindowManager () {

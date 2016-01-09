@@ -48,7 +48,7 @@ private:
     Engine();
     void createManagers();
 
-    Scene* mCurrentScene;
+    std::unique_ptr<Scene> mCurrentScene;
 
     std::unique_ptr<ResourceManager> mResourceManager;
     std::unique_ptr<SDLWindowManager> mWindowManager;
