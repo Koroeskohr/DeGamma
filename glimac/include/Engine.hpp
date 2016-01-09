@@ -14,9 +14,7 @@
 #include "SDLWindowManager.hpp"
 #include "ResourceManager.hpp"
 #include "TimeManager.hpp"
-
 #include "Scene.hpp"
-
 #include "Program.hpp"
 #include "FreeflyCamera.hpp"
 

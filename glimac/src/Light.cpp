@@ -31,9 +31,8 @@ namespace glimac{
         lightColor = color;
     }
 
-    Light::~Light () {
-        std::cout << "Light deleted";
-    }
+    Light::~Light ()
+    { }
 }
 
 

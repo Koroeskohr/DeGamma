@@ -53,9 +53,6 @@ namespace glimac {
             aiMesh * currMesh = scene->mMeshes[i];
             const aiMaterial *material = scene->mMaterials[currMesh->mMaterialIndex];
 
-
-            //TODO : make this nicer by using a filepath
-            //TODO : only works for nanosuit though
             std::string fullPath = directory;
             std::cout << fullPath << std::endl;
 

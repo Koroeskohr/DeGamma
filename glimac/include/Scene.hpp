@@ -33,7 +33,6 @@ namespace glimac {
         void addRenderable(Renderable * renderable);
         std::vector<Renderable*> & getRenderables();
 
-        //void setCamera(const FreeflyCamera& camera);
         FreeflyCamera * getCamera();
 
         void addProgram(Program * program);
@@ -48,13 +47,12 @@ namespace glimac {
 
     private:
         std::vector<Renderable*> mRenderables;
-        //TODO : std::vector<Light*> mLights;
-        FreeflyCamera * mCamera;
-
-        Program* mCurrentProgram;
         std::vector<Program*> mPrograms;
         std::vector<Light*> mPointLights;
+        FreeflyCamera * mCamera;
+        Program* mCurrentProgram;
         Light * mDirLight;
+
         void loadPrograms();
     };
 

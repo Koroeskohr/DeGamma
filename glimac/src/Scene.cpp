@@ -13,10 +13,8 @@ namespace glimac{
         std::cout << "Program added has ID " << mPrograms.at(0)->getGLId() << std::endl;
         setProgram(mPrograms.at(0));
 
-
         mCurrentProgram->setUniformMatrix4("projection", mCamera->getProjectionMatrix());
         mDirLight = new Light(glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
-
     }
 
     Scene::~Scene () {
@@ -30,6 +28,10 @@ namespace glimac{
         for(auto light: mPointLights){
             delete light;
         }
+
+        delete mDirLight;
+        delete mCamera;
+
     }
 
     void Scene::update () {
@@ -41,7 +43,6 @@ namespace glimac{
     void Scene::render () {
         glm::mat4 view = mCamera->getViewMatrix();
         mCurrentProgram->setUniformMatrix4("view", view);
-
 
         for(auto renderable: mRenderables){
             renderable->render(mCurrentProgram);
@@ -60,8 +61,6 @@ namespace glimac{
         //TODO : more shaders ?
         Program * p  = glimac::loadProgram("shaders/3D.vs.glsl", "shaders/3D.fs.glsl");
         addProgram(p);
-        std::cout << "mprograms has " << mPrograms.size() << std::endl;
-
     }
 
     void Scene::addProgram (Program * program) {
@@ -178,7 +177,7 @@ namespace glimac{
         //POINT LIGHTS
         mCurrentProgram->setUniformInt("nbPointLights", mPointLights.size());
 
-        for(int i = 0; i < mPointLights.size(); i++){
+        for(unsigned int i = 0; i < mPointLights.size(); i++){
 
             std::string currUniformName = "lights[";
             currUniformName += std::to_string(i);

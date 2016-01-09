@@ -19,7 +19,6 @@ Engine* Engine::getInstance() {
     return mInstance;
 }
 
-//TODO : add timemanager
 Engine::Engine()
         : mWindowManager(),
           mResourceManager(),
@@ -62,16 +61,10 @@ Engine::Engine()
 
     std::cout << "creating lights uniforms" << std::endl;
     mCurrentScene->createLightsUniforms();
-
-
-    //TODO : start timers
-
 }
 
 Engine::~Engine(){
-    //TODO
     mCurrentScene.reset(nullptr);
-
     std::cout << "Engine deleted" << std::endl;
 }
 
