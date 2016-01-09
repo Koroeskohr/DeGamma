@@ -191,10 +191,9 @@ namespace glimac {
             program->setUniformInt("hasTexture", currentTex->hasTexture);
             program->setUniformInt("texture_diffuse1", 0);
             program->setUniform("color_diffuse", dColor.r, dColor.g, dColor.b);
-
             //program->setUniform("color_ambiant", aColor.r, aColor.g, aColor.b);
             program->setUniform("color_specular", sColor.r, sColor.g, sColor.b);
-            program->setUniform("shininess", shininess);
+            //program->setUniform("shininess", shininess);
 
             glBindTexture(GL_TEXTURE_2D, currTexId);
             glBindVertexArray(currMesh->getVAOid());
