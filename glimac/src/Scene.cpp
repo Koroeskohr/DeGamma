@@ -142,10 +142,7 @@ namespace glimac{
             glm::vec3 colVec = glm::vec3(col["r"].GetDouble(),
                                          col["g"].GetDouble(),
                                          col["b"].GetDouble());
-            Light * light = nullptr;
-
-            light = new Light(posVec, colVec);
-            mPointLights.push_back(light);
+            addPointLight(new Light(posVec, colVec));
         }
 
         std::cout << "added lights from the scene" << std::endl;
@@ -172,8 +169,6 @@ namespace glimac{
         mDirLight->setLightColor(color);
     }
 
-
-
     void Scene::createLightsUniforms() {
 
         //DIRECTIONAL LIGHT
@@ -183,7 +178,7 @@ namespace glimac{
         //POINT LIGHTS
         mCurrentProgram->setUniformInt("nbPointLights", mPointLights.size());
 
-        for(int i = 0; i<mPointLights.size(); i++){
+        for(int i = 0; i < mPointLights.size(); i++){
 
             std::string currUniformName = "lights[";
             currUniformName += std::to_string(i);
@@ -192,7 +187,6 @@ namespace glimac{
             std::string uniformPos = (currUniformName+"].lightPos").c_str();
 
             mCurrentProgram->setUniform(uniformColor.c_str(), mPointLights[i]->getLightColor());
-
             mCurrentProgram->setUniform(uniformPos.c_str(), mPointLights[i]->getLightPos());
 
         }

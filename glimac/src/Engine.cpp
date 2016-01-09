@@ -43,7 +43,6 @@ Engine::Engine()
     glDepthFunc(GL_LEQUAL);
     glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 
-    Light * myLight = new Light();
 
     //glPolygonMode( GL_FRONT_AND_BACK, GL_LINE ); // TODO : remove, it displays meshes as wireframe
 
@@ -60,9 +59,6 @@ Engine::Engine()
     mCurrentScene->getRenderables().at(1)->setScale(0.2);
     mCurrentScene->getRenderables().at(2)->setScale(0.2);
     */
-
-   /* mCurrentScene->addPointLight(new Light(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
-    mCurrentScene->addPointLight(new Light(glm::vec3(0.0f, 0.0f, -10.0f), glm::vec3(1.0f, 0.0f, 0.0f)));*/
 
     std::cout << "creating lights uniforms" << std::endl;
     mCurrentScene->createLightsUniforms();
