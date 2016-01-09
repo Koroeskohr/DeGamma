@@ -30,11 +30,7 @@ namespace glimac {
                 throw std::runtime_error("Wrong model id input");
         }
     }
-
-    const aiScene* ResourceManager::import (std::string str) {
-        Assimp::Importer importer;
-        return importer.ReadFile(str, aiProcessPreset_TargetRealtime_Fast);
-    }
+    
 
     Model *ResourceManager::getModel (const int modelId) {
         long modelCount = mModelsMap.count(modelId);
@@ -46,12 +42,10 @@ namespace glimac {
             throw std::runtime_error(errorMessage.str());
         }
         else if(modelCount == 0){
-            std::cout << "----RM::getmodel, about to make a model" << std::endl;
             model = makeModel(modelId);
             mModelsMap.insert(std::make_pair(modelId, model));
         }
         else {
-            std::cout << "----RM::getmodel, sending back " << modelId << std::endl;
             model = mModelsMap.at(modelId);
         }
 

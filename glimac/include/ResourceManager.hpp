@@ -24,11 +24,6 @@ public:
 
     ~ResourceManager ();
 
-    /*
-     * Let's not have multiple importer since one is enough
-     */
-    static const aiScene* import(std::string str);
-
     enum Models { AIRBOAT, COTTAGE } ;
 
     /*
