@@ -135,6 +135,8 @@ void Engine::loop () {
             mCurrentScene->getCamera()->lookAt(mCurrentScene->getRenderables().at(0)->getTransform().position);
             */
 
+        difference = glm::ivec2(0,0);
+
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         //mCurrentScene->update();
         mCurrentScene->render();
