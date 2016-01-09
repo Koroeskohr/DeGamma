@@ -26,6 +26,9 @@ namespace glimac{
         for(auto program: mPrograms){
             delete program;
         }
+        for(auto light: mPointLights){
+            delete light;
+        }
     }
 
     void Scene::update () {
