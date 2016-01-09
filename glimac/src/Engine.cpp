@@ -114,6 +114,15 @@ void Engine::loop () {
         else if (getWindowManager()->isKeyPressed(SDLK_d))
             mCurrentScene->getCamera()->moveLeft(-0.25f);
 
+        if(getWindowManager()->isKeyPressed(SDLK_LSHIFT))
+            mCurrentScene->getCamera()->moveUp(0.25f);
+
+        if(getWindowManager()->isKeyPressed(SDLK_LCTRL))
+            mCurrentScene->getCamera()->moveUp(-0.25f);
+
+        if(getWindowManager()->isKeyPressed(SDLK_a))
+            mCurrentScene->getCamera()->lookAt(mCurrentScene->getRenderables().at(0)->getTransform().position);
+
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         //mCurrentScene->update();
         mCurrentScene->render();
