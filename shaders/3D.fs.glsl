@@ -1,5 +1,15 @@
 #version 330 core
 
+struct Light{
+    vec3 lightPos;
+    vec3 lightColor;
+};
+
+struct dirLight{
+    vec3 lightDir;
+    vec3 lightColor;
+};
+
 in vec2 vTexCoords;
 in vec3 vFragPos;
 in vec3 vNormal;
@@ -13,65 +23,95 @@ uniform vec3 color_ambiant;
 uniform vec3 color_specular;
 uniform float shininess;
 
-uniform vec3 lightPos;
-uniform vec3 lightColor;
+uniform int nbPointLights;
+uniform Light lights[100];
+uniform dirLight myDirLight;
 
 uniform int hasTexture;
 
+vec3 calcPointLight(Light light, vec3 normal, vec3 fragPos, vec3 viewDir){
 
-void main()
-{
-
-    vec3 colorD = color_diffuse;
-
-    //this should be in the scene :)
-    vec3 colorA = vec3(1.0f, 1.0f, 1.0f);
-    vec4 colorS = vec4(color_specular, 1.0f);
-    // TO ADD IN THE LIGHT CLASS : floats about a point light
     float constant = 1.0f;
     float linear = 0.09f;
     float quadratic = 0.032f;
+
+    vec3 objectColor;
+    if(hasTexture==1)
+        objectColor = vec3(texture(texture_diffuse1, vTexCoords));
+    else
+        objectColor = color_diffuse;
+
+    vec3 lightPos = light.lightPos;
+    vec3 lightColor = light.lightColor;
+    vec3 lightDir = normalize(lightPos - vFragPos);
+    float diff = max(dot(normal, lightDir), 0.0);
+    vec3 reflectDir = reflect(-lightDir, normal);
+
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), shininess);
+
+    //specular stuff
+
+    float specularStrength = 0.5;
 
     float distance    = length(lightPos - vFragPos);
     float attenuation = 1.0f / (constant + linear * distance +
                                 quadratic * (distance * distance));
 
 
+    //setting colors
 
+    vec3 ambient  = lightColor * objectColor;
+    vec3 diffuse  = lightColor * diff * objectColor;
+    vec3 specular = spec * color_specular;
 
-    vec4 result;
-    if(hasTexture==1){
-        result = vec4(texture(texture_diffuse1, vTexCoords));
-    }
-    else{
-        result = vec4(colorD,1);
-    }
-
-    //diffuse lightning
-    vec4 lightColor = vec4(1.0f, 1.0f, 1.0f, 1.0f);
-    vec3 norm = normalize(vNormal);
-    vec3 lightDir = normalize(lightPos - vFragPos);
-    float diff = max(dot(norm, lightDir), 0.0);
-    vec4 diffuse = diff * lightColor;
-
-    //specular stuff
-
-    float specularStrength = 0.5;
-    vec3 viewDir = normalize(vView - vFragPos);
-    vec3 reflectDir = reflect(-lightDir, norm);
-
-    float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
-    vec4 specular = specularStrength * spec * colorS;
-
-    vec4 ambiant = vec4(colorA, 1.0f);
-
-    //end calculations
-    result *= attenuation;
-    ambiant *= attenuation;
+    ambient *= attenuation;
     diffuse *= attenuation;
     specular *= attenuation;
 
-    result = result * (diffuse + specular + ambiant);
+    return (ambient+diffuse+specular);
 
-    color = result;
 }
+
+vec3 CalcDirLight(dirLight light, vec3 normal, vec3 viewDir){
+
+    vec3 objectColor;
+    if(hasTexture==1)
+        objectColor = vec3(texture(texture_diffuse1, vTexCoords));
+    else
+        objectColor = color_diffuse;
+
+
+    vec3 lightDir = normalize(-light.lightDir);
+    // Diffuse shading
+    float diff = max(dot(normal, lightDir), 0.0);
+    // Specular shading
+    vec3 reflectDir = reflect(-lightDir, normal);
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
+    // Combine results
+    vec3 ambient  = light.lightColor  * objectColor;
+    vec3 diffuse  = light.lightColor  * diff * objectColor;
+    vec3 specular = light.lightColor * spec * objectColor;
+    return (ambient + diffuse + specular);
+}
+
+
+void main()
+{
+
+
+
+    //stuff for every light
+    vec3 normal = normalize(vNormal);
+    vec3 viewDir = normalize(vView - vFragPos);
+
+    vec3 result = CalcDirLight(myDirLight, normal, viewDir);
+
+
+    for(int i = 0; i < nbPointLights; i++)
+        result += calcPointLight(lights[i], normal, vFragPos, viewDir);
+
+
+
+    color = vec4(result, 1.0f);
+}
+

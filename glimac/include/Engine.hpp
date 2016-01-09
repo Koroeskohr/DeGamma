@@ -18,7 +18,6 @@
 #include "Scene.hpp"
 #include "Renderable.hpp"
 #include "app/include/renderables/renderables.hpp"
-#include "Light.hpp"
 
 using namespace glimac;
 class Engine {

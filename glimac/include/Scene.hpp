@@ -10,6 +10,7 @@
 #include "FreeflyCamera.hpp"
 #include "Light.hpp"
 
+
 #include <vector>
 
 namespace glimac {
@@ -24,7 +25,6 @@ namespace glimac {
 
         void addRenderable(Renderable * renderable);
         std::vector<Renderable*> & getRenderables();
-        std::vector<Light*> & getLights();
 
         //TODO : void addLight(const Light& light);
         //void setCamera(const FreeflyCamera& camera);
@@ -32,9 +32,12 @@ namespace glimac {
 
         void addProgram(Program * program);
         void setProgram(Program * program);
-
-        void addLight(Light * light);
         Program* getCurrentProgram ();
+
+        void addPointLight(Light * light);
+        void setDirLight();
+        std::vector<Light*> & getPointLights();
+        void createLightsUniforms();
 
 
     private:
@@ -44,7 +47,8 @@ namespace glimac {
 
         Program* mCurrentProgram;
         std::vector<Program*> mPrograms;
-        std::vector<Light*> mLights;
+        std::vector<Light*> mPointLights;
+        Light * mDirLight;
         void loadPrograms();
     };
 

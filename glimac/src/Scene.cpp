@@ -15,11 +15,8 @@ namespace glimac{
 
 
         mCurrentProgram->setUniformMatrix4("projection", mCamera->getProjectionMatrix());
+        mDirLight = new Light(glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
 
-       // mCurrentProgram->setUniform("lightPos", mLights[0]->getLightPos());
-       // mCurrentProgram->setUniform("lightColor", mLights[0]->getLightColor());
-        //mCurrentProgram->setUniform("lightPos", glm::vec3(0.0f, -1.75f, -2.0f));
-        //mCamera->moveFront(-1.0f);
     }
 
     Scene::~Scene () {
@@ -41,6 +38,7 @@ namespace glimac{
         glm::mat4 view = mCamera->getViewMatrix();
         mCurrentProgram->setUniformMatrix4("view", view);
 
+
         for(auto renderable: mRenderables){
             renderable->render(mCurrentProgram);
         }
@@ -50,8 +48,8 @@ namespace glimac{
         mRenderables.push_back(renderable);
     }
 
-    void Scene::addLight(Light * light){
-        mLights.push_back(light);
+    void Scene::addPointLight(Light * light){
+        mPointLights.push_back(light);
     }
 
     void Scene::loadPrograms () {
@@ -59,6 +57,7 @@ namespace glimac{
         Program * p  = glimac::loadProgram("shaders/3D.vs.glsl", "shaders/3D.fs.glsl");
         addProgram(p);
         std::cout << "mprograms has " << mPrograms.size() << std::endl;
+
     }
 
     void Scene::addProgram (Program * program) {
@@ -81,7 +80,38 @@ namespace glimac{
     std::vector<Renderable *> & Scene::getRenderables () {
         return mRenderables;
     }
-    std::vector<Light *> & Scene::getLights() {
-        return mLights;
+
+    std::vector<Light *> & Scene::getPointLights(){
+        return mPointLights;
+    }
+
+    void Scene::setDirLight() {
+
+    }
+
+
+
+    void Scene::createLightsUniforms() {
+
+        //DIRECTIONAL LIGHT
+        mCurrentProgram->setUniform("myDirLight.lightDir", mDirLight->getLightPos());
+        mCurrentProgram->setUniform("myDirLight.lightColor", mDirLight->getLightColor());
+
+        //POINT LIGHTS
+        mCurrentProgram->setUniformInt("nbPointLights", mPointLights.size());
+
+        for(int i = 0; i<mPointLights.size(); i++){
+
+            std::string currUniformName = "lights[";
+            currUniformName += std::to_string(i);
+
+            const char * uniformColor = (currUniformName+"].lightColor").c_str();
+            const char * uniformPos = (currUniformName+"].lightPos").c_str();
+
+            mCurrentProgram->setUniform(uniformColor, mPointLights[i]->getLightColor());
+
+            mCurrentProgram->setUniform(uniformPos, mPointLights[i]->getLightPos());
+
+        }
     }
 }
