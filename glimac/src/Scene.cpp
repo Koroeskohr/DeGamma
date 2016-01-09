@@ -187,12 +187,12 @@ namespace glimac{
             std::string currUniformName = "lights[";
             currUniformName += std::to_string(i);
 
-            const char * uniformColor = (currUniformName+"].lightColor").c_str();
-            const char * uniformPos = (currUniformName+"].lightPos").c_str();
+            std::string uniformColor = (currUniformName+"].lightColor").c_str();
+            std::string uniformPos = (currUniformName+"].lightPos").c_str();
 
-            mCurrentProgram->setUniform(uniformColor, mPointLights[i]->getLightColor());
+            mCurrentProgram->setUniform(uniformColor.c_str(), mPointLights[i]->getLightColor());
 
-            mCurrentProgram->setUniform(uniformPos, mPointLights[i]->getLightPos());
+            mCurrentProgram->setUniform(uniformPos.c_str(), mPointLights[i]->getLightPos());
 
         }
     }
