@@ -19,7 +19,7 @@ out vec4 color;
 
 uniform sampler2D texture_diffuse1;
 uniform vec3 color_diffuse;
-uniform vec3 color_ambiant;
+//uniform vec3 color_ambiant;
 uniform vec3 color_specular;
 uniform float shininess;
 
@@ -47,11 +47,11 @@ vec3 calcPointLight(Light light, vec3 normal, vec3 fragPos, vec3 viewDir){
     float diff = max(dot(normal, lightDir), 0.0);
     vec3 reflectDir = reflect(-lightDir, normal);
 
-    float spec = pow(max(dot(viewDir, reflectDir), 0.0), shininess);
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
 
     //specular stuff
 
-    float specularStrength = 0.5;
+    float specularStrength = 0.5f;
 
     float distance    = length(lightPos - vFragPos);
     float attenuation = 1.0f / (constant + linear * distance +
@@ -90,7 +90,7 @@ vec3 CalcDirLight(dirLight light, vec3 normal, vec3 viewDir){
     // Combine results
     vec3 ambient  = light.lightColor  * objectColor;
     vec3 diffuse  = light.lightColor  * diff * objectColor;
-    vec3 specular = light.lightColor * spec * objectColor;
+    vec3 specular = light.lightColor * spec * color_specular;
     return (ambient + diffuse + specular);
 }
 
