@@ -31,7 +31,8 @@ public:
                   LANTERN,
                   WALLCHAMBRE,
                   HOSPITALBED,
-                  FLOORGRASS } ;
+                  FLOORGRASS,
+                  WHEELCHAIR} ;
 
     /*
      * Model factory

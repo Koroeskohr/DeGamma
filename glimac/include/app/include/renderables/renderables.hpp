@@ -13,5 +13,6 @@
 #include "WallChambre.hpp"
 #include "HospitalBed.hpp"
 #include "FloorGrass.hpp"
+#include "Wheelchair.hpp"
 
 #endif //DEGAMMA_RENDERABLES_HPP
