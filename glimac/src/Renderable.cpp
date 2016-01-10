@@ -3,10 +3,11 @@
 namespace glimac {
 
     Renderable::Renderable(const int modelId, const glm::vec3& position)
-        : mModel(ResourceManager::getInstance()->getModel(modelId)),
+        : mModel(ModelManager::getInstance()->getModel(modelId)),
           mTransform(position)
     {
         std::cout << "New renderable with texture " << mModel << std::endl;
+        std::cout << "Model : " << mModel->mMeshes[0]->getVertices()[0].texCoords.x << std::endl;
     }
 
     Renderable::~Renderable () {

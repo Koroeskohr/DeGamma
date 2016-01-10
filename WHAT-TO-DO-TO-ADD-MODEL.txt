@@ -1,7 +1,7 @@
 1. Ajouter une sous-classe de Model (copier/coller AirboatModel et faire le nécessaire)
 2. Ajouter cette sous-classe dans glimac/app/include/models/models.hpp
-3. Ajouter une entrée dans l'énum de ResourceManager Models
-4. Ajouter une entrée dans ResourceManager::makeModel()
+3. Ajouter une entrée dans l'énum de ModelManager Models
+4. Ajouter une entrée dans ModelManager::makeModel()
 5. Ajouter une sous-classe de Renderable
 6. Ajouter cette sous-classe dans glimac/app/include/renderables/renderables.hpp
 7. Ajouter une entrée dans RenderableFactory::getByName

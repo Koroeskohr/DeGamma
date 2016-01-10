@@ -3,7 +3,7 @@
 #include <common.hpp>
 
 #include "Transform.hpp"
-#include "ResourceManager.hpp"
+#include "ModelManager.hpp"
 
 namespace glimac {
 class Model;

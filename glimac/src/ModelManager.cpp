@@ -2,28 +2,28 @@
 // Created by koro on 16/12/15.
 //
 
-#include "ResourceManager.hpp"
+#include "ModelManager.hpp"
 
-ResourceManager* ResourceManager::mInstance = nullptr;
+ModelManager *ModelManager::mInstance = nullptr;
 
 namespace glimac {
-    ResourceManager *ResourceManager::getInstance () {
+    ModelManager *ModelManager::getInstance () {
         if (!mInstance) {
-            mInstance = new ResourceManager;
+            mInstance = new ModelManager;
         }
         return mInstance;
     }
 
-    ResourceManager::ResourceManager ()
+    ModelManager::ModelManager ()
         : mModelsMap()
     { }
 
     // called by Renderable childs instances
-    Model* ResourceManager::makeModel(const int modelId){
+    Model*ModelManager::makeModel(const int modelId){
         switch(modelId){
-            case ResourceManager::AIRBOAT:
+            case ModelManager::AIRBOAT:
                 return new AirboatModel;
-            case ResourceManager::COTTAGE:
+            case ModelManager::COTTAGE:
                 return new CottageModel;
 
             default:
@@ -32,7 +32,7 @@ namespace glimac {
     }
 
 
-    Model *ResourceManager::getModel (const int modelId) {
+    Model *ModelManager::getModel (const int modelId) {
         long modelCount = mModelsMap.count(modelId);
         Model * model;
 
@@ -54,7 +54,7 @@ namespace glimac {
         return model;
     }
 
-    ResourceManager::~ResourceManager () {
+    ModelManager::~ModelManager () {
         std::cout << "Resource manager deleted";
     }
 }

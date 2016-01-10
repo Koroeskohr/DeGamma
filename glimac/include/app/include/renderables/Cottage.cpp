@@ -5,9 +5,9 @@
 #include "Cottage.hpp"
 
 Cottage::Cottage ()
-        : Renderable(ResourceManager::COTTAGE)
+        : Renderable(ModelManager::COTTAGE)
 { }
 
 Cottage::Cottage (glm::vec3 pos)
-        : Renderable(ResourceManager::COTTAGE, pos)
+        : Renderable(ModelManager::COTTAGE, pos)
 { }

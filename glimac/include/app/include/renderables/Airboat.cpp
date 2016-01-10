@@ -5,9 +5,9 @@
 #include "Airboat.hpp"
 
 Airboat::Airboat()
-    : Renderable(ResourceManager::AIRBOAT)
+    : Renderable(ModelManager::AIRBOAT)
 { }
 
 Airboat::Airboat(glm::vec3 pos)
-    : Renderable(ResourceManager::AIRBOAT, pos)
+    : Renderable(ModelManager::AIRBOAT, pos)
 { }

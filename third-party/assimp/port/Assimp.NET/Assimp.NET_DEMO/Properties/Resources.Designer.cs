@@ -24,7 +24,7 @@ namespace Assimp.Viewer.Properties {
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
         
-        private static global::System.Resources.ResourceManager resourceMan;
+        private static global::System.Resources.ModelManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
@@ -33,13 +33,13 @@ namespace Assimp.Viewer.Properties {
         }
         
         /// <summary>
-        ///   Returns the cached ResourceManager instance used by this class.
+        ///   Returns the cached ModelManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        internal static global::System.Resources.ModelManager ModelManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Assimp.Viewer.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ModelManager temp = new global::System.Resources.ModelManager("Assimp.Viewer.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

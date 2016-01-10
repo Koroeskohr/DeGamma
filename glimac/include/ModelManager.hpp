@@ -17,30 +17,30 @@
 
 namespace glimac {
 
-class ResourceManager {
+class ModelManager {
 
 public:
-    static ResourceManager* getInstance();
+    static ModelManager * getInstance();
 
-    ~ResourceManager ();
+    ~ModelManager ();
 
     enum Models { AIRBOAT, COTTAGE } ;
 
     /*
      * Model factory
      */
-    Model* getModel(const int modelId); //see ResourceManager::EModels enum
+    Model* getModel(const int modelId); //see ModelManager::EModels enum
 
     /*
      * No default copy constructor since it's a singleton
      */
-    ResourceManager(const ResourceManager&) = delete;
-    void operator=(const ResourceManager&) = delete;
+    ModelManager (const ModelManager &) = delete;
+    void operator=(const ModelManager &) = delete;
 
 
 private:
-    ResourceManager();
-    static ResourceManager* mInstance;
+    ModelManager ();
+    static ModelManager * mInstance;
 
     Model* makeModel(const int modelId);
     std::map<int, Model*> mModelsMap;

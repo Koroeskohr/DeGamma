@@ -65,7 +65,7 @@ Engine::~Engine(){
 }
 
 void Engine::createManagers () {
-    mResourceManager = std::unique_ptr<ResourceManager>(ResourceManager::getInstance());
+    mResourceManager = std::unique_ptr<ModelManager>(ModelManager::getInstance());
     mWindowManager = std::unique_ptr<SDLWindowManager>(
                          new SDLWindowManager(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME));
     mTimeManager = std::unique_ptr<TimeManager>(TimeManager::getInstance());
@@ -143,8 +143,8 @@ void Engine::loop () {
 void Engine::loadSceneFromFile (std::string & path) {
     std::cout << "--------- NEW SCENE ----------" << std::endl;
     Scene * scene = new Scene(path);
-    std::cout << "--------- DELETING PREVIOUS SCENE ----------" << std::endl;
     if(mCurrentScene != nullptr) {
+        std::cout << "--------- DELETING PREVIOUS SCENE ----------" << std::endl;
         mCurrentScene.reset(scene);
     } else {
         mCurrentScene = std::unique_ptr<Scene>(scene);
