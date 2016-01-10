@@ -5,7 +5,9 @@ namespace glimac {
     Renderable::Renderable(const int modelId, const glm::vec3& position)
         : mModel(ResourceManager::getInstance()->getModel(modelId)),
           mTransform(position)
-    { }
+    {
+        std::cout << "New renderable with texture " << mModel << std::endl;
+    }
 
     Renderable::~Renderable () {
         std::cout << "Renderable deleted" << std::endl;
