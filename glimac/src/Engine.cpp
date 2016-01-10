@@ -70,16 +70,13 @@ void Engine::createManagers () {
 }
 
 void Engine::loop () {
-    const float SPEED = 1.5f;
 
     bool done = false;
-    glm::ivec2 initialMousePosition(WINDOW_WIDTH/2,WINDOW_HEIGHT/2), actualMousePosition(WINDOW_WIDTH/2,WINDOW_HEIGHT/2), difference(0,0);
-
+    glm::ivec2 lastMousePosition(WINDOW_WIDTH/2,WINDOW_HEIGHT/2);
     std::shared_ptr<Timer> frameTimer = mTimeManager->registerTimer();
     std::shared_ptr<Timer> inputDelay = mTimeManager->registerTimer();
     while(!done) {
         frameTimer->reset();
-
         // Event loop:
         SDL_Event e;
         while (mWindowManager->pollEvent(e)) {
@@ -88,47 +85,8 @@ void Engine::loop () {
             }
         }
 
-        actualMousePosition = getWindowManager()->getMousePosition();
-        difference = actualMousePosition - initialMousePosition;
-        initialMousePosition = actualMousePosition;
+        handleInput(inputDelay, lastMousePosition);
 
-        //SDL_WarpMouse(WINDOW_WIDTH/2, WINDOW_HEIGHT/2);
-
-
-        if(getWindowManager()->isMouseButtonPressed(SDL_BUTTON_RIGHT)){
-            mCurrentScene->getCamera()->rotateLeft(-difference.x/4.0f);
-            mCurrentScene->getCamera()->rotateUp(-difference.y/4.0f);
-        }
-
-        if(getWindowManager()->isKeyPressed(SDLK_z))
-            mCurrentScene->getCamera()->moveFront(SPEED);
-        else if (getWindowManager()->isKeyPressed(SDLK_s))
-            mCurrentScene->getCamera()->moveFront(-SPEED);
-
-        if(getWindowManager()->isKeyPressed(SDLK_q))
-            mCurrentScene->getCamera()->moveLeft(SPEED);
-        else if (getWindowManager()->isKeyPressed(SDLK_d))
-            mCurrentScene->getCamera()->moveLeft(-SPEED);
-
-        if(getWindowManager()->isKeyPressed(SDLK_LSHIFT))
-            mCurrentScene->getCamera()->moveUp(SPEED);
-
-        if(getWindowManager()->isKeyPressed(SDLK_LCTRL))
-            mCurrentScene->getCamera()->moveUp(-SPEED);
-
-        if(getWindowManager()->isKeyPressed(SDLK_o) && inputDelay->elapsedTime() > 1000){
-            std::string n("model.json");
-            loadSceneFromFile(n);
-            inputDelay->reset();
-        }
-
-        if(getWindowManager()->isKeyPressed(SDLK_p) && inputDelay->elapsedTime() > 1000){
-            std::string n("2.json");
-            loadSceneFromFile(n);
-            inputDelay->reset();
-        }
-
-        difference = glm::ivec2(0,0);
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         //mCurrentScene->update();
@@ -137,6 +95,57 @@ void Engine::loop () {
 
         int loopIterationDuration = (int)frameTimer->elapsedTime();
         SDL_Delay(std::max<int>(0, 1000/60.0f - loopIterationDuration));
+    }
+}
+
+void Engine::handleInput (std::shared_ptr<Timer> inputDelay, glm::ivec2& lastMousePos) {
+    const float SPEED = 1.5f;
+    glm::ivec2 actualMousePosition,
+               difference(0,0);
+
+    actualMousePosition = getWindowManager()->getMousePosition();
+    difference = actualMousePosition - lastMousePos;
+    lastMousePos = actualMousePosition;
+
+    //SDL_WarpMouse(WINDOW_WIDTH/2, WINDOW_HEIGHT/2);
+
+
+    if(getWindowManager()->isMouseButtonPressed(SDL_BUTTON_RIGHT)){
+        mCurrentScene->getCamera()->rotateLeft(-difference.x/4.0f);
+        mCurrentScene->getCamera()->rotateUp(-difference.y/4.0f);
+    }
+
+    if(getWindowManager()->isKeyPressed(SDLK_z))
+        mCurrentScene->getCamera()->moveFront(SPEED);
+    else if (getWindowManager()->isKeyPressed(SDLK_s))
+        mCurrentScene->getCamera()->moveFront(-SPEED);
+
+    if(getWindowManager()->isKeyPressed(SDLK_q))
+        mCurrentScene->getCamera()->moveLeft(SPEED);
+    else if (getWindowManager()->isKeyPressed(SDLK_d))
+        mCurrentScene->getCamera()->moveLeft(-SPEED);
+
+    if(getWindowManager()->isKeyPressed(SDLK_LSHIFT))
+        mCurrentScene->getCamera()->moveUp(SPEED);
+
+    if(getWindowManager()->isKeyPressed(SDLK_LCTRL))
+        mCurrentScene->getCamera()->moveUp(-SPEED);
+
+    if(getWindowManager()->isKeyPressed(SDLK_o) && inputDelay->elapsedTime() > 1000){
+        std::string n("model.json");
+        loadSceneFromFile(n);
+        inputDelay->reset();
+    }
+
+    if(getWindowManager()->isKeyPressed(SDLK_p) && inputDelay->elapsedTime() > 1000){
+        std::string n("2.json");
+        loadSceneFromFile(n);
+        inputDelay->reset();
+    }
+
+    if(getWindowManager()->isKeyPressed(SDLK_KP_ENTER)  && inputDelay->elapsedTime() > 300){
+        mCurrentScene->useNextShader();
+        inputDelay->reset();
     }
 }
 
@@ -149,10 +158,6 @@ void Engine::loadSceneFromFile (std::string & path) {
     } else {
         mCurrentScene = std::unique_ptr<Scene>(scene);
     }
-
-    std::cout << "creating lights uniforms" << std::endl;
-    mCurrentScene->createLightsUniforms();
-
 }
 
 std::unique_ptr<SDLWindowManager> const &Engine::getWindowManager () {
