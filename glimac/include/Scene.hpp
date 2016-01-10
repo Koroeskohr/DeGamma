@@ -12,6 +12,7 @@
 #include "RenderableFactory.hpp"
 #include "rapidjson/document.h"
 #include "Light.hpp"
+#include "Skybox.hpp"
 
 #include <fstream>
 #include <vector>
@@ -54,7 +55,10 @@ namespace glimac {
         FreeflyCamera * mCamera;
         Program* mCurrentProgram;
         unsigned int mCurrentProgramId;
+
         Light * mDirLight;
+        Skybox * mSkybox;
+
 
         void loadPrograms();
     };

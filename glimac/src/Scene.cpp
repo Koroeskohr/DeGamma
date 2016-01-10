@@ -10,7 +10,48 @@ namespace glimac{
         : mCamera(new FreeflyCamera(glm::perspective(glm::radians(40.0f), 1280.0f/720.0f, 0.1f, 1000.0f))),
           mCurrentProgramId(0)
     {
+
         mDirLight = new Light(glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+    }
+
+    Scene::~Scene () {
+        std::cout << "Deleting scene" << std::endl;
+        for(auto renderable: mRenderables){
+            delete renderable;
+        }
+        for(auto program: mPrograms){
+            delete program;
+        }
+        for(auto light: mPointLights){
+            delete light;
+        }
+
+        delete mDirLight;
+        delete mCamera;
+
+    }
+
+    void Scene::update () {
+        for(auto renderable: mRenderables){
+            renderable->update();
+        }
+    }
+
+    void Scene::render () {
+        glm::mat4 view = mCamera->getViewMatrix();
+        //mCurrentProgram->setUniformMatrix4("view", view);
+
+        mSkybox->draw(mCamera->getProjectionMatrix(), view);
+
+        for(auto renderable: mRenderables){
+            renderable->render(mCurrentProgram);
+        }
+    }
+
+    void Scene::addRenderable (Renderable *renderable) {
+        mRenderables.push_back(renderable);
+    }
+
 
     }
 
@@ -95,41 +136,7 @@ namespace glimac{
         return mPointLights;
     }
 
-    Scene::~Scene () {
-        std::cout << "Deleting scene" << std::endl;
-        for(auto renderable: mRenderables){
-            delete renderable;
-        }
-        for(auto program: mPrograms){
-            delete program;
-        }
-        for(auto light: mPointLights){
-            delete light;
-        }
 
-        delete mDirLight;
-        delete mCamera;
-
-    }
-
-    void Scene::update () {
-        for(auto renderable: mRenderables){
-            renderable->update();
-        }
-    }
-
-    void Scene::render () {
-        glm::mat4 view = mCamera->getViewMatrix();
-        mCurrentProgram->setUniformMatrix4("view", view);
-
-        for(auto renderable: mRenderables){
-            renderable->render(mCurrentProgram);
-        }
-    }
-
-    void Scene::addRenderable (Renderable *renderable) {
-        mRenderables.push_back(renderable);
-    }
 
     void Scene::addPointLight(Light * light){
         mPointLights.push_back(light);
