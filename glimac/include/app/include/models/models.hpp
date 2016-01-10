@@ -13,6 +13,9 @@
 #include "WallChambreModel.hpp"
 #include "HospitalBedModel.hpp"
 #include "WheelchairModel.hpp"
+#include "CrateModel.hpp"
+#include "ChevetModel.hpp"
+#include "TulipModel.hpp"
 
 
 #endif //DEGAMMA_MODELS_HPP

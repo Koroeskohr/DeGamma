@@ -31,7 +31,10 @@ public:
                   LANTERN,
                   WALLCHAMBRE,
                   HOSPITALBED,
-                  WHEELCHAIR} ;
+                  WHEELCHAIR,
+                  CRATE,
+                  CHEVET,
+                  TULIP} ;
 
     /*
      * Model factory
