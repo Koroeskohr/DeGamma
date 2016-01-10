@@ -61,12 +61,12 @@ namespace glimac{
 
         // Cubemap (Skybox)
         std::vector<const GLchar*> faces;
-        faces.push_back("assets/skybox/right.jpg");
-        faces.push_back("assets/skybox/left.jpg");
-        faces.push_back("assets/skybox/top.jpg");
-        faces.push_back("assets/skybox/bottom.jpg");
-        faces.push_back("assets/skybox/back.jpg");
-        faces.push_back("assets/skybox/front.jpg");
+        faces.push_back("assets/skybox/right.tga");
+        faces.push_back("assets/skybox/left.tga");
+        faces.push_back("assets/skybox/top.tga");
+        faces.push_back("assets/skybox/bottom.tga");
+        faces.push_back("assets/skybox/back.tga");
+        faces.push_back("assets/skybox/front.tga");
 
         mFaces = faces;
         mTexture = loadCubemap(mFaces);
