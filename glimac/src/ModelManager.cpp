@@ -27,6 +27,8 @@ namespace glimac {
                 return new CottageModel;
             case ModelManager::DRAGON:
                 return new DragonModel;
+            case ModelManager::HORF:
+                return new HorfModel;
 
             default:
                 throw std::runtime_error("Wrong model id input");

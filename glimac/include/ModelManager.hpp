@@ -24,7 +24,10 @@ public:
 
     ~ModelManager ();
 
-    enum Models { AIRBOAT, COTTAGE, DRAGON } ;
+    enum Models { AIRBOAT,
+                  COTTAGE,
+                  DRAGON,
+                  HORF } ;
 
     /*
      * Model factory

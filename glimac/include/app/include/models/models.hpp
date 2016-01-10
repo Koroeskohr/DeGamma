@@ -8,5 +8,6 @@
 #include "AirboatModel.hpp"
 #include "CottageModel.hpp"
 #include "DragonModel.hpp"
+#include "HorfModel.hpp"
 
 #endif //DEGAMMA_MODELS_HPP
