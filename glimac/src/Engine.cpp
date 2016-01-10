@@ -41,7 +41,7 @@ Engine::Engine()
 
     //glPolygonMode( GL_FRONT_AND_BACK, GL_LINE ); // TODO : remove, it displays meshes as wireframe
 
-    std::string baseScenePath("model.json");
+    std::string baseScenePath("1.json");
     loadSceneFromFile(baseScenePath);
 
     /*
@@ -71,7 +71,7 @@ void Engine::createManagers () {
 }
 
 void Engine::loop () {
-
+    FileLogger debug("1.0.0", "fps.txt");
     bool done = false;
     glm::ivec2 lastMousePosition(WINDOW_WIDTH/2,WINDOW_HEIGHT/2);
     std::shared_ptr<Timer> frameTimer = mTimeManager->registerTimer();
@@ -95,6 +95,7 @@ void Engine::loop () {
         mWindowManager->swapBuffers();
 
         int loopIterationDuration = (int)frameTimer->elapsedTime();
+        debug << std::to_string(1000/(float)loopIterationDuration).c_str() << "fps";
         SDL_Delay(std::max<int>(0, 1000/60.0f - loopIterationDuration));
     }
 }
@@ -132,14 +133,26 @@ void Engine::handleInput (std::shared_ptr<Timer> inputDelay, glm::ivec2& lastMou
     if(getWindowManager()->isKeyPressed(SDLK_LCTRL))
         mCurrentScene->getCamera()->moveUp(-SPEED);
 
+    if(getWindowManager()->isKeyPressed(SDLK_i) && inputDelay->elapsedTime() > 1000){
+        std::string n("1.json");
+        loadSceneFromFile(n);
+        inputDelay->reset();
+    }
+
     if(getWindowManager()->isKeyPressed(SDLK_o) && inputDelay->elapsedTime() > 1000){
-        std::string n("model.json");
+        std::string n("2.json");
         loadSceneFromFile(n);
         inputDelay->reset();
     }
 
     if(getWindowManager()->isKeyPressed(SDLK_p) && inputDelay->elapsedTime() > 1000){
-        std::string n("2.json");
+        std::string n("3.json");
+        loadSceneFromFile(n);
+        inputDelay->reset();
+    }
+
+    if(getWindowManager()->isKeyPressed(SDLK_m) && inputDelay->elapsedTime() > 1000){
+        std::string n("dragons.json");
         loadSceneFromFile(n);
         inputDelay->reset();
     }

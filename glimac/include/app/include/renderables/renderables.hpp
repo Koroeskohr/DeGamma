@@ -7,5 +7,6 @@
 
 #include "Airboat.hpp"
 #include "Cottage.hpp"
+#include "Dragon.hpp"
 
 #endif //DEGAMMA_RENDERABLES_HPP
