@@ -13,7 +13,7 @@ namespace glimac {
           mDiffuseColor(glm::vec4(diffuse, 1)),
           mAmbientColor(glm::vec4(ambient, 1)),
           mSpecularColor(glm::vec4(specular, 1)),
-          mShininess(shininess), //Possible problem
+          mShininess(shininess),
           mTexImageWidth(texImage->getWidth()),
           mTexImageHeight(texImage->getHeight()),
           hasTexture(true)

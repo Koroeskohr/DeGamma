@@ -4,9 +4,6 @@
 
 #include "Model.hpp"
 
-
-
-
 namespace glimac {
 
     Model::Model(const std::string &fileName) {
@@ -16,7 +13,6 @@ namespace glimac {
         if(const char * error = importer.GetErrorString() ){
             std::cout << "%%%%%% There might be an error in parsing: " << importer.GetErrorString() << std::endl;
         }
-        std::cout << fileName << std::endl;
         std::size_t lastSlash = fileName.find_last_of("/\\");
         std::string dir = fileName.substr(0,lastSlash+1);
 
@@ -29,8 +25,6 @@ namespace glimac {
         else {
             loadMeshes(scene);
         }
-
-
     }
 
     Model::~Model() {
@@ -45,8 +39,6 @@ namespace glimac {
         aiColor3D specular;
         float shininess;
 
-        std::cout << "yo" << std::endl;
-
         aiString imagePath;
 
         for (unsigned int i = 0; i < scene->mNumMeshes; i++) {
@@ -54,9 +46,6 @@ namespace glimac {
             const aiMaterial *material = scene->mMaterials[currMesh->mMaterialIndex];
 
             std::string fullPath = directory;
-            std::cout << fullPath << std::endl;
-
-
 
             if (AI_SUCCESS != material->Get(AI_MATKEY_NAME, name))
                 std::cout << name.data <<"No material name" << std::endl;
