@@ -161,6 +161,18 @@ void Engine::handleInput (std::shared_ptr<Timer> inputDelay, glm::ivec2& lastMou
         mCurrentScene->useNextShader();
         inputDelay->reset();
     }
+
+    if(getWindowManager()->isKeyPressed(SDLK_TAB) && inputDelay->elapsedTime() > 200){
+        int pmode;
+        glGetIntegerv(GL_POLYGON_MODE, &pmode);
+
+        if(pmode == GL_LINE)
+            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+        else{
+            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        }
+        inputDelay->reset();
+    }
 }
 
 void Engine::loadSceneFromFile (std::string & path) {

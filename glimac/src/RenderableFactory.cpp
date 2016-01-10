@@ -18,6 +18,8 @@ namespace glimac {
             renderable = (Renderable*)(new Horf);
         if(name == "lantern")
             renderable = (Renderable*)(new Lantern);
+        if(name == "cave")
+            renderable = (Renderable*)(new Cave);
 
 
 

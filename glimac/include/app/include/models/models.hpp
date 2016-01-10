@@ -10,5 +10,6 @@
 #include "DragonModel.hpp"
 #include "HorfModel.hpp"
 #include "LanternModel.hpp"
+#include "CaveModel.hpp"
 
 #endif //DEGAMMA_MODELS_HPP

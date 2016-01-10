@@ -28,7 +28,8 @@ public:
                   COTTAGE,
                   DRAGON,
                   HORF,
-                  LANTERN } ;
+                  LANTERN,
+                  CAVE } ;
 
     /*
      * Model factory
