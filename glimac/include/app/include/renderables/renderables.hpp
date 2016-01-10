@@ -12,5 +12,6 @@
 #include "Lantern.hpp"
 #include "WallChambre.hpp"
 #include "HospitalBed.hpp"
+#include "FloorGrass.hpp"
 
 #endif //DEGAMMA_RENDERABLES_HPP

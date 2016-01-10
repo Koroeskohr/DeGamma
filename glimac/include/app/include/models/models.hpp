@@ -12,6 +12,7 @@
 #include "LanternModel.hpp"
 #include "WallChambreModel.hpp"
 #include "HospitalBedModel.hpp"
+#include "FloorGrassModel.hpp"
 
 
 #endif //DEGAMMA_MODELS_HPP

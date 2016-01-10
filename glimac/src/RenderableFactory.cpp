@@ -22,6 +22,8 @@ namespace glimac {
             renderable = (Renderable*)(new WallChambre);
         if(name == "hospitalbed")
             renderable = (Renderable*)(new HospitalBed);
+        if(name == "floorgrass")
+            renderable = (Renderable*)(new FloorGrass);
 
 
 

@@ -30,7 +30,8 @@ public:
                   HORF,
                   LANTERN,
                   WALLCHAMBRE,
-                  HOSPITALBED } ;
+                  HOSPITALBED,
+                  FLOORGRASS } ;
 
     /*
      * Model factory
