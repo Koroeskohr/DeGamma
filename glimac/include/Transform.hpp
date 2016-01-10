@@ -19,8 +19,6 @@ struct Transform {
 
     void updateModelMatrix(){
         modelMatrix = mat4(1);
-        //std::cout << rotation << std::endl;
-
         modelMatrix = rotation * modelMatrix;
         modelMatrix = glm::translate(modelMatrix, position);
         modelMatrix = glm::scale(modelMatrix, scale);
