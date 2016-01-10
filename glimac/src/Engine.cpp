@@ -55,8 +55,6 @@ Engine::Engine()
     mCurrentScene->getRenderables().at(2)->setScale(0.2);
     */
 
-    std::cout << "creating lights uniforms" << std::endl;
-    mCurrentScene->createLightsUniforms();
 }
 
 Engine::~Engine(){
@@ -149,6 +147,10 @@ void Engine::loadSceneFromFile (std::string & path) {
     } else {
         mCurrentScene = std::unique_ptr<Scene>(scene);
     }
+
+    std::cout << "creating lights uniforms" << std::endl;
+    mCurrentScene->createLightsUniforms();
+
 }
 
 std::unique_ptr<SDLWindowManager> const &Engine::getWindowManager () {
