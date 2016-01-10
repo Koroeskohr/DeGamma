@@ -18,8 +18,8 @@ namespace glimac{
         public:
 
         Skybox();
-        ~Skybox();
-        void draw(glm::mat4 projection, glm::mat4 view);
+        ~Skybox(){};
+        void draw(const glm::mat4& projection, const glm::mat4& view);
 
         private:
             Program * mProgram;

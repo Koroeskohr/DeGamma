@@ -57,7 +57,7 @@ namespace glimac {
         unsigned int mCurrentProgramId;
 
         Light * mDirLight;
-        Skybox * mSkybox;
+        std::unique_ptr<Skybox> mSkybox;
 
 
         void loadPrograms();

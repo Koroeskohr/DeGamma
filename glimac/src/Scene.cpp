@@ -7,12 +7,11 @@
 namespace glimac{
     //HACK : ratio should be retrieved
     Scene::Scene ()
-        : mCamera(new FreeflyCamera(glm::perspective(glm::radians(40.0f), 1280.0f/720.0f, 0.1f, 1000.0f))),
-          mCurrentProgramId(0)
-    {
-
-        mDirLight = new Light(glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
-    }
+        : mCamera(new FreeflyCamera(glm::perspective(glm::radians(40.0f), 1280.0f/720.0f, 0.1f, 10000.0f))),
+          mCurrentProgramId(0),
+          mDirLight(new Light(glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f))),
+          mSkybox(std::unique_ptr<Skybox>(new Skybox))
+    { }
 
     Scene::~Scene () {
         std::cout << "Deleting scene" << std::endl;
@@ -39,10 +38,11 @@ namespace glimac{
 
     void Scene::render () {
         glm::mat4 view = mCamera->getViewMatrix();
-        //mCurrentProgram->setUniformMatrix4("view", view);
+        mCurrentProgram->setUniformMatrix4("view", view);
 
         mSkybox->draw(mCamera->getProjectionMatrix(), view);
 
+        mCurrentProgram->use();
         for(auto renderable: mRenderables){
             renderable->render(mCurrentProgram);
         }
@@ -127,6 +127,8 @@ namespace glimac{
             Program * p = loadProgram(vs_path.c_str(), fs_path.c_str());
             addProgram(p);
         }
+
+
 
         loadPrograms();
         std::cout << "added everything from the scene" << std::endl;

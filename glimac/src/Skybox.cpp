@@ -6,11 +6,9 @@
 
 namespace glimac{
 
-    Skybox::Skybox(){
-
-        mProgram = loadProgram("shaders/skybox.vs.glsl", "shaders/skybox.fs.glsl");
-
-
+    Skybox::Skybox():
+        mProgram(loadProgram("shaders/skybox.vs.glsl", "shaders/skybox.fs.glsl"))
+{
         GLfloat posVertices[] = {
                 // Positions
                 -1.0f,  1.0f, -1.0f,
@@ -111,7 +109,7 @@ namespace glimac{
         return textureID;
     }
 
-    void Skybox::draw(glm::mat4 projection, glm::mat4 view){
+    void Skybox::draw(const glm::mat4& projection, const glm::mat4& view){
         // Transformation matrices
         mProgram->use();
 
@@ -119,7 +117,7 @@ namespace glimac{
 
         glm::mat4 matModel;
         // Translate model to the center of the scene
-        matModel = glm::scale(matModel, glm::vec3(40.0f, 40.0f, 40.0f));
+        matModel = glm::scale(matModel, glm::vec3(5000.0f, 5000.0f, 5000.0f));
         mProgram->setUniformMatrix4("model", matModel);
         mProgram->setUniformMatrix4("view", view);
         mProgram->setUniformMatrix4("projection", projection);
