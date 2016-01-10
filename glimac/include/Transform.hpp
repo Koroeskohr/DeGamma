@@ -6,6 +6,7 @@
 #define DEGAMMA_TRANSFORM_HPP
 
 #include <common.hpp>
+#include <iostream>
 
 using namespace glm;
 
@@ -18,7 +19,9 @@ struct Transform {
 
     void updateModelMatrix(){
         modelMatrix = mat4(1);
-        modelMatrix *= rotation;
+        //std::cout << rotation << std::endl;
+
+        modelMatrix = rotation * modelMatrix;
         modelMatrix = glm::translate(modelMatrix, position);
         modelMatrix = glm::scale(modelMatrix, scale);
     }
