@@ -70,6 +70,8 @@ void Engine::createManagers () {
 }
 
 void Engine::loop () {
+    const float SPEED = 1.5f;
+
     bool done = false;
     glm::ivec2 initialMousePosition(WINDOW_WIDTH/2,WINDOW_HEIGHT/2), actualMousePosition(WINDOW_WIDTH/2,WINDOW_HEIGHT/2), difference(0,0);
 
@@ -99,20 +101,20 @@ void Engine::loop () {
         }
 
         if(getWindowManager()->isKeyPressed(SDLK_z))
-            mCurrentScene->getCamera()->moveFront(0.25f);
+            mCurrentScene->getCamera()->moveFront(SPEED);
         else if (getWindowManager()->isKeyPressed(SDLK_s))
-            mCurrentScene->getCamera()->moveFront(-0.25f);
+            mCurrentScene->getCamera()->moveFront(-SPEED);
 
         if(getWindowManager()->isKeyPressed(SDLK_q))
-            mCurrentScene->getCamera()->moveLeft(0.25f);
+            mCurrentScene->getCamera()->moveLeft(SPEED);
         else if (getWindowManager()->isKeyPressed(SDLK_d))
-            mCurrentScene->getCamera()->moveLeft(-0.25f);
+            mCurrentScene->getCamera()->moveLeft(-SPEED);
 
-        /*if(getWindowManager()->isKeyPressed(SDLK_LSHIFT))
-            mCurrentScene->getCamera()->moveUp(0.25f);
+        if(getWindowManager()->isKeyPressed(SDLK_LSHIFT))
+            mCurrentScene->getCamera()->moveUp(SPEED);
 
         if(getWindowManager()->isKeyPressed(SDLK_LCTRL))
-            mCurrentScene->getCamera()->moveUp(-0.25f);*/
+            mCurrentScene->getCamera()->moveUp(-SPEED);
 
         if(getWindowManager()->isKeyPressed(SDLK_o) && inputDelay->elapsedTime() > 1000){
             std::string n("model.json");
