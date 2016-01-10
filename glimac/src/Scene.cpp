@@ -71,7 +71,7 @@ namespace glimac{
         const Value &models = document["models"];
         const Value &dirLights = document["lights"]["directional"];
         const Value &pointLights = document["lights"]["point"];
-        const Value &programs = document["programs"];
+        //const Value &programs = document["programs"];
 
         // 1/5 : set Camera position
         mCamera->setPosition(camera["position"]["x"].GetDouble(), camera["position"]["y"].GetDouble(),
@@ -80,12 +80,13 @@ namespace glimac{
         // 2/5 : create renderables
         for (SizeType i = 0; i < models.Size(); ++i) {
             const Value &pos = models[i]["position"];
+            const Value &rot = models[i]["rotation"];
             const Value &scale = models[i]["scale"];
             std::string type = models[i]["type"].GetString();
             Renderable *r = RenderableFactory::getByName(type);
 
             r->setPosition(glm::vec3(pos["x"].GetDouble(), pos["y"].GetDouble(), pos["z"].GetDouble()));
-            //r->setRotation();
+            r->setRotation(rot["x"].GetDouble(), rot["y"].GetDouble(), rot["z"].GetDouble());
             r->setScale(glm::vec3(scale["x"].GetDouble(), scale["y"].GetDouble(), scale["z"].GetDouble()));
             addRenderable(r);
         }
@@ -117,7 +118,7 @@ namespace glimac{
 
         std::cout << "added lights from the scene" << std::endl;
         //5/5 : create programs
-
+        /*
         for (SizeType i = 0; i < programs.Size(); ++i)
         {
             std::string name = programs[i]["name"].GetString();
@@ -127,7 +128,7 @@ namespace glimac{
             Program * p = loadProgram(vs_path.c_str(), fs_path.c_str());
             addProgram(p);
         }
-
+        */
 
 
         loadPrograms();

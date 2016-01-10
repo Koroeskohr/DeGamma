@@ -36,6 +36,15 @@ namespace glimac {
         mTransform.rotation = rot;
     }
 
+    void Renderable::setRotation (float x, float y, float z) {
+        glm::mat4 rot(1);
+        rot = glm::rotate(rot, glm::radians(x), glm::vec3(1,0,0));
+        rot = glm::rotate(rot, glm::radians(y), glm::vec3(0,1,0));
+        rot = glm::rotate(rot, glm::radians(z), glm::vec3(0,0,1));
+
+        mTransform.rotation = rot;
+    }
+
     void Renderable::setScale (glm::vec3 scale) {
         mTransform.scale = scale;
     }

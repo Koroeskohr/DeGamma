@@ -20,6 +20,7 @@ public:
 
     void setPosition(glm::vec3 pos);
     void setRotation(glm::mat4 rot);
+    void setRotation(float x, float y, float z);
     void setScale(glm::vec3 scale);
     void setScale(float ratio);
 
