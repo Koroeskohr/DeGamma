@@ -7,7 +7,6 @@ namespace glimac {
           mTransform(position)
     {
         std::cout << "New renderable with texture " << mModel << std::endl;
-        std::cout << "Model : " << mModel->mMeshes[0]->getVertices()[0].texCoords.x << std::endl;
     }
 
     Renderable::~Renderable () {
@@ -20,8 +19,6 @@ namespace glimac {
     }
 
     void Renderable::render(Program * program){
-
-        mTransform.scale = glm::vec3(0.2);
         mTransform.updateModelMatrix();
         program->setUniformMatrix4("model", mTransform.modelMatrix);
         mModel->draw(program);
