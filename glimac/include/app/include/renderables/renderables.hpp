@@ -10,5 +10,7 @@
 #include "Dragon.hpp"
 #include "Horf.hpp"
 #include "Lantern.hpp"
+#include "WallChambre.hpp"
+#include "HospitalBed.hpp"
 
 #endif //DEGAMMA_RENDERABLES_HPP

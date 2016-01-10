@@ -28,7 +28,9 @@ public:
                   COTTAGE,
                   DRAGON,
                   HORF,
-                  LANTERN } ;
+                  LANTERN,
+                  WALLCHAMBRE,
+                  HOSPITALBED } ;
 
     /*
      * Model factory

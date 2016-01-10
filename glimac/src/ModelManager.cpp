@@ -31,6 +31,10 @@ namespace glimac {
                 return new HorfModel;
             case ModelManager::LANTERN:
                 return new LanternModel;
+            case ModelManager::WALLCHAMBRE:
+                return new WallChambreModel;
+            case ModelManager::HOSPITALBED:
+                return new HospitalBedModel;
             default:
                 throw std::runtime_error("Wrong model id input");
         }
