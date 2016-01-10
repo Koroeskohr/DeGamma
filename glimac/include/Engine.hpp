@@ -30,6 +30,7 @@ public:
     void loop();
     void loadSceneFromFile(std::string & path);
     long getGlobalTime();
+    void handleInput(std::shared_ptr<Timer> inputDelay, glm::ivec2& lastMousePos);
 
 
     //TODO : remove when wmanager is singleton
