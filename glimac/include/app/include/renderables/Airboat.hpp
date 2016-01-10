@@ -11,6 +11,10 @@ class Airboat : public Renderable {
 public:
     Airboat();
     Airboat(glm::vec3 pos);
+
+    ~Airboat(){
+        std::cout << "Deleted airboat renderable" << std::endl;
+    }
 };
 
 

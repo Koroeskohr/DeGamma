@@ -15,7 +15,9 @@ public:
     AirboatModel()
         : Model("assets/nanosuit/nanosuit.obj") {}
 
-    ~AirboatModel () {}
+    ~AirboatModel () {
+        std::cout << "Deleted ab model" << std::endl;
+    }
 
 };
 

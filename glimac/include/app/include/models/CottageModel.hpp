@@ -14,7 +14,9 @@ public:
     CottageModel ()
             : Model("assets/cottage/Snow covered CottageOBJ.obj") {}
 
-    ~CottageModel () {}
+    ~CottageModel () {
+        std::cout << "Deleted cottage model" << std::endl;
+    }
 
 };
 

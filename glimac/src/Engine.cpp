@@ -3,8 +3,6 @@
 //
 
 #include "Engine.hpp"
-#include "Light.hpp"
-
 
 const int WINDOW_WIDTH = 1280;
 const int WINDOW_HEIGHT = 720;
@@ -73,8 +71,6 @@ void Engine::createManagers () {
     mWindowManager = std::unique_ptr<SDLWindowManager>(
                          new SDLWindowManager(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME));
     mTimeManager = std::unique_ptr<TimeManager>(TimeManager::getInstance());
-
-
 }
 
 void Engine::loop () {
@@ -82,6 +78,7 @@ void Engine::loop () {
     glm::ivec2 initialMousePosition(WINDOW_WIDTH/2,WINDOW_HEIGHT/2), actualMousePosition(WINDOW_WIDTH/2,WINDOW_HEIGHT/2), difference(0,0);
 
     std::shared_ptr<Timer> frameTimer = mTimeManager->registerTimer();
+    std::shared_ptr<Timer> inputDelay = mTimeManager->registerTimer();
     while(!done) {
         frameTimer->reset();
 
@@ -121,38 +118,44 @@ void Engine::loop () {
         if(getWindowManager()->isKeyPressed(SDLK_LCTRL))
             mCurrentScene->getCamera()->moveUp(-0.25f);*/
 
-        difference = glm::ivec2(0,0);
+        if(getWindowManager()->isKeyPressed(SDLK_o) && inputDelay->elapsedTime() > 1000){
+            std::string n("model.json");
+            loadSceneFromFile(n);
+            inputDelay->reset();
+        }
 
+        if(getWindowManager()->isKeyPressed(SDLK_p) && inputDelay->elapsedTime() > 1000){
+            std::string n("2.json");
+            loadSceneFromFile(n);
+            inputDelay->reset();
+        }
+
+        difference = glm::ivec2(0,0);
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         //mCurrentScene->update();
         mCurrentScene->render();
         mWindowManager->swapBuffers();
 
-
         int loopIterationDuration = (int)frameTimer->elapsedTime();
         SDL_Delay(std::max<int>(0, 1000/60.0f - loopIterationDuration));
-
     }
-
 }
 
 void Engine::loadSceneFromFile (std::string & path) {
+    std::cout << "--------- NEW SCENE ----------" << std::endl;
     Scene * scene = new Scene(path);
-
+    std::cout << "--------- DELETING PREVIOUS SCENE ----------" << std::endl;
     if(mCurrentScene != nullptr) {
         mCurrentScene.reset(scene);
     } else {
         mCurrentScene = std::unique_ptr<Scene>(scene);
     }
-
-
 }
 
 std::unique_ptr<SDLWindowManager> const &Engine::getWindowManager () {
     return mWindowManager;
 }
-
 
 long Engine::getGlobalTime () {
     return mProgramTimer->elapsedTime();

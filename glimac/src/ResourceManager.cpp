@@ -43,9 +43,11 @@ namespace glimac {
         }
         else if(modelCount == 0){
             model = makeModel(modelId);
+            std::cout << "creating model " << modelId << std::endl;
             mModelsMap.insert(std::make_pair(modelId, model));
         }
         else {
+            std::cout << "getting model " << modelId << std::endl;
             model = mModelsMap.at(modelId);
         }
 

@@ -11,6 +11,10 @@ class Cottage : public Renderable {
 public:
     Cottage ();
     Cottage (glm::vec3 pos);
+
+    ~Cottage () {
+        std::cout << "Deleted cottage renderable" << std::endl;
+    }
 };
 
 
