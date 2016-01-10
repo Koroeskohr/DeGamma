@@ -34,7 +34,10 @@ public:
                   WHEELCHAIR,
                   CRATE,
                   CHEVET,
-                  TULIP} ;
+                  TULIP,
+                  FLOORGRASS
+                  } ;
+
 
     /*
      * Model factory
