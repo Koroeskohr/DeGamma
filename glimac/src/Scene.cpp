@@ -53,7 +53,7 @@ namespace glimac{
     }
 
 
-    }
+
 
     Scene::Scene (std::string &path)
             : Scene() {
