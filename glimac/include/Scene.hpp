@@ -44,6 +44,8 @@ namespace glimac {
         std::vector<Light*> & getPointLights();
         void createLightsUniforms();
 
+        void useNextShader();
+
 
     private:
         std::vector<Renderable*> mRenderables;
@@ -51,6 +53,7 @@ namespace glimac {
         std::vector<Light*> mPointLights;
         FreeflyCamera * mCamera;
         Program* mCurrentProgram;
+        unsigned int mCurrentProgramId;
         Light * mDirLight;
 
         void loadPrograms();
