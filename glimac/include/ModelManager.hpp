@@ -30,7 +30,8 @@ public:
                   HORF,
                   LANTERN,
                   WALLCHAMBRE,
-                  HOSPITALBED } ;
+                  HOSPITALBED,
+                  WHEELCHAIR} ;
 
     /*
      * Model factory

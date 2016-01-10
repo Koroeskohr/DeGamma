@@ -12,5 +12,7 @@
 #include "Lantern.hpp"
 #include "WallChambre.hpp"
 #include "HospitalBed.hpp"
+#include "Wheelchair.hpp"
+
 
 #endif //DEGAMMA_RENDERABLES_HPP
