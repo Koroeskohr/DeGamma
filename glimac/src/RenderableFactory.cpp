@@ -16,6 +16,8 @@ namespace glimac {
             renderable = (Renderable*)(new Dragon);
         if(name == "horf")
             renderable = (Renderable*)(new Horf);
+        if(name == "lantern")
+            renderable = (Renderable*)(new Lantern);
 
 
 

@@ -9,5 +9,6 @@
 #include "Cottage.hpp"
 #include "Dragon.hpp"
 #include "Horf.hpp"
+#include "Lantern.hpp"
 
 #endif //DEGAMMA_RENDERABLES_HPP

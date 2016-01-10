@@ -27,7 +27,8 @@ public:
     enum Models { AIRBOAT,
                   COTTAGE,
                   DRAGON,
-                  HORF } ;
+                  HORF,
+                  LANTERN } ;
 
     /*
      * Model factory
