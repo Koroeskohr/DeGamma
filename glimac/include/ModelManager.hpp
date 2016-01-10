@@ -29,7 +29,15 @@ public:
                   DRAGON,
                   HORF,
                   LANTERN,
-                  CAVE } ;
+                  CAVE,
+                  WALLCHAMBRE,
+                  HOSPITALBED,
+                  WHEELCHAIR,
+                  CRATE,
+                  CHEVET,
+                  TULIP,
+                  FLOORGRASS } ;
+
 
     /*
      * Model factory

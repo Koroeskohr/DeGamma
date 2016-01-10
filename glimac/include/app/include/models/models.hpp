@@ -11,5 +11,13 @@
 #include "HorfModel.hpp"
 #include "LanternModel.hpp"
 #include "CaveModel.hpp"
+#include "WallChambreModel.hpp"
+#include "HospitalBedModel.hpp"
+#include "FloorGrassModel.hpp"
+#include "WheelchairModel.hpp"
+#include "CrateModel.hpp"
+#include "ChevetModel.hpp"
+#include "TulipModel.hpp"
+
 
 #endif //DEGAMMA_MODELS_HPP

@@ -20,6 +20,20 @@ namespace glimac {
             renderable = (Renderable*)(new Lantern);
         if(name == "cave")
             renderable = (Renderable*)(new Cave);
+        if(name == "wallchambre")
+            renderable = (Renderable*)(new WallChambre);
+        if(name == "hospitalbed")
+            renderable = (Renderable*)(new HospitalBed);
+        if(name == "floorgrass")
+            renderable = (Renderable*)(new FloorGrass);
+        if(name == "wheelchair")
+            renderable = (Renderable*)(new Wheelchair);
+        if(name == "crate")
+            renderable = (Renderable*)(new Crate);
+        if(name == "chevet")
+            renderable = (Renderable*)(new Chevet);
+        if(name == "tulip")
+            renderable = (Renderable*)(new Tulip);
 
 
 

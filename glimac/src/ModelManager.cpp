@@ -33,6 +33,19 @@ namespace glimac {
                 return new LanternModel;
             case ModelManager::CAVE:
                 return new CaveModel;
+            case ModelManager::WALLCHAMBRE:
+                return new WallChambreModel;
+            case ModelManager::HOSPITALBED:
+            case ModelManager::FLOORGRASS:
+                return new FloorGrassModel;
+            case ModelManager::WHEELCHAIR:
+                return new WheelchairModel;
+            case ModelManager::CRATE:
+                return new CrateModel;
+            case ModelManager::CHEVET:
+                return new ChevetModel;
+            case ModelManager::TULIP:
+                return new TulipModel;
             default:
                 throw std::runtime_error("Wrong model id input");
         }
