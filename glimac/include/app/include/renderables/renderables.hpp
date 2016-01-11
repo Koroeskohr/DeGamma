@@ -14,7 +14,6 @@
 #include "HospitalBed.hpp"
 #include "FloorGrass.hpp"
 #include "Wheelchair.hpp"
-
 #include "Crate.hpp"
 #include "Chevet.hpp"
 #include "Tulip.hpp"

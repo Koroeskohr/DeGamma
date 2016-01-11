@@ -13,7 +13,7 @@ class WallChambreModel: public Model{
 
 public:
     WallChambreModel()
-        : Model("assets/wallChambre/wallChambre.obj") {}
+        : Model("assets/wallChambre/fullChambre2.obj") {}
 
     ~WallChambreModel () {
         std::cout << "Deleted dragon model" << std::endl;

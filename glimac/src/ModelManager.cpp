@@ -34,6 +34,7 @@ namespace glimac {
             case ModelManager::WALLCHAMBRE:
                 return new WallChambreModel;
             case ModelManager::HOSPITALBED:
+                return new HospitalBedModel;
             case ModelManager::FLOORGRASS:
                 return new FloorGrassModel;
             case ModelManager::WHEELCHAIR:
