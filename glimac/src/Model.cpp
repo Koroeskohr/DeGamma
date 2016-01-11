@@ -170,9 +170,9 @@ namespace glimac {
 
             GLuint currTexId =  currentTex->getGlTexture();
             glm::vec4 dColor = currentTex->getDiffuseColor();
-            glm::vec4 aColor = currentTex->getAmbientColor();
+            //glm::vec4 aColor = currentTex->getAmbientColor();
             glm::vec4 sColor = currentTex->getSpecularColor();
-            GLfloat shininess = currentTex->getShininess();
+            //GLfloat shininess = currentTex->getShininess();
 
             program->setUniformInt("hasTexture", currentTex->hasTexture);
             program->setUniformInt("texture_diffuse1", 0);

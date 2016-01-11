@@ -88,7 +88,6 @@ namespace glimac{
         glGenTextures(1, &textureID);
         glActiveTexture(GL_TEXTURE0);
 
-        int width,height;
         std::unique_ptr<Image> image;
 
         glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
