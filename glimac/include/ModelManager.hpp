@@ -36,10 +36,8 @@ public:
                   CRATE,
                   CHEVET,
                   TULIP,
-                  FLOORGRASS } ;
                   FLOORGRASS,
-                  WHEELCHAIR,
-                  MOUNTAIN} ;
+                  MOUNTAIN } ;
 
 
     /*

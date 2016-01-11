@@ -15,13 +15,10 @@
 #include "HospitalBedModel.hpp"
 #include "FloorGrassModel.hpp"
 #include "WheelchairModel.hpp"
-<<<<<<< Updated upstream
 #include "CrateModel.hpp"
 #include "ChevetModel.hpp"
 #include "TulipModel.hpp"
-=======
 #include "MountainModel.hpp"
->>>>>>> Stashed changes
 
 
 #endif //DEGAMMA_MODELS_HPP
