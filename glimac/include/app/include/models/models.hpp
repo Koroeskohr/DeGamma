@@ -19,7 +19,6 @@
 #include "CrateModel.hpp"
 #include "ChevetModel.hpp"
 #include "TulipModel.hpp"
-
 #include "MountainModel.hpp"
 
 
