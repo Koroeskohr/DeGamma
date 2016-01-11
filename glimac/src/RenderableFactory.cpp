@@ -34,6 +34,9 @@ namespace glimac {
             renderable = (Renderable*)(new Chevet);
         if(name == "tulip")
             renderable = (Renderable*)(new Tulip);
+        if(name == "mountain")
+            renderable = (Renderable*)(new Mountain);
+
 
 
 
