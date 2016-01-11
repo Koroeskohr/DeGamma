@@ -41,13 +41,14 @@ namespace glimac {
                 return new FloorGrassModel;
             case ModelManager::WHEELCHAIR:
                 return new WheelchairModel;
-
             case ModelManager::CRATE:
                 return new CrateModel;
             case ModelManager::CHEVET:
                 return new ChevetModel;
             case ModelManager::TULIP:
                 return new TulipModel;
+            case ModelManager::MOUNTAIN:
+                return new MountainModel;
 
             default:
                 throw std::runtime_error("Wrong model id input");
