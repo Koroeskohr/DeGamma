@@ -10,6 +10,7 @@
 #include "DragonModel.hpp"
 #include "HorfModel.hpp"
 #include "LanternModel.hpp"
+#include "CaveModel.hpp"
 #include "WallChambreModel.hpp"
 #include "HospitalBedModel.hpp"
 #include "FloorGrassModel.hpp"

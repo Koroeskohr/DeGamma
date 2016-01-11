@@ -10,6 +10,7 @@
 #include "Dragon.hpp"
 #include "Horf.hpp"
 #include "Lantern.hpp"
+#include "Cave.hpp"
 #include "WallChambre.hpp"
 #include "HospitalBed.hpp"
 #include "FloorGrass.hpp"

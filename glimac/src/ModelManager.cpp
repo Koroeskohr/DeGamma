@@ -31,6 +31,8 @@ namespace glimac {
                 return new HorfModel;
             case ModelManager::LANTERN:
                 return new LanternModel;
+            case ModelManager::CAVE:
+                return new CaveModel;
             case ModelManager::WALLCHAMBRE:
                 return new WallChambreModel;
             case ModelManager::HOSPITALBED:

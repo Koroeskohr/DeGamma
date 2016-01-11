@@ -29,14 +29,14 @@ public:
                   DRAGON,
                   HORF,
                   LANTERN,
+                  CAVE,
                   WALLCHAMBRE,
                   HOSPITALBED,
                   WHEELCHAIR,
                   CRATE,
                   CHEVET,
                   TULIP,
-                  FLOORGRASS
-                  } ;
+                  FLOORGRASS } ;
 
 
     /*
